@@ -11,16 +11,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crina", "Crina", "{FB2B2C23
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Liviu", "Liviu", "{49234E1A-B69F-4F5E-9BB4-566054E142AD}"
-	ProjectSection(SolutionItems) = preProject
-		Liviu\TODO.txt = Liviu\TODO.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rares", "Rares", "{667C9E70-DD30-4BF1-8312-214F31575F2E}"
 	ProjectSection(SolutionItems) = preProject
 		Rares\TODO.txt = Rares\TODO.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "Carmen\WebApp\WebApp.csproj", "{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "Carmen\WebApp\WebApp.csproj", "{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CosmosDB", "CosmosDB", "{BFB036CA-1816-418B-B97F-ADFA196EB2F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes&Instructions", "{7EC47984-F22D-472D-9871-C78FD2A20F20}"
+	ProjectSection(SolutionItems) = preProject
+		Liviu\CosmosDB\Notes&Instructions\CosmosDB.txt = Liviu\CosmosDB\Notes&Instructions\CosmosDB.txt
+		Liviu\CosmosDB\Notes&Instructions\Readme.txt = Liviu\CosmosDB\Notes&Instructions\Readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{D26B4A21-E8A9-4725-AD9E-2355C0B550F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmosDB", "Liviu\CosmosDB\Sources\CosmosDB\CosmosDB.csproj", "{032B9E58-FB76-4442-AB6C-3F35B74107A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,12 +41,20 @@ Global
 		{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3EC40DB1-EC16-4F9E-88F0-28CF127D3ED0} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{BFB036CA-1816-418B-B97F-ADFA196EB2F9} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{7EC47984-F22D-472D-9871-C78FD2A20F20} = {BFB036CA-1816-418B-B97F-ADFA196EB2F9}
+		{D26B4A21-E8A9-4725-AD9E-2355C0B550F0} = {BFB036CA-1816-418B-B97F-ADFA196EB2F9}
+		{032B9E58-FB76-4442-AB6C-3F35B74107A3} = {D26B4A21-E8A9-4725-AD9E-2355C0B550F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
