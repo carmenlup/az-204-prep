@@ -13,7 +13,7 @@ while (option != exit)
     {
         case "1":
             {
-                // Create DB - Container. Run 1 time only
+                // Create DB - re-runnable
                 WriteLine("----------------------[Initialize DB]----------------------");
                 await DbUtilities.InitializeDB();
             }; break;
