@@ -2,7 +2,7 @@ using Microsoft.FeatureManagement;
 using sqlapp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = "Endpoint=https://az-204-app-config.azconfig.io;Id=Pgu3;Secret=fxG4Ef8tEMUjtEE94634ZsuvTcqfEoMU4PqN+OCZ0/Q=";
+var connectionString = "";
 builder.Host.ConfigureAppConfiguration(builder =>
 {
     builder.AddAzureAppConfiguration(options =>
