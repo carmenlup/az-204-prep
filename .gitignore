@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/AZ900Prep/Rares/sqlfunction/sqlfunction/Properties/ServiceDependencies/az204-function4pp - Zip Deploy
+/AZ900Prep/Rares/sqlfunction/sqlfunction/Properties
