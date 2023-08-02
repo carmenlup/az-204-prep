@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{63DE0F50-71D1-4498-BC85-A8DE535475F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageAccountApp", "Liviu\StorageAccount\StorageAccountApp\StorageAccountApp.csproj", "{96C928A2-2B63-483D-A810-F75545BBFD03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032B9E58-FB76-4442-AB6C-3F35B74107A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96C928A2-2B63-483D-A810-F75545BBFD03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C928A2-2B63-483D-A810-F75545BBFD03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96C928A2-2B63-483D-A810-F75545BBFD03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96C928A2-2B63-483D-A810-F75545BBFD03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{90FA9FA8-2783-483D-9968-E57D90B4296E} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
 		{71A625B8-55C1-4492-86E4-2A05A1E4E1D9} = {90FA9FA8-2783-483D-9968-E57D90B4296E}
 		{63DE0F50-71D1-4498-BC85-A8DE535475F5} = {90FA9FA8-2783-483D-9968-E57D90B4296E}
+		{96C928A2-2B63-483D-A810-F75545BBFD03} = {63DE0F50-71D1-4498-BC85-A8DE535475F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
