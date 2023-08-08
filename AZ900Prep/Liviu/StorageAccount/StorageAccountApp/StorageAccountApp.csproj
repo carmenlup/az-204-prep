@@ -9,6 +9,18 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.8.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="FilesToUpload\" />
+    <Folder Include="DownloadFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FilesToUpload\File1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
