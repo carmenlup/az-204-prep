@@ -1,0 +1,78 @@
+Azure Active Directory
+
+- Identity Provider
+- Create User
+- Role Based Access
+- Application Objects
+	- Something you define in Azure AD
+	- You have an app that need to access your storage account
+	- You can create an Application Objects in your AD that will give access
+		- you can use the same app object to authorize different resources 
+		- is part of Microsoft Identity platform
+		- users can sign in using their Microsoft identities or social accounts
+
+Lab portal - Use Application Objects
+	- Go to AD -> App registrations
+		- register an application
+	- hit Registration
+		- give a name
+	- this is like a new identity within the AD
+	- associate this app object with your .Net app
+	- go to storage account - IAM - add role Assignment
+		- e.g. Reader role
+		- Add user -> search for the App object and select it
+		
+Microsoft Graph
+	-  is an API that has an endpoint:  https://graph.microsoft.com
+	- https://learn.microsoft.com/en-us/graph/overview
+	- allows it to get insights not only about Azure but also about Microsoft 365
+	- you can use to get info about users, groups, etc.
+	- make API calls
+	- We'll use it to get info about the user, with the help of an Application Objects
+	- Use the Postman took to invoke the API
+
+LAB - Use Graph to get user and group information using Postman
+	- get the Access Token
+	- define the App Object that can be used to get the Access Token
+	- go to your App Object - API permissions
+	- Add permissions from there
+	- Types of permissions:
+		- Application - choose this one now (runs on behalf of an application)
+		- Delegated (runs on behalf of the user)
+	- click Grant admin consent for Active Directory
+	- Call the Authentication service to get the ACCESS TOKEN - where you get the URLs??
+		- go to your App object - click the Endpoints tab
+		- get the OAuth 2.0 token endpoint: https://login.microsoftonline.com/62d18f9f-8f85-4e0b-901a-d292a89d516e/oauth2/v2.0/token
+		- the path param is the Directory Id
+		- create a POST request
+		- the body as x-www-form-urlencoded
+			- grant_type: client_credentials
+			- client_id: client id from App Object
+			- client_secret: generate a new one from your App object
+			- scope: https://graph.microsoft.com/default
+		- use the token and GET info about users: https://graph.microsoft.com/v1.0/users
+		
+UPDATE User	
+	- give API permissions to your App Object: User.ReadWrite.All
+	- PATCH: https://graph.microsoft.com/v1.0/users/{UserID}
+		- add the body as JSON with the user properties you want to update
+
+KEY VAULT
+	- hosting your secrets (encryption keys, certificates, secrets as passwords/keys)
+	- manage the lifecycle of your secrets
+	LAB:
+		- create the Key Vault service
+		- Soft-delete is automatically Enabled and you need to specify the retaintion days
+		- Permission model - Vault access policy vs RBAC
+			- Choose Vault access policy
+		
+	Keys:
+		- Create new encryption keys from the service
+		.NET:
+			- install the Azure.Security.KeyVault.Keys package + Azure.Identity
+			- Create an App Object that will be used to access the Key Vault
+			- go to your Key Valut - Access policy and add new one
+				- give Get, Encrypt, Decrypt permissions for the App Object
+			
+		
+		
