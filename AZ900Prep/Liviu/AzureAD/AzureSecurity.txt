@@ -73,6 +73,62 @@ KEY VAULT
 			- Create an App Object that will be used to access the Key Vault
 			- go to your Key Valut - Access policy and add new one
 				- give Get, Encrypt, Decrypt permissions for the App Object
+		
+	Secrets:
+		- How to store the connection strings?
+		- Create new secret
+			- name
+			- value (the connection string)
+			- you can also set Activation date / expiration date
+		- .NET	
+			- install Azure.Security.KeyVault.Secrets package
+			- Use the SecretClient class to establish a connection, using the KeyVault URI and the ClientSecretCredentials (app object)
+			- update the Key Vault Access policies and give Get access to your app object
+			- call .GetSecret(secretName)
 			
+	
+Managed Identities
+	- Helps Azure resources to authentitcate to services that support Azure AD authentitcation
+	- this is a more secure way, comparing with the app object, where we need to maintain the clientSecret (which is similar as a password)
+	- you can assign an Identity to the environment that is hosting your application. Then you can give permissions to that identity to access your services (e.g. to access the Storage Account)
+	- this works for services in Azure that have support for Managed Identities
+
+LAB Managed Identities
+	- have a VM
+	- have a Storage Account
+		- have a Container and a blob uploaded
+	- we're using the program we created to work with Blobs
+		- just that we delete the app object related code, since we are going to authorize using the Managed Identities
+	- we'll need to host the app on the VM
+	- copy the compile version of this console app on the VM
+	- Configure Managed Identities for VM:
+		- Go to your VM 
+		- Identity Section - Turn ON
+		- The VM is registered as a separate Identity in your Add
+		- go to Storage Account:
+			- Add Role Assignments
+			- Select Members and select your VM
+	- .NET code updates:
+		- we still need to use some credentials -> TokenCredentials
+		- TokenCredentials credentials = new DefaultAzureCredentials();
+			- gets a token based on the credentials that are defined for the underling environment
+			- it will automatically get the ManagedIdentity that we provided for our VM and get an access token
+			- this class can pick up the credentials from a variaty of locations (in our case ManagedIdentity),as Environment variables for example
+		- build and copy the app on the VM
+		- install .Net runtime on the VM
+		- run the exe -> the blob is downloaded
+		
+Getting the access token
+	- get the access token yourself instead using the DefaultAzureCredentials class
+	- https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token
+	- get the metadata URI (find it in the documentation)
+	- Storage account metadata URI: http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=http://storage.azure.com 
+	- have a HttpClient and call the metadata URI to get the access token
+	- build the app, copy on the VM and run
+	- this will also get the token for the underlying environment
+	- Why we want to get it manually like this? No particular reason, just that is required for the exam...
+	
+		
+	
 		
 		
