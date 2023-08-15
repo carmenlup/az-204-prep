@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureSecurity", "AzureSecur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes&Instructions", "{E2DB1555-AF3B-49B6-9CB0-2E7B272021E1}"
 	ProjectSection(SolutionItems) = preProject
+		Liviu\AzureAD\AuthenticationAndAuthorization.txt = Liviu\AzureAD\AuthenticationAndAuthorization.txt
 		Liviu\AzureAD\AzureSecurity.txt = Liviu\AzureAD\AzureSecurity.txt
 	EndProjectSection
 EndProject
@@ -69,6 +70,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B93287
 		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +94,10 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +118,7 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{7DF30B9B-E520-4F5F-95E2-52A903259BD5} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{B9328774-E9E6-42B4-A1DF-B4477DE545CF} = {7DF30B9B-E520-4F5F-95E2-52A903259BD5}
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7} = {FC868821-074F-4701-B815-AA46111F84B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}

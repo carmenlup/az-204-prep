@@ -1,0 +1,74 @@
+Azure AD is used as Identity Provider
+
+APIs and authorization
+	- Access tokens will be used to call the APIs
+	
+Libraries:
+	- Microsoft authentication library
+	
+OAuth 2.0
+	- industry standard protocol for authorization
+	- UC: User that is defined in Az AD, will log into the web application. The app will authenticate the user.
+	The App will access the a Storage Account on behalf of the user.
+	OAuth 2.0 - This is known as the Authorization Code Flow 
+	- the app exchanges the authorization code for an access tokens
+
+Auhtorization Code flow - more details
+	- Resource owner - the user who has access to the protected resource
+	- Client - The app requesting access to the protected resource
+	- Resource server - The Storage Account
+	- Authorization server	(Microsoft Identity platform)
+		- will provide the access token
+	
+	- How the auth flow works:
+		1. The web app makes a call to the Authorization server
+		2. The auth server will pass the Authorization Code back to the application, by calling the redirect URI that was specified at step 1
+		3. The app will use the Auth Code to call the Authorization server to exchange that code for the Access Token
+		4. The the app will be able to call the Storage Account APIs, using the Access Token
+		
+Review the different ways of accessing the Storage Account, which we implemented so far:
+	- using the connection string. This includes the access key in the URL, which gives your full permissions to that Storage Account and all its services
+	- using an Application Object identity.
+		- we also used the Client Credentials Flow to get the Access token from Postman
+	- using Managed Identity. 
+	
+Lab ASP.Net - Adding Authentication
+	- create a web app
+	- create an App Object from the portal 
+	- create a section in your appsettings.json where to define properties for:
+		- the app object ClientId, TenantId
+		- "Instance": "https://login.microsoftonline.com".The  url that will be used for authentication
+		- add 2 more properties in the appsettings, AzureAd section:
+		"CallbackPath":"/signin-oidc",
+		"SignedOutCallbackPath": "/signout-oidc"
+		OIDC = Open ID Connect. Protocol that is build on top of OAuth 
+	- install the Microsoft.Identity.Web package
+	- from Program.cs: builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "your setting section defined above");
+	- app.UseAuthentication
+	- add [Authorize] for the Index page
+	- Portal: go to your App Object -> Authentication
+		- Add a platform -> select Web
+		- define the Redirect URIs (for now just copy the URL of your localhost app) https://localhost:7259/ + callbackPath
+		- define the Front-Channel ogout URL: https://localhost:7259/signout-oidc
+		- check ID tokens checkbox
+		- click Configure
+		
+Add Sigh-Out feature:
+	- install package microsoft.identity.web.ui
+		We're gonna use the sign-in, sign-out controllers that comes with these packages
+	- Program.cs: 
+		- builder.Services.AddControllersWithViews();. Because it depends on the MVC pattern
+		- Add MvcOptions to the razor pages. Add it after the above line. 
+			builder.Services.AddRazorPages().AddMvcOptions(opt => {var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+			opt.Filters.Add(new AuthorizedFilter(policy));
+			}).AddMicrosoftIdentityUI();
+		- remove the [Authorize] attribute from Index, since we added the Auth policy for evrything
+		- Use endpoints, since we added MVC:
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}"
+				);
+			});
+		
