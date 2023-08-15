@@ -71,4 +71,27 @@ Add Sigh-Out feature:
 					pattern: "{controller=Home}/{action=Index}/{id?}"
 				);
 			});
+		- Add Scaffolded Item to the project
+		- Pick Identity
+		- Select Account/Login and /Logout
+		- Add DataContext
+		- Check SQL Lite
+			This installs some nuget packages required to work with identities. Will add some new pages + partial pages. Will also update the Program.cs and add the required services
+		- Do some changes in the _LoginPartial class, in order to use the Microsoft.Identity.Web.UI controllers:
+		@if (User.Identity.IsAuthenticated)
+		{
+			<li class="nav-item">
+				<a id="manage" class="nav-link text-dark" title="Manage">Hello @User.Identity.Name!</a>
+			</li>
+			<li class="nav-item">
+					<a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">SignOut</a>
+			</li>
+		}
+		else
+		{
+			<li class="nav-item">
+					<a class="nav-link text-dark" id="login" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Login</a>
+			</li>
+		}		
+		- add _LoginPartial to your _Layout.cshtml
 		
