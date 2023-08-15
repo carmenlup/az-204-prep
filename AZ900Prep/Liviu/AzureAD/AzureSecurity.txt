@@ -1,0 +1,214 @@
+Azure Active Directory
+
+- Identity Provider
+- Create User
+- Role Based Access
+- Application Objects
+	- Something you define in Azure AD
+	- You have an app that need to access your storage account
+	- You can create an Application Objects in your AD that will give access
+		- you can use the same app object to authorize different resources 
+		- is part of Microsoft Identity platform
+		- users can sign in using their Microsoft identities or social accounts
+
+Lab portal - Use Application Objects
+	- Go to AD -> App registrations
+		- register an application
+	- hit Registration
+		- give a name
+	- this is like a new identity within the AD
+	- associate this app object with your .Net app
+	- go to storage account - IAM - add role Assignment
+		- e.g. Reader role
+		- Add user -> search for the App object and select it
+		
+Microsoft Graph
+	-  is an API that has an endpoint:  https://graph.microsoft.com
+	- https://learn.microsoft.com/en-us/graph/overview
+	- allows it to get insights not only about Azure but also about Microsoft 365
+	- you can use to get info about users, groups, etc.
+	- make API calls
+	- We'll use it to get info about the user, with the help of an Application Objects
+	- Use the Postman took to invoke the API
+
+LAB - Use Graph to get user and group information using Postman
+	- get the Access Token
+	- define the App Object that can be used to get the Access Token
+	- go to your App Object - API permissions
+	- Add permissions from there
+	- Types of permissions:
+		- Application - choose this one now (runs on behalf of an application)
+		- Delegated (runs on behalf of the user)
+	- click Grant admin consent for Active Directory
+	- Call the Authentication service to get the ACCESS TOKEN - where you get the URLs??
+		- go to your App object - click the Endpoints tab
+		- get the OAuth 2.0 token endpoint: https://login.microsoftonline.com/62d18f9f-8f85-4e0b-901a-d292a89d516e/oauth2/v2.0/token
+		- the path param is the Directory Id
+		- create a POST request
+		- the body as x-www-form-urlencoded
+			- grant_type: client_credentials
+			- client_id: client id from App Object
+			- client_secret: generate a new one from your App object
+			- scope: https://graph.microsoft.com/default
+		- use the token and GET info about users: https://graph.microsoft.com/v1.0/users
+		
+UPDATE User	
+	- give API permissions to your App Object: User.ReadWrite.All
+	- PATCH: https://graph.microsoft.com/v1.0/users/{UserID}
+		- add the body as JSON with the user properties you want to update
+
+KEY VAULT
+	- hosting your secrets (encryption keys, certificates, secrets as passwords/keys)
+	- manage the lifecycle of your secrets
+	LAB:
+		- create the Key Vault service
+		- Soft-delete is automatically Enabled and you need to specify the retaintion days
+		- Permission model - Vault access policy vs RBAC
+			- Choose Vault access policy
+		
+	Keys:
+		- Create new encryption keys from the service
+		.NET:
+			- install the Azure.Security.KeyVault.Keys package + Azure.Identity
+			- Create an App Object that will be used to access the Key Vault
+			- go to your Key Valut - Access policy and add new one
+				- give Get, Encrypt, Decrypt permissions for the App Object
+		
+	Secrets:
+		- How to store the connection strings?
+		- Create new secret
+			- name
+			- value (the connection string)
+			- you can also set Activation date / expiration date
+		- .NET	
+			- install Azure.Security.KeyVault.Secrets package
+			- Use the SecretClient class to establish a connection, using the KeyVault URI and the ClientSecretCredentials (app object)
+			- update the Key Vault Access policies and give Get access to your app object
+			- call .GetSecret(secretName)
+			
+	
+Managed Identities
+	- Helps Azure resources to authentitcate to services that support Azure AD authentitcation
+	- this is a more secure way, comparing with the app object, where we need to maintain the clientSecret (which is similar as a password)
+	- you can assign an Identity to the environment that is hosting your application. Then you can give permissions to that identity to access your services (e.g. to access the Storage Account)
+	- this works for services in Azure that have support for Managed Identities
+
+LAB Managed Identities
+	- have a VM
+	- have a Storage Account
+		- have a Container and a blob uploaded
+	- we're using the program we created to work with Blobs
+		- just that we delete the app object related code, since we are going to authorize using the Managed Identities
+	- we'll need to host the app on the VM
+	- copy the compile version of this console app on the VM
+	- Configure Managed Identities for VM:
+		- Go to your VM 
+		- Identity Section - Turn ON
+		- The VM is registered as a separate Identity in your Add
+		- go to Storage Account:
+			- Add Role Assignments
+			- Select Members and select your VM
+	- .NET code updates:
+		- we still need to use some credentials -> TokenCredentials
+		- TokenCredentials credentials = new DefaultAzureCredentials();
+			- gets a token based on the credentials that are defined for the underling environment
+			- it will automatically get the ManagedIdentity that we provided for our VM and get an access token
+			- this class can pick up the credentials from a variaty of locations (in our case ManagedIdentity),as Environment variables for example
+		- build and copy the app on the VM
+		- install .Net runtime on the VM
+		- run the exe -> the blob is downloaded
+		
+Getting the access token
+	- get the access token yourself instead using the DefaultAzureCredentials class
+	- https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token
+	- get the metadata URI (find it in the documentation)
+	- Storage account metadata URI: http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=http://storage.azure.com 
+	- have a HttpClient and call the metadata URI to get the access token
+	- build the app, copy on the VM and run
+	- this will also get the token for the underlying environment
+	- Why we want to get it manually like this? No particular reason, just that is required for the exam...
+	
+	Using the access token:
+		- will try to access a blob
+		- use a http client to access the URL of a blob url
+		- add the Authorization header using the Bearer Token
+		- add one more header - x-ms-version
+		- when making requests using oauth2, we need to pass the version 2017-11-09 or higher (according to the documentation 
+		- make the request httpClient.GetAsync(url)
+		
+Web App - Managed Identity (give access to KeyVault)
+	- Use the same class DefaultAzureCredentials() to get the TokenCredentials
+	- Activate the Identity for your Web App
+	- go to your Azure Key Vault and configure the Access Policy. 
+	- Give access to your Web App identity
+	
+Managed Identities - notes
+	- 2 types:
+		- system - assignned. 
+			- This is linked dirrectly to the resource and will be deleted along with the resource
+		- user - assigned. 
+			- This lives as a separate resource and is not automatically deleted along with the resource. 
+			- Same identity can be assigned to multiple resources.
+			- easier to manage the permissions for multiple resources
+	- go to your VM/Web App -> Identity
+	- you'll find there the 2 types of identityes mentioned above (2 tabs)
+	
+Managed Identities - User-Assigned identity
+	- create the User-Assigned Managed Identity resource
+		- RG, location, name
+	- go to your VM -> Identity - User-Assigned identity tab
+	- Add - choose the User-Assigned Identity you created 
+	- Go to Storage Account to give permissions to this Identity
+	- Add role assignment - Reader for example
+	- Assign access to -> select Managed Identity instead of the default selection that is User, Group
+	- Select members and pick your User-Assigned Identity resource
+		
+User-Assigned Identities - Powershell
+	- how to create and assign
+	- you need to install the PS module Az.ManagedServiceIdentity. Run command Install-Module Az.ManagedServiceIdentity
+	
+	
+	Script.ps1
+		Connect-AzAccount
+		
+		$ResourceGroupName="app-grp"
+		$IdentityName="LiviuUserAssignedIdentity"
+		$LocationName="North Europe"
+		
+		$VmName="YourAppVM"
+		
+		New-AzUserAssignedIdentity -ResourceGroupName $ResourceGroupName -Name $IdentityName -Location $LocationName
+		
+		$Identity=Get-AzResource -Name $IdentityName -ResourceGroupName $ResourceGroupName
+		$YourIdentityId = $Identity.Id
+		$Vm=Get-AzVM -ResourceGroupName $ResourceGroupName -Name $VmName
+		
+		Update-AzVM -ResourceGroupName $ResourceGroupName -VM $Vm -IdentityType UserAssigned -IdentityId $YourIdentityId
+
+System-Assigned Identities - Powershell
+	Script.ps1
+		Connect-AzAccount
+		
+		$ResourceGroupName="app-grp"
+		$VmName="YourAppVM"
+		
+		$Vm=Get-AzVM -ResourceGroupName $ResourceGroupName -Name $VmName
+		
+		Update-AzVM -ResourceGroupName $ResourceGroupName -VM $Vm -IdentityType SystemAssigned
+	
+Storage Account - Key Vault - Powershell
+	- Get the access key from a storage account and place it in the key vault service
+	Script.ps1
+		Connect-AzAccount		
+		$ResourceGroupName="app-grp"
+		$StorageAccountName="your account name"
+		$StorageAccountKey=(Get-AzStorageAccountKey -ResourceGroupName $ResourceGroupName -AccountName $StorageAccountName) | Where-Obj {$_.KeyName eq "key1"}
+		
+		$StorageAccountKeyValue = $StorageAccountKey.Value
+		
+		$KeyVaultName="your key vault"
+		$SecretValue=ConvertTo-SecureString $StorageAccountKeyValue -AsPlainText -Force
+		
+		Set-AzKeyVaultSecret -VaultName $VaultName -Name "the secret name" -SecretValue $SecretValue
+		
+		
