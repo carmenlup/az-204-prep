@@ -128,7 +128,87 @@ Getting the access token
 	- this will also get the token for the underlying environment
 	- Why we want to get it manually like this? No particular reason, just that is required for the exam...
 	
+	Using the access token:
+		- will try to access a blob
+		- use a http client to access the URL of a blob url
+		- add the Authorization header using the Bearer Token
+		- add one more header - x-ms-version
+		- when making requests using oauth2, we need to pass the version 2017-11-09 or higher (according to the documentation 
+		- make the request httpClient.GetAsync(url)
 		
+Web App - Managed Identity (give access to KeyVault)
+	- Use the same class DefaultAzureCredentials() to get the TokenCredentials
+	- Activate the Identity for your Web App
+	- go to your Azure Key Vault and configure the Access Policy. 
+	- Give access to your Web App identity
 	
+Managed Identities - notes
+	- 2 types:
+		- system - assignned. 
+			- This is linked dirrectly to the resource and will be deleted along with the resource
+		- user - assigned. 
+			- This lives as a separate resource and is not automatically deleted along with the resource. 
+			- Same identity can be assigned to multiple resources.
+			- easier to manage the permissions for multiple resources
+	- go to your VM/Web App -> Identity
+	- you'll find there the 2 types of identityes mentioned above (2 tabs)
+	
+Managed Identities - User-Assigned identity
+	- create the User-Assigned Managed Identity resource
+		- RG, location, name
+	- go to your VM -> Identity - User-Assigned identity tab
+	- Add - choose the User-Assigned Identity you created 
+	- Go to Storage Account to give permissions to this Identity
+	- Add role assignment - Reader for example
+	- Assign access to -> select Managed Identity instead of the default selection that is User, Group
+	- Select members and pick your User-Assigned Identity resource
+		
+User-Assigned Identities - Powershell
+	- how to create and assign
+	- you need to install the PS module Az.ManagedServiceIdentity. Run command Install-Module Az.ManagedServiceIdentity
+	
+	
+	Script.ps1
+		Connect-AzAccount
+		
+		$ResourceGroupName="app-grp"
+		$IdentityName="LiviuUserAssignedIdentity"
+		$LocationName="North Europe"
+		
+		$VmName="YourAppVM"
+		
+		New-AzUserAssignedIdentity -ResourceGroupName $ResourceGroupName -Name $IdentityName -Location $LocationName
+		
+		$Identity=Get-AzResource -Name $IdentityName -ResourceGroupName $ResourceGroupName
+		$YourIdentityId = $Identity.Id
+		$Vm=Get-AzVM -ResourceGroupName $ResourceGroupName -Name $VmName
+		
+		Update-AzVM -ResourceGroupName $ResourceGroupName -VM $Vm -IdentityType UserAssigned -IdentityId $YourIdentityId
+
+System-Assigned Identities - Powershell
+	Script.ps1
+		Connect-AzAccount
+		
+		$ResourceGroupName="app-grp"
+		$VmName="YourAppVM"
+		
+		$Vm=Get-AzVM -ResourceGroupName $ResourceGroupName -Name $VmName
+		
+		Update-AzVM -ResourceGroupName $ResourceGroupName -VM $Vm -IdentityType SystemAssigned
+	
+Storage Account - Key Vault - Powershell
+	- Get the access key from a storage account and place it in the key vault service
+	Script.ps1
+		Connect-AzAccount		
+		$ResourceGroupName="app-grp"
+		$StorageAccountName="your account name"
+		$StorageAccountKey=(Get-AzStorageAccountKey -ResourceGroupName $ResourceGroupName -AccountName $StorageAccountName) | Where-Obj {$_.KeyName eq "key1"}
+		
+		$StorageAccountKeyValue = $StorageAccountKey.Value
+		
+		$KeyVaultName="your key vault"
+		$SecretValue=ConvertTo-SecureString $StorageAccountKeyValue -AsPlainText -Force
+		
+		Set-AzKeyVaultSecret -VaultName $VaultName -Name "the secret name" -SecretValue $SecretValue
 		
 		
