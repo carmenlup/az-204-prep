@@ -15,7 +15,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<AuthAzureAppContext>();
 
 // Add services to the container.
-builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
+var scopes = new string[] { "https://storage.azure.com/user_impersonation" };
+builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd")
+    .EnableTokenAcquisitionToCallDownstreamApi(scopes)
+    .AddInMemoryTokenCaches();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddMvcOptions(options =>
 {

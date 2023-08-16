@@ -95,3 +95,46 @@ Add Sigh-Out feature:
 		}		
 		- add _LoginPartial to your _Layout.cshtml
 		
+Get User Claims
+	- key-value pairs containing information about the user
+	- Display User.Claims on the index page
+	
+Get Group Claims
+	- Portal - Go to your App Object -> Token Configuration
+	- From there you can define what Claims to be passed to your app, along with the ID token
+	- select Add Group Claim and select Security Groups and Group ID
+	- Manifest: Here you'll see all the properties of your App Object. 
+Other claims
+	- Portal - App Object - Token Configuration
+	- Add claims - Select the token type (ID in our case)
+	- Choose the claims you want to be provided along with the token ID
+
+AUTHORIZATION	
+LAB Get Access Token
+	- Get token for the logged in user
+	- First of all, go to your Storage account and set Role Assignments for the user you'll use to log into your application (First User - UserA@chifanionutgmail.onmicrosoft.com)
+	- Program.cs	
+		- need to insure that our pogram can automatically work with Access Token
+		- Add a scope. string[] scopes = new string[] {"https://storage.azure.com/user_impersonation"};
+		- where we add the service .AddMicrosoftIdentityWebAppAuthentication() we'll call .EnableTokenAcquisitionToCallDownstreamApi(scope).AddInMemoryTokenCaches();
+		
+		- Even the application needs some permissions, in order to access the storage account on behalf of the user
+		- go go App Object - API Permissions - Add permissions
+		- choose Azure Storage -> select Delegated permissions -> select user_impersonation
+		- Then go to the Authentication section and check Access Token
+	
+	Inspect the Access Token for the sake of demonstration (normally you'll not work directly with it):
+		- Inject ITokenAcquisition interface into Index page
+		- In OnGet() method, get the token
+		-  AccessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(scopes);
+		- but we get an error: One client credential type required either: ClientSecret, Certificate, ClientAssertion or AppTokenProvider must be defined when creating a Confidential Client.
+		- this is because the  authorization code flow need to exchange the Auth Code for the Token, and for this it needs a secret
+		- Edit the appsettings.json AzureAd section and add the ClientSecret prop. Generate a value from your App Object
+	
+	Using an access token:
+		- get the access token credentials using this class: var credentials = new TokenAcquisitionTokenCredential(TokenAcquisition);
+		- you don't need to specify any scopes. This class will give you the Access Token based on the logged in user permissions
+		- you can use this Token Credentials to call the Storage Account, on behalf of the logged in user: var client = new BlobClient(blobUri, credentials);
+		
+		
+			
