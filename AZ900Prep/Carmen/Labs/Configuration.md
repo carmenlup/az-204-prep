@@ -3,9 +3,9 @@
 App Service has different configurations available and are grouped by categories on different tabs in Azure portal
 1. Application settings
 2. General setting
-3. Default documents: $\color{red}{Windows OLNY!!!}$.
+3. Default documents: $\color{red}{Windows}$ $\color{red}{OLNY!!!}$.
 4. Path mapping
-5. Error pages ($\color{orange}{in Preview}$). 
+5. Error pages ($\color{orange}{in}$ $\color{orange}{Preview}$). 
 
 ### LAB 1 - OS dependencies
 Objective: Configuration options differ based on OS
@@ -19,7 +19,8 @@ Objective: Configuration options differ based on OS
 3. Create App service resouce for Linux
 4. After resource is created go to resource and open Configuration
 	> - only 4 options mentioned in general description should be available 
-	> $\color{orange}{Default doccuments}$ is only for Windows
+	
+	$\color{red}{!!!Default}$  $\color{red}{documents}$ is only for Windows
 
 ![Windows config](./Images/LinuxConfigOptions.PNG "Optional title")
 
