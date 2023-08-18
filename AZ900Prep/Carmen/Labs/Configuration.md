@@ -14,12 +14,12 @@ Objective: Configuration options differ based on OS
 2. After resource is created go to resource and open Configuration
 	> - all 5 options mentioned in general description should be available 
 
-![Windows config](/Images/WindowsConfigOptions.PNG "Optional title")
+![Windows config](./Images/WindowsConfigOptions.PNG "Optional title")
 
 3. Create App service resouce for Linux
 4. After resource is created go to resource and open Configuration
 	> - only 4 options mentioned in general description should be available 
 	> $\color{orange}{Default doccuments}$ is only for Windows
 
-![Windows config](/Images/LinuxConfigOptions.PNG "Optional title")
+![Windows config](./Images/LinuxConfigOptions.PNG "Optional title")
 
