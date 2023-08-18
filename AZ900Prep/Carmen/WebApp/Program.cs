@@ -1,5 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.Reflection;
+using WebApp.Service;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+builder.Services.AddTransient<IProductService, ProductService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
