@@ -5,7 +5,6 @@ namespace WebApp.Service
 {
     public class ProductService : IProductService
     {
-        private static string db_database = "appdb";
         private readonly IConfiguration Configuration;
         public ProductService(IConfiguration configuration)
         {
