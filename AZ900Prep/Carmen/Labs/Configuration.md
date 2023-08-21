@@ -24,7 +24,7 @@ Objective: Configuration options differ based on OS
 
 ![Linux config](./Images/LinuxConfigOptions.PNG "App Service on Linux")
 
-### Default routing vs Custom routing
+### Default folder deployment vs custom folder / Multiple apps deployment
 By default, App Service starts your app from the root directory of your app code. But certain web frameworks don't start in the root directory.
 > For more details see official documentation [Map URL Path to directory](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=portal)
 
@@ -76,4 +76,6 @@ To check this step try to publish your app from Visual Studion and web depolymen
 **Deploy your app**
 
 11. Deploy your app again from VS - now the deployment and app should work
+
+
 
