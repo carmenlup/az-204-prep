@@ -136,5 +136,38 @@ LAB Get Access Token
 		- you don't need to specify any scopes. This class will give you the Access Token based on the logged in user permissions
 		- you can use this Token Credentials to call the Storage Account, on behalf of the logged in user: var client = new BlobClient(blobUri, credentials);
 		
+	Publish to web app
+		- after publishing, you need to change the App Obj - Authentication -> Sign In / Sign Out URLs
 		
+	Access blob data from Postman
+		- Same as we did before, when calling the graph endpoint. We are using the App Object that will need to have IAM permissions to access the storage account
+		- but this time the scope will be https://storage.azure.com/.default
+		- And use the URL of the blob resource to access it 
+			- besides the authorization header we also need to pass the "x-ms-version" : 2017-11-09 header
+		
+	Create our Web API
+		-our application will call the API, which will use OAuth for authorization
+		- create 2 endpoints that feetch data from SQL: GetProducts and GetProductById
+		- using aprox the same code as for the Functions lab
+		- publish the web api
+			- create a new app service and publish to it
+			
+		
+	Protect our Web API
+		- create a new App Object for our API app
+		- change the Manifest - AccessTokenAcceptedVersion = 2. In this way we'll accept OAuth2 tokens
+		- install the Microsoft.Identity.Web package
+		- Program.cs -> register the services and middlewares
+			- builder.Services.AddMicrosoftIdentityWebApi(builder.Configuration, "AzureAd");
+			- use Authorization
+			- use Authentication
+		- create the AzureAd section in your appsettings
+		- specify the Instance: https://login.microsoftonline.com, ClientId and TenantId from the App object
+		- don't need a client secret here, beause the API is not making the call to exchange the Access Code for a token. the API will get the Access Token
+		- add  [Authorize] on the controller
+	
+	Call the API using Postman
+		- go to the ProductsApi App object
+		- App roles
+			
 			

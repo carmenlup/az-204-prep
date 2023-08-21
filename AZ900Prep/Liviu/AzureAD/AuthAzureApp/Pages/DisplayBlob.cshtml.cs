@@ -8,7 +8,7 @@ namespace AuthAzureApp.Pages
     public class DisplayBlobModel : PageModel
     {
         public ITokenAcquisition TokenAcquisition { get; }
-        public string FileContent; 
+        public string? FileContent; 
         public DisplayBlobModel(ITokenAcquisition tokenAcquisition)
         {
             TokenAcquisition = tokenAcquisition;

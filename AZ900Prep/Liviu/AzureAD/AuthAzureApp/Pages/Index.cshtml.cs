@@ -17,7 +17,7 @@ namespace AuthAzureApp.Pages
             _tokenAcquisition = tokenAcquisition;
         }
 
-        public async Task OnGet()
+        public void OnGet()
         {
            // var scopes = new string[] { "https://storage.azure.com/user_impersonation" };
            //AccessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(scopes);
