@@ -78,4 +78,5 @@ To check this step try to publish your app from Visual Studion and web depolymen
 11. Deploy your app again from VS - now the deployment and app should work
 
 
-
+### Lab 3 - Application configuration - ASPNETCORE_ENVIRONMENT
+Web app app settings / azure web app app settings $\color{red}{TODO in the class}$
