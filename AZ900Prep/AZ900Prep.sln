@@ -51,7 +51,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{FC868821-074F-4701-B815-AA46111F84B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureSecurity", "Liviu\AzureAD\AzureSecurity\AzureSecurity.csproj", "{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureSecurity", "Liviu\AzureAD\AzureSecurity\AzureSecurity.csproj", "{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
+	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Configuration.md = Carmen\Labs\Configuration.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
+	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\LinuxConfigOptions.PNG = Carmen\Labs\Images\LinuxConfigOptions.PNG
+		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +104,8 @@ Global
 		{E2DB1555-AF3B-49B6-9CB0-2E7B272021E1} = {4A639ACC-4867-4101-9EF5-6024DAC6B0BF}
 		{FC868821-074F-4701-B815-AA46111F84B0} = {4A639ACC-4867-4101-9EF5-6024DAC6B0BF}
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF} = {FC868821-074F-4701-B815-AA46111F84B0}
+		{7DF30B9B-E520-4F5F-95E2-52A903259BD5} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{B9328774-E9E6-42B4-A1DF-B4477DE545CF} = {7DF30B9B-E520-4F5F-95E2-52A903259BD5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
