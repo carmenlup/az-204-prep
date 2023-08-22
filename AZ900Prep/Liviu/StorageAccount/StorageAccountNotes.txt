@@ -1,0 +1,306 @@
+STORAGE ACCOUNT
+
+	Blob (for objects, images, videos)
+	Table (table data - key-value)
+	Queue (queues used for sending and receiving mesages)
+	File (used to create file shares)
+
+Types of Storage accounts:
+	1. Standard General Purpose V2 (you get access to all 4 types of storage mentioned above)
+	2. Premium blobs. this is supported for block and append blobs. This is when you want fast access to your blobs, high transaction rate.
+	3. Premium Page blobs. Used for the virtual hard disk that is assigned to your virtual machine. You'll get premium performance for those hard disks with this type of storage. This is supported for page blobs. Fast access to blobs, high transaction rates.
+	4. Premium file shares. Fast access to your files, high transaction rates. 
+	
+Portal - create storage accounts
+	- select the Storage account service
+	- give unique storage account name
+	- performance -> Standard (general purpose v2) or Premium (option 2, 3, 4)
+	- Redundancy
+
+Blob service:
+	- optimized for storing large amounts of unstructured data (images, videos)
+	- create a container. this will contains the objects you store
+	- each object will have an URL you can use to access it
+	- Types of blobs:
+		- Block blobs - This is made up of blocks of data that ca be managed individually. This is what we are going to use.
+		- Append blobs - These are blocks blobs that are optimized for append operations - Good for logging (log files).
+		- Page blobs - This is used for virtual hard drive files for VMs
+
+Platform lab - Upload blobs
+	- create container
+	- go to container -> upload objects
+	- how to create folders
+	- when you upload -> hit Advanced -> fill in the field "Upload to folder"
+	- But if you want to have a folder structure you can use Data Lake Get 2
+	
+Platform lab - Accessing the blobs
+	- from portal go to the object and click download
+	- or get the URL of the object
+	- you need to be authorized to access the object with that URL
+	- How to authorize:
+		1. go to container and change the Public access level:
+			- Private - no anonymous access
+			- Blob - anonymous read access for blobs
+			- Container - anonymous read access for container and blobs. This will allow applications to hydrate (list all) blobs from the container
+		2. Access Keys
+		3. Shared Access Signatures
+		4. Azure Active Directory
+		
+Azure Storage Explorer
+	- a tool you can use to work with the storage account
+	- download the .exe from Azure and install
+	- a better user experience
+	
+Using Access Keys for authorization
+	- go to Storage account -> Access Keys
+	- give full access to all services and all data within your Storage account
+	
+Shared Access signatures
+	- can be set at the blob level
+	- go to the object -> select Generate SAS (shared access signatures)
+	- select start and expiry dates
+	- you can allow specific IP addresses
+	- click generate
+	- you'll get the sas URL, which can be used to access the object
+
+SAS at the account level
+	- go to storage account
+	- shared access signature
+	- from there you can give access to certain services, resource types, also give specific permissions ( read, write, etc.)
+	- start and expiry date time
+	- ip addresses
+	- generate the connection string
+	
+Stored access policy
+	- this can be used to invalidate a shared access signature (in case the signature is compromised)
+	- go to storage account -> container -> access policy
+	- add policy
+	- select permissions
+	- start - expiry date time
+	- from the Storage Explorer you can right click on the container and Get Shared Access Signature
+	- you can chose the policy that will be used to build that SAS
+	- Use the generated SAS to connect to that container
+	- let's say the SAS got compromised
+	- you go and edit the policy and remove all the permissions
+	- the user wont be able to access the container even if they have the SAS 
+	
+Different types of SAS:
+	- Create it at the account level
+	- create it at the service level (eg container)
+	- create a user delegation shared access signature (using AD credentials)
+	- https://learn.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas
+	
+Azure storage account - AD authentication
+	- ensure the users that are defined in your Azure AD get access to the data from your storage account
+	- go to storage account -> IAM
+	- add role assignment
+	- select a role. storage account contributor 
+	- + Select members
+	- review and assign
+	
+Access Tiers
+	- Available for blob services
+	- Hot / Cool / Archive
+		- Pricing 
+			Higher -> Lower for storage
+			Lower > Higher for access operations
+	- Hot -> Data is accessed frequently
+	- Cool -> Data is accessed infrequently and stored for at least 30 days
+	- Archive -> rarely accessed and stored for at least 180 days
+	- Hot / Cool -> set at the torage account level
+	- Archive -> set at the blob level
+	
+Hot / Cool access tier
+	- go to the account -> Configuration Settings -> select the access tier. (Hot and Cool options available)
+	- when you create new storage account you can also set the access tier at the storage account level
+	- Changing the access tier from the account level will also change the access tier of the existing blobs
+	
+Archive access tier
+	- go to the blobl object
+	- change tier
+	- you are not able to access it again unless you rehydrate your object. Operation that will take some time
+	- Rehydrate priority: 
+		Standard - takes up to 15 hours
+		High - may complete in less than 1 hour for objects smaller than 10 GB (you pay more to access it)
+		
+
+Lifecycle Management Policies:
+	- Let's say you have a lot of objects and some of them are not accessed that frequently
+	- For those objects you need to change the access tiers, in order to optimize the storage costs
+	- For this you have Lifecycle Management Rules
+	- Based on particular conditions you can change the access tiers of objects or even delete them
+	- Can be applied at the account level or subsets of blobls
+	
+	- go to your storage account -> Data management section -> pick Lifecycle Management
+	- Add rule:
+		- Apply to all blobs or add filters
+		- Select Blob Types
+		- Select Blob Subtype: Base Blobs/ Snapshots / Versions
+		- Last modified (days)
+		- Then -> select the action: Move to different access tier / Delete
+		
+Blob Versioning
+	- Allows to maintain the previous version
+	- you can restore to earlier versions
+	- each blob gets an initial version ID. A new version is set whenever the blobl is updated
+	- enable / disable the feature at any point in time
+	
+	- go to Storage account> Data Management section -> Data protections -> Check Enable Versioning
+	- When you edit the file you'll get a new versions
+	- you can see the versions at the object level -> Versions tab
+	- you can select what version to be the current one
+	- even when you are disabling the feature, the existing versions will be preserved
+	
+Blob snapshots
+	- go to your blob object -> Snapshots tab -> create Snapshot
+	- you can edit / download / delete the snapshots
+	- you can promote, which will restore that object
+	- similar feature with versioning, but this can be used when you don't need to have versioning for all the blobs
+	
+Blob soft delete
+	- you can specify a retention period
+	- data will be available
+	- during the retention period you can restore the blob and its snapshots
+	- you can change the setting anytime
+	
+	- go to storage account -> Data protection -> Check Enable Soft Deletion
+	- How to recover:
+		- go to your container and toggle Show Deleted blobs
+		- Check -> Undelete
+		
+LAB .Net - Creating a container
+	- install the nuget package: Azure.Storage.Blobs/
+	- declare variables
+		- connectionString: go to Storage account - Access Keys
+		- containerName
+	- create client: BlobServiceClient client = new BlobServiceClient(connectionString);
+	- create container: await client.CreateBlobContainerAsync(containerName);
+	- the CreateBlobContainerAsync method has an overload where you can specify the access type (e.g. public/private)
+	
+LAB .Net - Upload blob
+	- you need blobName and filePath
+	- create a BlobContainerClient: new BlobContainerClient(connectionString, containerName);
+	- get the BlobClient: BlobContainerClient.GetBlobClient(bloblName);
+	- await BlobClient.UploadAsync(filePath, overrideExistingBlob: true);
+
+LAB .Net - List blobs
+	- get BlobContainerClient
+	- get all blobs -> BlobContainerClient.GetBlobsAsync()
+	- you can use foreach to loop
+	
+LAB .Net - Download blobs
+	- get BlobContainerClient
+	- you need the blob name you want to download and the path where you want to save it
+	- get BlobClient = new BlobClient(connectionString, containerName, blobName);
+	- BlobClient.DownloadToAsync(filePath);
+	
+LAB .Net - Blob metadata (how to set the properties)
+	- click on the blob -> see the Metadata properties (key - value pair)
+	- get BlobClient
+	- create Dictionary<string, string> where you add the metadata. e.g. {"Department", "Logistics"}
+	- BlobClient.SetMetadataAsync(metadataDictionary);
+	- how to read metadata:
+		- get BlobProperties = BlobClient.GetPropertiesAsync()
+		- foreach( var metadata in BlobProperties.Metadata)
+		
+	
+LAB .Net - Blob lease
+	- Scenario: You have multiple programs that access the same Blob object
+		- You want to lock the object so that no other programs can modify the blob
+		- you can use the Lease 
+	- get BlobClient
+	- Get BlobLeaseClient = BlobClient.GetBlobLeaseClient();
+	- define a timespan that means how long the Lease will take place: TimeSpan leaseTime = new TimeSpan(values)
+	- Response<BlobLease> response =  BlobLeaseClient.AquireAsync(leaseTime)
+	- print the Lease id: response.Value.LeaseId
+	- no other programs can update the object while the lease is active (during the timespan)
+	
+LAB - Az Copy
+	- command line utility to copy files from/to storage accounts
+	- create container: azcopy make [accountUrl/containerName?sharedSignature]
+	- upload file: azcopy copy [local file] [accountUrl/containerName/blobName?sharedSignature]
+	- download file: azcopy copy [accountUrl/containerName/blobName?sharedSignature] [fileName to be saved on your local device]
+	
+Moving Storage account to another region
+	- create new storage account in destination region
+	- copy the data
+	- Steps:
+		- export template (see export option from Storage Account -> Automation section)
+			- copy the template
+			- create resource
+			- select Template -> build my own template and paste the template prev copied
+			
+		- modify the template and set the target region
+		- deploy the template to create the new storage account
+		- configure the new storage account
+		- move data
+		- delete the data from the source region
+		- Move data: you can use azcopy tool
+
+LAB - Azure Blob - Change feed
+	- it provides a read-only log of changes
+		- useful for audit trail 
+	- can log CUD operations (Cosmos DB does not support Delete for example)
+	- change feed data is recorded in a container named $blobchangefeed
+	- the records are stored in Apache Avro format
+	
+	- goto your storage account -> Data Protection -> Enable blob change feed. 
+		Options:
+		- Keep all logs
+		- Delete change feed logs after X days
+	- this storage will also affect the cost of your storage account
+	- it takes a minute or to until the log is recorded
+	- Avro format is an optimized format for storing data
+
+What is Azure Table storage?
+	- store non relational, but Structured data
+	- it's based on structured NoSQL data concept 
+	- you have a key/attribute store with a schemaless design
+	
+	- A table is a collection of entities
+	- The entities do not need to have a certain type of schema
+	- Each entity can have different set of properties
+	- An entity is made up of properties
+	- Each properties is a name-value pair
+	- Entity = Row in traditional SQL 
+	- When you define an entity you also need to:
+		- define the Partition Keys
+		- Define Row Key - This unique identitfies the entity within the partition
+	- The [Partition Key - Row Key] pair will uniquely identify the entity within the table
+
+LAB - Table storage
+	- create table
+	- goto storage browser
+	- Add Entity	
+		- specify the Partition Key and Row Key columns
+		- Add additional properties (so called columns in SQL)
+	- you can add another Entity but with different Properties
+	
+LAB .Net - Table storage - ADD
+	- connectionString
+	- tableName
+	- install nuget Azure.Data.Table
+	- instantiate TableClient = new TableClient(connectionString, tableName);
+	- instantiate TableEntity = new TableEntity(partitionKeyValue, rowKeyValue){
+		{key,value} // -> the properties of your entity
+	};
+	- tableClient.AddEntity(entity);
+	
+	
+LAB .Net - Table storage - READ
+	- instantiate TableClient
+	- Pageable<TableEntity> result = TableClient.Query<TableEntity>(entity => entity.PartitonKey == "yourValue");
+	- foreach TableEntity in results
+		read info from the entity: e.g. tableEntity.GetInt32("Quantity");
+	
+
+
+LAB .Net - Table storage - DELETE
+	- instantiate TableClient
+	- TableClient.DeleteEntity(partitionKeyValue, rowKeyValue);
+	
+LAB .Net - Table storage - UPDATE	
+	TableClient tableClient = new TableClient(connectionString, tableName);
+    Order order = tableClient.GetEntity<Order>(category, orderID);
+    order.quantity = quantity;
+    tableClient.UpdateEntity<Order>(order,ifMatch:ETag.All,TableUpdateMode.Replace);

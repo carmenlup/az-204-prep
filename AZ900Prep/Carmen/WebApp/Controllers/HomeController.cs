@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
+using WebApp.Service;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductService _product;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductService product)
         {
             _logger = logger;
+            _product = product;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _product.GetProduct();
+            return View(products);
         }
 
         public IActionResult Privacy()
