@@ -1,0 +1,27 @@
+﻿@page
+@model AuthAzureApp.Pages.CallProductsWebApi
+@{
+    ViewData["Title"] = "Display blob page";
+}
+
+<div class="text-body text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.ProductName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

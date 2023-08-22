@@ -168,6 +168,49 @@ LAB Get Access Token
 	
 	Call the API using Postman
 		- go to the ProductsApi App object
-		- App roles
-			
+			- App roles
+				- create roles that will be allowed to interact with this App object
+				- the other identities (App objects) that interact with your API will need to have these roles
+				- create role and select Allowed for Applications
+			- goto Exposing an API
+			- Application ID URI - click add. - will generate a url for this app object
+			- go to the Postman App object -> this is the object we use to get the token and access the Web API (which is hosted under the ProductsApi app object)
+			- click API permissions -> Add permissions -> select either My APIs or my organization APIs. There you'll find the URL createad for ProductsApi
+			- Select and pick the app role that we created
+		- get the auth token using the client credentials flow, same as we did for Graph
+		- the scope will be the ProductsApi app object url + /.default. api://13ec6c37-c61a-4755-ac0a-dd650def2153/.default
+		- then call our API /api/products, using the access token we got
+		
+	Calling the API from a console application
+		- the class that is used to represent an application in code is called IConfidentialClientApplication, from Microsoft.Identity.Client;
+		- IConfidentialClientApplication clientApp = ConfidentialClientApplicationBuilder.Create(clientId).WithTenantId(tenantId).WithClientSecret(secret).Build();
+		- string[] scope = new string[] {ourApiScope}
+		- AuthenticationResult result = await clientApp.AquireTokenForClient(scope).ExecuteAsync();
+		- string accessToken = result.AccessToken;
+		- execute a Get, using a http client
+	
+	Call the API from another web app
+		- going to use the Auth web app
+		- here we need to authorize the user that is logged into the Auth Web App, instead of an App Object as we did before
+		- go to the ProductsApi app object and add a Scope
+		- the Scope gives delegate permissions. The Auth Web App will have the same permissions as the user that is logged in
+		- ProductsApi App object - Expose an API - Add a scope
+			- e.g. Products.Read
+			- select Admins and Users
+			- set Consent and Display name: Reading product data
+			- same for description
+			- Enabled
+			- get the Scope URL, and set it in Program.cs of the Auth Web App. This will be the name for which will get the access token.
+		- AuthApp App object
+			- give Api permissions
+			- Add permissions - My Apis - select the ProductsApi - Delegated permissions (this time) - select the scope we've just created
+		
+	App Role claims
+		- Auth App object -> Create new App roles, applicable for Users
+		- Create AuthApp.Read 
+		- Go to AD -> Enterprise application -> we'll find our Auth App there -> select it
+		- go to Users and Groups
+			- Add a user -> the role will be AuthApp.Read 
+		- then, after logging in with the user added above, we see it contains the /Role claim (AuthApp.Read), which can be used by the app to authorize to specific resources
+	
 			
