@@ -30,14 +30,15 @@ By default, App Service starts your app from the root directory of your app code
 
 ### LAB 2 - Path mappings
 Objective: We will create a simple Web app to explain configurations options for deployment 
-By default the web server hads a defult folder for deployment (site\wwwroot). SOme applications does have a different folder where app starts.
+By default the web server has a defult folder for deployment (site\wwwroot). 
+Some applications does have a different folder where app starts or multiple applications can be hosted on the same web server and different routes are needed for run the apps.
 This lab will explain how App Service should be configured in this case.
 
 #### We will create a simple webapp and default App Service on windows
 1. Create in Visusl Studio a simple ASP.NET Core Web App (Model-View-Controller)
-2. Run local the app to see the result. The application is lunched on localhost
+2. Run local the app to see the result. The application is launched on localhost
 3. Create in Azure a App Service for Windows
-4. Verify the app url in a new tab - default page of the webserver should be available
+4. Verify the app url in a new tab - default page of the web server should be available
 ![Default web page Windows](./Images/SuccessfulDeploymentAppService.PNG "Default Web Server page Windows")
 
 #### Change your app for run on different folder
@@ -51,7 +52,7 @@ This lab will explain how App Service should be configured in this case.
 #### Deploy your app
 **Deployment Profile**
 1. From Visual Studion - Create a new deployment profile with "test" added on Site name and Destination URL:
-![Deploy on custom folder in Azure](./Images/SuccessfulDeploymentAppService.PNG "Defailt location folder site\wwwroot")
+![Deploy on custom folder in Azure](./Images/DeploymentInTestFolder.PNG "Defailt location folder site\wwwroot")
 
 In order to deploy the app in test folder the Path mapping must be added to the App Service configuration.
 To check this step try to publish your app from Visual Studion and web depolyment error will be shown.
