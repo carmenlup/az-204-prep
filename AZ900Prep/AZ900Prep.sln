@@ -60,7 +60,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
 	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
+		Carmen\Labs\Images\DeploymentInTestFolder.PNG = Carmen\Labs\Images\DeploymentInTestFolder.PNG
+		Carmen\Labs\Images\ErrorWhenPublish.PNG = Carmen\Labs\Images\ErrorWhenPublish.PNG
 		Carmen\Labs\Images\LinuxConfigOptions.PNG = Carmen\Labs\Images\LinuxConfigOptions.PNG
+		Carmen\Labs\Images\IISLaunchApp.PNG = Carmen\Labs\Images\IISLaunchApp.PNG
+		Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG
 		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
 	EndProjectSection
 EndProject
