@@ -1,0 +1,38 @@
+1. In this exercise, you'll deploy a basic HTML+CSS site to Azure App Service by using the Azure CLI az webapp up command. 
+	You'll then update the code and redeploy it by using the same command.
+
+	The az webapp up command makes it easy to create and update web apps. When executed it performs the following actions:
+
+		Create a default resource group if one isn't specified.
+		Create a default app service plan.
+		Create an app with the specified name.
+		Zip deploy files from the current working directory to the web app.
+
+2. Open Bash => Create a directory and then navigate to it: 
+		mkdir htmlapp
+		cd htmlapp
+
+3. Run the following git command to clone the sample app repository to your htmlapp directory
+	git clone https://github.com/Azure-Samples/html-docs-hello-world.git
+
+4. Set variables to hold the resource group and app names by running the following commands.
+	resourceGroup=$(az group list --query "[].{id:name}" -o tsv)
+	appName=az204app$RANDOM
+  
+  5. Create the web app. Change to the directory that contains the sample code and run the az webapp up command.
+	  cd html-docs-hello-world
+	 az webapp up -g $resourceGroup -n $appName --html
+
+This command may take a few minutes to run. While running, it displays information similar to the example below.
+
+{
+"app_url": "https://<myAppName>.azurewebsites.net",
+"location": "westeurope",
+"name": "<app_name>",
+"os": "Windows",
+"resourcegroup": "<resource_group_name>",
+"serverfarm": "appsvc_asp_Windows_westeurope",
+"sku": "FREE",
+"src_path": "/home/<username>/demoHTML/html-docs-hello-world ",
+< JSON data removed for brevity. >
+}
