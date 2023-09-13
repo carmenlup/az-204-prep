@@ -1,0 +1,123 @@
+Monitor, troubleshoot and optimize solution
+
+Monitor service
+	- go to any resource - Monitor tab
+	- there you'll see key metrics for that resource - CPU utilization, Network, Disk, etc.
+
+	Apart from that, goto Monitor service - metrics - select the resource and the metrics you want to check
+	You also have Monitor - Activity log
+		- this records the changes you do on a azure resource -> admin action as part of your subscription
+
+	Create Alert rule:
+		- goto Alerts
+		- select the resource
+		- select signal type: e.g. CPU, shut down VM, etc.
+		- select threshold
+		- select evaluate every X amount of time
+		- Next -> Create Action Group (define what needs to be done when the alert is triggered)
+		- select notification type
+		- Actions: Apart from sending emails, you can also trigger some actions: e.g. functions, powershenll, logic apps, etc.
+		- Create
+		- select Severity
+		- Create -> it will have a cost per month
+		!!! You can link the action group to multiple alerts
+	Dynamic thresholds:
+		- it's using machine learning to check the historical behavior of your metrics
+		- you do not specify a threashold
+		- it will decide based on historical data
+		- you define sensitivity
+			- high - if there's a small deviation from the normal, it will tirigger an alert
+			- medium - more balanced thresholds and fewer alerts will be generated
+			- low - alerts will be triggered from large deviation from the normal
+		- Azure monitor - create alert rule - condition- select CPU for example - select Dynamic threshold
+		- select greater than High, Medium, Low
+		
+Log analytics workspace
+	- it's part of Azure monitor service
+	- central solution for all of your logs
+	- you can send your logs from both premise and cloud services
+	- you can use the Kusto query language to perform queries 
+	- you can also use solutions from the marketplace that can give you visualization and dashboards
+	LAB:
+		- create resource - Log analytics workspace
+		- How to connect azure resources (e.g. VMs)
+			- Log analytics service -> Virtual machines -> choose the VM -> connect
+			- this is installing a microsoft monitoring agent on the VM.
+			- the agent is sending the data to your log analytics service
+			- you can go to your VM -> extensions and applications -> you can see the agent there
+			- Then you need to define what data to be collected
+			- goto Log analytics service -> Legacy Agents management -> select what types of logs to add
+		- Where to find the logs
+			- Log analytics service -> Logs -> there you'll find tables where the logs are stored
+	
+	Azure Web App - Diagnostics
+		- goto web app -> Diagnostics settings -> select what data to collect
+			- Http logs, application logs, access audit, etc.
+		- you can send the logs to various destinations
+			- Log analytics service
+			- archive to storage account
+			- stream to an event hub
+			- send to partner solutions
+			
+LAB - ARM Templates - Action groups
+	- Monitor - Alerts - Action groups
+	- we'll create an ARM template to deploy an action group that will have an email receiver
+		- send email whenever the alert is generated as part of that action group
+	- create a normal arm template .json
+	- the resources object will be defined like this:
+		"resources" : [{
+			"type": "Microsoft.Insights/actionGroups",
+			"apiVersion": "2021-09-01", -- take this from the microsoft documentation
+			"name": "groupB",
+			"location": "Global",
+			"properties"{
+				"enabled": true,
+				"groupShortName": "grpB",
+				"emailReceivers": [
+				{
+					"name": "AdminEmail",
+					"emailAddress": "chifan.iontut@gmail.com",
+					"useCommonAlertSchema": false
+				}
+				]
+			}
+			
+		}]
+	- save the template, copy the content
+	- goto Create resource -> template deployment (using custom template) - build your own template -paste the new template
+	- save - select resource group - create
+	
+ARM template - deploy alert in azure monitor
+	- in the template you can use some predefined functions. For example retrieve the resourceId: resourceId("resource_type", "resource_name")
+	- "defaultValue": "[resourceId('Microsoft.Compute/virtualMachines', 'linuxvm')]",
+
+Heartbeat:
+	- Records logged by Log Analytics agents once per minute to report on agent health.
+	
+LAB - Log analytics query alert
+	- create alert based on a query
+	- go and write the query in the portal -> click New alert rule
+	- Create the alert rule from Powershell:
+		- define the log query
+		- define the resourceId of the log analytics workspace -> get it from the resource -> properties - Resource ID
+		- create the RuleSource
+		- create RuleSchedule
+		- create TriggerCondition
+		- define the ActionGroup 
+			- NOT all the PS commands that starts with New- will create a resource. Some of them are used to create an in-memory object, similar as the new keyword in c#
+		- Trigger AlertAction 
+		- create the rule: New-AzScheduledQueryRule 
+		
+Application Insights:
+	- Provides the feature of application performance management and monitoring of live web applications
+	- Here you see various aspects such as detecting performance issues or any other issues
+	- Has support for .NET, Node.js, Java and Python
+	- This can work for application hosted in cloud (Azure, other clouds) or on premise
+	- Has integration with Visual Studio IDE
+	- You can also see how users interact with your application
+	How does it work?
+		- install an instrumentation package (SDK) for your application. Or use the Application Insights agent
+		- you can instrument web application, background components and Javascript in web pages
+		- The telemetry data sent by Application Insights has very little impact on the performance of your app
+
+Configure the SDK locally:

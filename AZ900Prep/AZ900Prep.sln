@@ -80,6 +80,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCalls", "PostmanCall
 		Liviu\Postman\Environments\AzureEnv.postman_environment.json = Liviu\Postman\Environments\AzureEnv.postman_environment.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MonitorTroubleshootOptimize", "MonitorTroubleshootOptimize", "{3BB4E6CF-D10F-4759-85AF-F75306E8454C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{02A0C06D-5E70-4837-A5B2-0E4B748EBCED}"
+	ProjectSection(SolutionItems) = preProject
+		Liviu\MonitorTroubleshootOptimize\ArmTemplateCreateActionGroup.txt = Liviu\MonitorTroubleshootOptimize\ArmTemplateCreateActionGroup.txt
+		Liviu\MonitorTroubleshootOptimize\ArmTemplateCreateAlert.txt = Liviu\MonitorTroubleshootOptimize\ArmTemplateCreateAlert.txt
+		Liviu\MonitorTroubleshootOptimize\Notes.txt = Liviu\MonitorTroubleshootOptimize\Notes.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +142,8 @@ Global
 		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{29B32F58-9550-41AD-912D-F984E1FEC9BD} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{88091778-D16B-4193-99A7-C7143C761D78} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{3BB4E6CF-D10F-4759-85AF-F75306E8454C} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{02A0C06D-5E70-4837-A5B2-0E4B748EBCED} = {3BB4E6CF-D10F-4759-85AF-F75306E8454C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}

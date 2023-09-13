@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "metricAlerts_alert2_name": {
+            "defaultValue": "alert2",
+            "type": "String"
+        },
+        "virtualMachines_linuxvm_externalid": {
+            "defaultValue": "[resourceId('Microsoft.Compute/virtualMachines','linuxvm')]",
+            "type": "String"
+        },
+        "actiongroups_actiongroup1_externalid": {
+            "defaultValue": "/subscriptions/449180c8-b2b1-44d3-a575-6e5283b6fa51/resourceGroups/rgwebapp/providers/microsoft.insights/actiongroups/actiongroup1",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/metricAlerts",
+            "apiVersion": "2018-03-01",
+            "name": "[parameters('metricAlerts_alert2_name')]",
+            "location": "global",
+            "properties": {
+                "description": "alert desc",
+                "severity": 3,
+                "enabled": true,
+                "scopes": [
+                    "[parameters('virtualMachines_linuxvm_externalid')]"
+                ],
+                "evaluationFrequency": "PT1M",
+                "windowSize": "PT5M",
+                "criteria": {
+                    "allOf": [
+                        {
+                            "threshold": 50,
+                            "name": "Metric1",
+                            "metricNamespace": "Microsoft.Compute/virtualMachines",
+                            "metricName": "Percentage CPU",
+                            "operator": "GreaterThan",
+                            "timeAggregation": "Average",
+                            "skipMetricValidation": false,
+                            "criterionType": "StaticThresholdCriterion"
+                        }
+                    ],
+                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+                },
+                "autoMitigate": true,
+                "targetResourceType": "Microsoft.Compute/virtualMachines",
+                "targetResourceRegion": "northeurope",
+                "actions": [
+                    {
+                        "actionGroupId": "[parameters('actiongroups_actiongroup1_externalid')]",
+                        "webHookProperties": {}
+                    }
+                ]
+            }
+        }
+    ]
+}
