@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Access Token: </h1>
+    <p>@Model.AccessToken</p>
+    <h1 class="display-4">Displaying all the user's claims:</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Claim Type</th>
+                <th scope="col">Claim Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in User.Claims)
+            {
+                <tr>
+                    <td scope="col">@claim.Type</td>
+                    <td scope="col">@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
