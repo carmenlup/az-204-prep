@@ -46,6 +46,7 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 -> Options to add configuration to console app are
 
 a. Using configuration builder Microsoft.Extensions.Configuration
+
 b. Hosting approach 
 
 -> Console app can be changed to a host app by using Package: Microsoft.Extensions.Hosting
