@@ -13,8 +13,8 @@ Description of labs:
 	Connection string will be readed from a config file.
 
 ### LAB 1 - Secure application settings in .Net using User Secrets - Hosting approach
-$\color{green}{$Objective:}$ Understand basic implementation for secure app settings in .Net core apps
-, importand packages for configuration (Microsoft.Extensions.Configuration, Microsoft.Extensions.Hosting)
+$\color{green}{Objective:}$ Understand basic implementation for secure app settings in .Net core apps
+, importand packages for configuration (**Microsoft.Extensions.Configuration, Microsoft.Extensions.Hosting**)
 For more details follow [Configuration in .Net](https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration) documentation
 
 1. Create basic Console app
@@ -27,7 +27,7 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 
 		**Investigate the changes:**
 		
-		By enabling Manage user secrets it will do next changes
+		By enabling Manage user secrets, it will do next changes
 
 			- generate a secrets.json file under current user ~/AppData/Roaming/Microsoft/UserSecrets/<local_generated_id>
 			- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
@@ -38,10 +38,10 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 	Add the next config to your secret.json file
 		
 		{
-			"MySecretConfiguration":  "this configuration is local on my secret and is not avalable under source control";
+			"MySecretConfiguration":  "this configuration is local on my secret and is not avalable under source control"
 		}
-
-Remark:
+-------------------------------------------------------------------
+** $\color{green}{Remark:}$ **
 
 -> Options to add configuration to console app are
 
@@ -51,6 +51,8 @@ b. Hosting approach
 -> Console app can be changed to a host app by using Package: Microsoft.Extensions.Hosting
 
 We will use hosting approach. Hosting package already contains Microsoft.Extensions.Configuration.UserSecrets so we will remove installed package firs and install the Hosting package.
+
+--------------------------------------------------------------------
 
 5. Console app as a host
 
@@ -95,19 +97,24 @@ After step 9 the code frome Program.cs should look like this:
 	Console.WriteLine(storageConnectionString);
 
 	await host.RunAsync();
-10. Observe the result
+**10. Observe the result**
+
 Result: The text "this configuration is local on my secret and is not avalable under source control" is printed.
 
 
 ### LAB 2 - Manage blobs in Storage account from .Net Core application	
-$\color{green}{$Objective:}$ Implementation in .Net Core for managing blobs in Azure
+$\color{green}{Objective:}$ Implementation in .Net Core for managing blobs in Azure
 
+
+----------------------------------------------------------------------------------
+** $\color{green}{Remark:}$ **
 Microsoft provides different packages to manage resources in Azure. For working with features from Storage account 
 the namespace Azure.Storage contains the next important packages (not all packages are listed):
 - Azure.Storage.Blob - used for manage blobs
 - Azure.Storage.File.Share - used for manage shared files
 - Azure.Storage.Queue - used for manage queues
 
+----------------------------------------------------------------------------------
 
 1. Go to portal and a Storage Account - General Propose V2 
 2. Add Azure.Storage.Blob package to the project created at Lab 1
@@ -120,7 +127,7 @@ the namespace Azure.Storage contains the next important packages (not all packag
 5. Go to portal -> Access keys -> copy connection key of key1
 6. Replace value set for  "StorageAccountConnectionString" with your Storage account connection string 
 7. Create a container for store blobs
-	Obs. Blob package provide BlobServiceClient Client class that is used for manage blobs.  
+	Obs. Blob package provide BlobServiceClient class that is used for manage blobs.  
 
 		string containerName = "newcontainer";
 		BlobServiceClient blobServiceCLient = new BlobServiceClient(storageConnectionString);
