@@ -55,18 +55,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureSecurity", "Liviu\Azur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
 	ProjectSection(SolutionItems) = preProject
-		Carmen\Labs\Configuration.md = Carmen\Labs\Configuration.md
+		Carmen\Labs\AppService.md = Carmen\Labs\AppService.md
+		Carmen\Labs\StorageAccount.md = Carmen\Labs\StorageAccount.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\BlobApp.csproj", "{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{3B7BCC5F-F48C-4404-A235-6813800BE91A}"
 	ProjectSection(SolutionItems) = preProject
-		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
-		Carmen\Labs\Images\DeploymentInTestFolder.PNG = Carmen\Labs\Images\DeploymentInTestFolder.PNG
-		Carmen\Labs\Images\ErrorWhenPublish.PNG = Carmen\Labs\Images\ErrorWhenPublish.PNG
-		Carmen\Labs\Images\LinuxConfigOptions.PNG = Carmen\Labs\Images\LinuxConfigOptions.PNG
-		Carmen\Labs\Images\IISLaunchApp.PNG = Carmen\Labs\Images\IISLaunchApp.PNG
-		Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG
-		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
+		Carmen\Labs\Images\AppService\ApplicationFolder.PNG = Carmen\Labs\Images\AppService\ApplicationFolder.PNG
+		Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG = Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG
+		Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG = Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG
+		Carmen\Labs\Images\AppService\IISLaunchApp.PNG = Carmen\Labs\Images\AppService\IISLaunchApp.PNG
+		Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG = Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG
+		Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG
+		Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG = Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAccount", "{14FB3C15-4B9B-4352-8C78-0C344983748F}"
+	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG = Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG
 	EndProjectSection
 EndProject
 Global
@@ -91,6 +101,10 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +125,9 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{7DF30B9B-E520-4F5F-95E2-52A903259BD5} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{B9328774-E9E6-42B4-A1DF-B4477DE545CF} = {7DF30B9B-E520-4F5F-95E2-52A903259BD5}
+		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{3B7BCC5F-F48C-4404-A235-6813800BE91A} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{14FB3C15-4B9B-4352-8C78-0C344983748F} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
