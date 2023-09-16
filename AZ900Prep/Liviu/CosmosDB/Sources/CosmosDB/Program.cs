@@ -5,7 +5,7 @@ const string exit = "9";
 
 DisplayMenu();
 var option = Console.ReadLine();
-ChangeFeedProcessor changeFeedProcessor = null;
+ChangeFeedProcessor? changeFeedProcessor = null;
 
 while (option != exit)
 {

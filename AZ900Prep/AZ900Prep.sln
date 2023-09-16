@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureSecurity", "AzureSecur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes&Instructions", "{E2DB1555-AF3B-49B6-9CB0-2E7B272021E1}"
 	ProjectSection(SolutionItems) = preProject
+		Liviu\AzureAD\AuthenticationAndAuthorization.txt = Liviu\AzureAD\AuthenticationAndAuthorization.txt
 		Liviu\AzureAD\AzureSecurity.txt = Liviu\AzureAD\AzureSecurity.txt
 	EndProjectSection
 EndProject
@@ -77,6 +78,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAccount", "{14FB3C15-4B9B-4352-8C78-0C344983748F}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG = Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebApi", "Liviu\AzureAD\MyWebApi\MyWebApi.csproj", "{29B32F58-9550-41AD-912D-F984E1FEC9BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCalls", "PostmanCalls", "{88091778-D16B-4193-99A7-C7143C761D78}"
+	ProjectSection(SolutionItems) = preProject
+		Liviu\Postman\Collections\Az - 204.postman_collection.json = Liviu\Postman\Collections\Az - 204.postman_collection.json
+		Liviu\Postman\Environments\AzureEnv.postman_environment.json = Liviu\Postman\Environments\AzureEnv.postman_environment.json
 	EndProjectSection
 EndProject
 Global

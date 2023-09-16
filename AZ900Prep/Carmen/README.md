@@ -3,10 +3,10 @@
 ## App Service
 ### URL
 Default domain name follow the next pattern:
-<span style="color:#F69555">*app-name*</span>.
-<span style="color:#76F38B">*azurewebsites.net* </span>, where 
-- app-name is the App Service resource name
-- azurewebsites.net - default created by azure for all sites
+$\color{blue}{app-name}$.
+$\color{green}{azurewebsites.net}$, where 
+- $\color{blue}{app-name}$ is the App Service resource name
+- $\color{green}{azurewebsites.net}$ - default created by azure for all sites
 ### Configuration
 ##### appsettings.json and Secret Manager
 - for more info read [Configuration in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-7.0)
