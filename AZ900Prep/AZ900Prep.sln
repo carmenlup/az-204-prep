@@ -90,6 +90,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCalls", "PostmanCall
 		Liviu\Postman\Environments\AzureEnv.postman_environment.json = Liviu\Postman\Environments\AzureEnv.postman_environment.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daniela", "Daniela", "{FE88D6E3-6BAE-438B-BE5D-287F902CBE12}"
+	ProjectSection(SolutionItems) = preProject
+		Daniela\Readme.txt = Daniela\Readme.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +152,9 @@ Global
 		{F41B60D9-6C7A-4E9E-B35F-444FF7396FBE} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{3B7BCC5F-F48C-4404-A235-6813800BE91A} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 		{14FB3C15-4B9B-4352-8C78-0C344983748F} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{88091778-D16B-4193-99A7-C7143C761D78} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
