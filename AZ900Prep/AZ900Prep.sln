@@ -57,7 +57,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Configuration.md = Carmen\Labs\Configuration.md
-		Carmen\Labs\SecurityInAD.md = Carmen\Labs\SecurityInAD.md
+		Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
@@ -90,9 +90,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daniela", "Daniela", "{BAA2BFBF-5FA0-46A3-A123-219608025F66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{871DF103-ED20-4A5B-B643-3B911E559C32}"
-	ProjectSection(SolutionItems) = preProject
-		Notes.txt = Notes.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{C4AD6930-8D85-456D-A25A-DF720599D7E2}"
 EndProject
@@ -101,6 +98,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sqlapp", "Daniela\AppService\sqlapp\sqlapp\sqlapp.csproj", "{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Object", "Application Object", "{BD8DB4B7-2ABA-404A-BBBB-3A4800575402}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationObject", "Daniela\Security\Applictaion Object\ApplicationObject\ApplicationObject.csproj", "{F95C1F89-70E8-4B58-995D-8A279A840A21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +135,10 @@ Global
 		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +167,7 @@ Global
 		{62B663DF-3C22-405A-B74E-98BA6BDD5296} = {C4AD6930-8D85-456D-A25A-DF720599D7E2}
 		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F} = {62B663DF-3C22-405A-B74E-98BA6BDD5296}
 		{BD8DB4B7-2ABA-404A-BBBB-3A4800575402} = {871DF103-ED20-4A5B-B643-3B911E559C32}
+		{F95C1F89-70E8-4B58-995D-8A279A840A21} = {BD8DB4B7-2ABA-404A-BBBB-3A4800575402}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
