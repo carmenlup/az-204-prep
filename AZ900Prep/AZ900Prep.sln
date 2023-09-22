@@ -85,6 +85,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daniela", "Daniela", "{BAA2BFBF-5FA0-46A3-A123-219608025F66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{871DF103-ED20-4A5B-B643-3B911E559C32}"
+	ProjectSection(SolutionItems) = preProject
+		Daniela\Security\Notes.txt = Daniela\Security\Notes.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{C4AD6930-8D85-456D-A25A-DF720599D7E2}"
 EndProject
@@ -113,6 +116,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAc
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\BlobApp.csproj", "{554D3D17-6038-41C1-9E95-D2F88BE3AB64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{F203D265-7257-4DC4-8F82-025D126057FE}"
+	ProjectSection(SolutionItems) = preProject
+		Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt = Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,6 +196,7 @@ Global
 		{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 		{03BADF27-B69A-4197-A6BA-DA11C15DB945} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 		{554D3D17-6038-41C1-9E95-D2F88BE3AB64} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{F203D265-7257-4DC4-8F82-025D126057FE} = {BAA2BFBF-5FA0-46A3-A123-219608025F66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
