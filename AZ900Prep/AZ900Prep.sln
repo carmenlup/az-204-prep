@@ -65,11 +65,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Images\AllUsers.PNG = Carmen\Labs\Images\AllUsers.PNG
+		Carmen\Labs\Images\ApplicationObjectClientSecret.PNG = Carmen\Labs\Images\ApplicationObjectClientSecret.PNG
+		Carmen\Labs\Images\ApplicationObjectTenantidClientId.PNG = Carmen\Labs\Images\ApplicationObjectTenantidClientId.PNG
 		Carmen\Labs\Images\AzureActiveDirectory.PNG = Carmen\Labs\Images\AzureActiveDirectory.PNG
+		Carmen\Labs\Images\container.PNG = Carmen\Labs\Images\container.PNG
 		Carmen\Labs\Images\CreateInternalUser.PNG = Carmen\Labs\Images\CreateInternalUser.PNG
+		Carmen\Labs\Images\RegisterApp.PNG = Carmen\Labs\Images\RegisterApp.PNG
+		Carmen\Labs\Images\SelectMembberTestDaniela.PNG = Carmen\Labs\Images\SelectMembberTestDaniela.PNG
 		Carmen\Labs\Images\SelectMember.PNG = Carmen\Labs\Images\SelectMember.PNG
 		Carmen\Labs\Images\StorageAccountAccessControl.PNG = Carmen\Labs\Images\StorageAccountAccessControl.PNG
 		Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG = Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG
+		Carmen\Labs\Images\StorageAccountAddRoleAssignmentToAppObject.PNG = Carmen\Labs\Images\StorageAccountAddRoleAssignmentToAppObject.PNG
+		Carmen\Labs\Images\StorageAccountContainerFile.PNG = Carmen\Labs\Images\StorageAccountContainerFile.PNG
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
