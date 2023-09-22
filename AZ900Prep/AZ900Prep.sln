@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureSecurity", "AzureSecur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes&Instructions", "Notes&Instructions", "{E2DB1555-AF3B-49B6-9CB0-2E7B272021E1}"
 	ProjectSection(SolutionItems) = preProject
+		Liviu\AzureAD\AuthenticationAndAuthorization.txt = Liviu\AzureAD\AuthenticationAndAuthorization.txt
 		Liviu\AzureAD\AzureSecurity.txt = Liviu\AzureAD\AzureSecurity.txt
 	EndProjectSection
 EndProject
@@ -60,8 +61,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
 	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
+		Carmen\Labs\Images\DeploymentInTestFolder.PNG = Carmen\Labs\Images\DeploymentInTestFolder.PNG
+		Carmen\Labs\Images\ErrorWhenPublish.PNG = Carmen\Labs\Images\ErrorWhenPublish.PNG
+		Carmen\Labs\Images\IISLaunchApp.PNG = Carmen\Labs\Images\IISLaunchApp.PNG
 		Carmen\Labs\Images\LinuxConfigOptions.PNG = Carmen\Labs\Images\LinuxConfigOptions.PNG
+		Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG
 		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebApi", "Liviu\AzureAD\MyWebApi\MyWebApi.csproj", "{29B32F58-9550-41AD-912D-F984E1FEC9BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCalls", "PostmanCalls", "{88091778-D16B-4193-99A7-C7143C761D78}"
+	ProjectSection(SolutionItems) = preProject
+		Liviu\Postman\Collections\Az - 204.postman_collection.json = Liviu\Postman\Collections\Az - 204.postman_collection.json
+		Liviu\Postman\Environments\AzureEnv.postman_environment.json = Liviu\Postman\Environments\AzureEnv.postman_environment.json
 	EndProjectSection
 EndProject
 Global
@@ -86,6 +102,14 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +130,9 @@ Global
 		{FCF21EF6-5E22-4679-B7C1-846C1672DCEF} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{7DF30B9B-E520-4F5F-95E2-52A903259BD5} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{B9328774-E9E6-42B4-A1DF-B4477DE545CF} = {7DF30B9B-E520-4F5F-95E2-52A903259BD5}
+		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7} = {FC868821-074F-4701-B815-AA46111F84B0}
+		{29B32F58-9550-41AD-912D-F984E1FEC9BD} = {FC868821-074F-4701-B815-AA46111F84B0}
+		{88091778-D16B-4193-99A7-C7143C761D78} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}

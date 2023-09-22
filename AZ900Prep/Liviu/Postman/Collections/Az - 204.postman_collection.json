@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "efa9dc47-9727-4cda-9ee8-37a3cff781d9",
+		"name": "Az - 204",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "499456"
+	},
+	"item": [
+		{
+			"name": "Functions",
+			"item": [
+				{
+					"name": "GetAllproducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://liviu-func01.azurewebsites.net/api/GetProducts?code=FpklWVM2b-FN-fRRhs2YEQKBK_-5P27pniPTGqVlP2Y7AzFuxCZKhA==",
+							"protocol": "https",
+							"host": [
+								"liviu-func01",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"api",
+								"GetProducts"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "FpklWVM2b-FN-fRRhs2YEQKBK_-5P27pniPTGqVlP2Y7AzFuxCZKhA=="
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products anonymous",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://liviu-func01.azurewebsites.net/api/products"
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://liviu-func01.azurewebsites.net/api/GetProductById?code=Km6hteThGUNsljWZ8T0JdKpPMToOiR1G2SRFPS1dSewnAzFuoNBZIw==&ProductId=10",
+							"protocol": "https",
+							"host": [
+								"liviu-func01",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"api",
+								"GetProductById"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "Km6hteThGUNsljWZ8T0JdKpPMToOiR1G2SRFPS1dSewnAzFuoNBZIw=="
+								},
+								{
+									"key": "ProductId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProductName\": \"Product 7\",\r\n    \"Quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://liviu-func01.azurewebsites.net/api/AddProduct?code=XNSJNd-Q-zOpSnmf6qa_LRKaoLygHwvGWRYCEV2NiuUsAzFu_11IZQ==",
+							"protocol": "https",
+							"host": [
+								"liviu-func01",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"api",
+								"AddProduct"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "XNSJNd-Q-zOpSnmf6qa_LRKaoLygHwvGWRYCEV2NiuUsAzFu_11IZQ=="
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewProduct Local",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ProductName\": \"New Product 8\",\r\n    \"Quantity\": 123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:7264/api/AddProduct"
+					},
+					"response": []
+				},
+				{
+					"name": "local Orchestrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:7264/api/HttpOrchestratorFunction_HttpStart"
+					},
+					"response": []
+				},
+				{
+					"name": "local orchestrator check status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7264/runtime/webhooks/durabletask/instances/44fd3c4b42b44a24b6c685eeb1b966a1?taskHub=TestHubName&connection=Storage&code=0jA5NFLl5fNBodmjtV7fKbZLrAJ4OtcwjZ2dtK6YBzbqAzFu_zXGRA==",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7264",
+							"path": [
+								"runtime",
+								"webhooks",
+								"durabletask",
+								"instances",
+								"44fd3c4b42b44a24b6c685eeb1b966a1"
+							],
+							"query": [
+								{
+									"key": "taskHub",
+									"value": "TestHubName"
+								},
+								{
+									"key": "connection",
+									"value": "Storage"
+								},
+								{
+									"key": "code",
+									"value": "0jA5NFLl5fNBodmjtV7fKbZLrAJ4OtcwjZ2dtK6YBzbqAzFu_zXGRA=="
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Orchestrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://liviu-func01.azurewebsites.net/api/HttpOrchestratorFunction_HttpStart"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Azure Security",
+			"item": [
+				{
+					"name": "CallOurAPIs",
+					"item": [
+						{
+							"name": "GetAccessToken",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody)\r",
+											"postman.setEnvironmentVariable(\"AzureToken\", response.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "f6d16900-2bae-47ad-befb-1193393a14bf",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "pJ68Q~KdMHVvIzj2ks7HawX6TOKc0K8u0NRuLaOU",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "https://graph.microsoft.com/.default",
+											"type": "text"
+										}
+									]
+								},
+								"url": "https://login.microsoftonline.com/62d18f9f-8f85-4e0b-901a-d292a89d516e/oauth2/v2.0/token"
+							},
+							"response": []
+						},
+						{
+							"name": "Get products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{AzureToken}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://products-api-liviu.azurewebsites.net/api/products"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetUsersWithApplicationObjects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{AzureToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://graph.microsoft.com/v1.0/users"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody)\r",
+									"postman.setEnvironmentVariable(\"AzureToken\", response.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "f6d16900-2bae-47ad-befb-1193393a14bf",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "pJ68Q~KdMHVvIzj2ks7HawX6TOKc0K8u0NRuLaOU",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://login.microsoftonline.com/62d18f9f-8f85-4e0b-901a-d292a89d516e/oauth2/v2.0/token"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{AzureToken}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"givenName\": \"User Liviu\",\r\n            \"jobTitle\": \"SW\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://graph.microsoft.com/v1.0/users/9c829c47-7472-47a3-9556-fc7fa170cc29"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
