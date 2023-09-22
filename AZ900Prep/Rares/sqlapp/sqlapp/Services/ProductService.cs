@@ -1,6 +1,7 @@
 ﻿using Microsoft.FeatureManagement;
 using sqlapp.Models;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace sqlapp.Services
 {
@@ -14,7 +15,20 @@ namespace sqlapp.Services
         public ProductService(IConfiguration configuration, IFeatureManager featureManager)
         {
             _configuration = configuration;
-            _featureManager= featureManager;
+            _featureManager = featureManager;
+        }
+
+        public async Task<List<Product>> GetProducts()
+        {
+            var functionUrl = "https://az204-function4pp.azurewebsites.net/api/GetProducts?code=ITp6b05GpmaRHvdiITZKOtZtxYNJumZggs2qKsu-U3JJAzFur-_PqQ==";
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(functionUrl);
+                var content = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<List<Product>>(content);
+            }
         }
 
         public async Task<bool> IsBeta()
@@ -22,34 +36,6 @@ namespace sqlapp.Services
             if (await _featureManager.IsEnabledAsync("beta"))
             { return true; }
             else { return false; }
-        }
-      
-        public List<Product> GetProducts()
-        {
-            List<Product> _product_lst = new List<Product>();
-            string _statement = "SELECT ProductID,ProductName,Quantity from Products";
-            SqlConnection _connection = GetConnection();
-
-            _connection.Open();
-
-            SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
-
-            using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
-            {
-                while (_reader.Read())
-                {
-                    Product _product = new Product()
-                    {
-                        ProductID = _reader.GetInt32(0),
-                        ProductName = _reader.GetString(1),
-                        Quantity = _reader.GetInt32(2)
-                    };
-
-                    _product_lst.Add(_product);
-                }
-            }
-            _connection.Close();
-            return _product_lst;
         }
 
         private SqlConnection GetConnection()
