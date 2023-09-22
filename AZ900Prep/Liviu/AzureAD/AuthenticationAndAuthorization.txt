@@ -1,0 +1,216 @@
+Azure AD is used as Identity Provider
+
+APIs and authorization
+	- Access tokens will be used to call the APIs
+	
+Libraries:
+	- Microsoft authentication library
+	
+OAuth 2.0
+	- industry standard protocol for authorization
+	- UC: User that is defined in Az AD, will log into the web application. The app will authenticate the user.
+	The App will access the a Storage Account on behalf of the user.
+	OAuth 2.0 - This is known as the Authorization Code Flow 
+	- the app exchanges the authorization code for an access tokens
+
+Auhtorization Code flow - more details
+	- Resource owner - the user who has access to the protected resource
+	- Client - The app requesting access to the protected resource
+	- Resource server - The Storage Account
+	- Authorization server	(Microsoft Identity platform)
+		- will provide the access token
+	
+	- How the auth flow works:
+		1. The web app makes a call to the Authorization server
+		2. The auth server will pass the Authorization Code back to the application, by calling the redirect URI that was specified at step 1
+		3. The app will use the Auth Code to call the Authorization server to exchange that code for the Access Token
+		4. The the app will be able to call the Storage Account APIs, using the Access Token
+		
+Review the different ways of accessing the Storage Account, which we implemented so far:
+	- using the connection string. This includes the access key in the URL, which gives your full permissions to that Storage Account and all its services
+	- using an Application Object identity.
+		- we also used the Client Credentials Flow to get the Access token from Postman
+	- using Managed Identity. 
+	
+Lab ASP.Net - Adding Authentication
+	- create a web app
+	- create an App Object from the portal 
+	- create a section in your appsettings.json where to define properties for:
+		- the app object ClientId, TenantId
+		- "Instance": "https://login.microsoftonline.com".The  url that will be used for authentication
+		- add 2 more properties in the appsettings, AzureAd section:
+		"CallbackPath":"/signin-oidc",
+		"SignedOutCallbackPath": "/signout-oidc"
+		OIDC = Open ID Connect. Protocol that is build on top of OAuth 
+	- install the Microsoft.Identity.Web package
+	- from Program.cs: builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "your setting section defined above");
+	- app.UseAuthentication
+	- add [Authorize] for the Index page
+	- Portal: go to your App Object -> Authentication
+		- Add a platform -> select Web
+		- define the Redirect URIs (for now just copy the URL of your localhost app) https://localhost:7259/ + callbackPath
+		- define the Front-Channel ogout URL: https://localhost:7259/signout-oidc
+		- check ID tokens checkbox
+		- click Configure
+		
+Add Sigh-Out feature:
+	- install package microsoft.identity.web.ui
+		We're gonna use the sign-in, sign-out controllers that comes with these packages
+	- Program.cs: 
+		- builder.Services.AddControllersWithViews();. Because it depends on the MVC pattern
+		- Add MvcOptions to the razor pages. Add it after the above line. 
+			builder.Services.AddRazorPages().AddMvcOptions(opt => {var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+			opt.Filters.Add(new AuthorizedFilter(policy));
+			}).AddMicrosoftIdentityUI();
+		- remove the [Authorize] attribute from Index, since we added the Auth policy for evrything
+		- Use endpoints, since we added MVC:
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}"
+				);
+			});
+		- Add Scaffolded Item to the project
+		- Pick Identity
+		- Select Account/Login and /Logout
+		- Add DataContext
+		- Check SQL Lite
+			This installs some nuget packages required to work with identities. Will add some new pages + partial pages. Will also update the Program.cs and add the required services
+		- Do some changes in the _LoginPartial class, in order to use the Microsoft.Identity.Web.UI controllers:
+		@if (User.Identity.IsAuthenticated)
+		{
+			<li class="nav-item">
+				<a id="manage" class="nav-link text-dark" title="Manage">Hello @User.Identity.Name!</a>
+			</li>
+			<li class="nav-item">
+					<a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">SignOut</a>
+			</li>
+		}
+		else
+		{
+			<li class="nav-item">
+					<a class="nav-link text-dark" id="login" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Login</a>
+			</li>
+		}		
+		- add _LoginPartial to your _Layout.cshtml
+		
+Get User Claims
+	- key-value pairs containing information about the user
+	- Display User.Claims on the index page
+	
+Get Group Claims
+	- Portal - Go to your App Object -> Token Configuration
+	- From there you can define what Claims to be passed to your app, along with the ID token
+	- select Add Group Claim and select Security Groups and Group ID
+	- Manifest: Here you'll see all the properties of your App Object. 
+Other claims
+	- Portal - App Object - Token Configuration
+	- Add claims - Select the token type (ID in our case)
+	- Choose the claims you want to be provided along with the token ID
+
+AUTHORIZATION	
+LAB Get Access Token
+	- Get token for the logged in user
+	- First of all, go to your Storage account and set Role Assignments for the user you'll use to log into your application (First User - UserA@chifanionutgmail.onmicrosoft.com)
+	- Program.cs	
+		- need to insure that our pogram can automatically work with Access Token
+		- Add a scope. string[] scopes = new string[] {"https://storage.azure.com/user_impersonation"};
+		- where we add the service .AddMicrosoftIdentityWebAppAuthentication() we'll call .EnableTokenAcquisitionToCallDownstreamApi(scope).AddInMemoryTokenCaches();
+		
+		- Even the application needs some permissions, in order to access the storage account on behalf of the user
+		- go go App Object - API Permissions - Add permissions
+		- choose Azure Storage -> select Delegated permissions -> select user_impersonation
+		- Then go to the Authentication section and check Access Token
+	
+	Inspect the Access Token for the sake of demonstration (normally you'll not work directly with it):
+		- Inject ITokenAcquisition interface into Index page
+		- In OnGet() method, get the token
+		-  AccessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(scopes);
+		- but we get an error: One client credential type required either: ClientSecret, Certificate, ClientAssertion or AppTokenProvider must be defined when creating a Confidential Client.
+		- this is because the  authorization code flow need to exchange the Auth Code for the Token, and for this it needs a secret
+		- Edit the appsettings.json AzureAd section and add the ClientSecret prop. Generate a value from your App Object
+	
+	Using an access token:
+		- get the access token credentials using this class: var credentials = new TokenAcquisitionTokenCredential(TokenAcquisition);
+		- you don't need to specify any scopes. This class will give you the Access Token based on the logged in user permissions
+		- you can use this Token Credentials to call the Storage Account, on behalf of the logged in user: var client = new BlobClient(blobUri, credentials);
+		
+	Publish to web app
+		- after publishing, you need to change the App Obj - Authentication -> Sign In / Sign Out URLs
+		
+	Access blob data from Postman
+		- Same as we did before, when calling the graph endpoint. We are using the App Object that will need to have IAM permissions to access the storage account
+		- but this time the scope will be https://storage.azure.com/.default
+		- And use the URL of the blob resource to access it 
+			- besides the authorization header we also need to pass the "x-ms-version" : 2017-11-09 header
+		
+	Create our Web API
+		-our application will call the API, which will use OAuth for authorization
+		- create 2 endpoints that feetch data from SQL: GetProducts and GetProductById
+		- using aprox the same code as for the Functions lab
+		- publish the web api
+			- create a new app service and publish to it
+			
+		
+	Protect our Web API
+		- create a new App Object for our API app
+		- change the Manifest - AccessTokenAcceptedVersion = 2. In this way we'll accept OAuth2 tokens
+		- install the Microsoft.Identity.Web package
+		- Program.cs -> register the services and middlewares
+			- builder.Services.AddMicrosoftIdentityWebApi(builder.Configuration, "AzureAd");
+			- use Authorization
+			- use Authentication
+		- create the AzureAd section in your appsettings
+		- specify the Instance: https://login.microsoftonline.com, ClientId and TenantId from the App object
+		- don't need a client secret here, beause the API is not making the call to exchange the Access Code for a token. the API will get the Access Token
+		- add  [Authorize] on the controller
+	
+	Call the API using Postman
+		- go to the ProductsApi App object
+			- App roles
+				- create roles that will be allowed to interact with this App object
+				- the other identities (App objects) that interact with your API will need to have these roles
+				- create role and select Allowed for Applications
+			- goto Exposing an API
+			- Application ID URI - click add. - will generate a url for this app object
+			- go to the Postman App object -> this is the object we use to get the token and access the Web API (which is hosted under the ProductsApi app object)
+			- click API permissions -> Add permissions -> select either My APIs or my organization APIs. There you'll find the URL createad for ProductsApi
+			- Select and pick the app role that we created
+		- get the auth token using the client credentials flow, same as we did for Graph
+		- the scope will be the ProductsApi app object url + /.default. api://13ec6c37-c61a-4755-ac0a-dd650def2153/.default
+		- then call our API /api/products, using the access token we got
+		
+	Calling the API from a console application
+		- the class that is used to represent an application in code is called IConfidentialClientApplication, from Microsoft.Identity.Client;
+		- IConfidentialClientApplication clientApp = ConfidentialClientApplicationBuilder.Create(clientId).WithTenantId(tenantId).WithClientSecret(secret).Build();
+		- string[] scope = new string[] {ourApiScope}
+		- AuthenticationResult result = await clientApp.AquireTokenForClient(scope).ExecuteAsync();
+		- string accessToken = result.AccessToken;
+		- execute a Get, using a http client
+	
+	Call the API from another web app
+		- going to use the Auth web app
+		- here we need to authorize the user that is logged into the Auth Web App, instead of an App Object as we did before
+		- go to the ProductsApi app object and add a Scope
+		- the Scope gives delegate permissions. The Auth Web App will have the same permissions as the user that is logged in
+		- ProductsApi App object - Expose an API - Add a scope
+			- e.g. Products.Read
+			- select Admins and Users
+			- set Consent and Display name: Reading product data
+			- same for description
+			- Enabled
+			- get the Scope URL, and set it in Program.cs of the Auth Web App. This will be the name for which will get the access token.
+		- AuthApp App object
+			- give Api permissions
+			- Add permissions - My Apis - select the ProductsApi - Delegated permissions (this time) - select the scope we've just created
+		
+	App Role claims
+		- Auth App object -> Create new App roles, applicable for Users
+		- Create AuthApp.Read 
+		- Go to AD -> Enterprise application -> we'll find our Auth App there -> select it
+		- go to Users and Groups
+			- Add a user -> the role will be AuthApp.Read 
+		- then, after logging in with the user added above, we see it contains the /Role claim (AuthApp.Read), which can be used by the app to authorize to specific resources
+	
+			
