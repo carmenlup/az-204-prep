@@ -56,8 +56,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureSecurity", "Liviu\Azur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
 	ProjectSection(SolutionItems) = preProject
-		Carmen\Labs\Configuration.md = Carmen\Labs\Configuration.md
+		Carmen\Labs\AppService.md = Carmen\Labs\AppService.md
+		Carmen\Labs\SecurityInAD_MicrosoftGraph.md = Carmen\Labs\SecurityInAD_MicrosoftGraph.md
 		Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md
+		Carmen\Labs\StorageAccount.md = Carmen\Labs\StorageAccount.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
