@@ -63,18 +63,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Images\AllUsers.PNG = Carmen\Labs\Images\AllUsers.PNG
-		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
 		Carmen\Labs\Images\AzureActiveDirectory.PNG = Carmen\Labs\Images\AzureActiveDirectory.PNG
 		Carmen\Labs\Images\CreateInternalUser.PNG = Carmen\Labs\Images\CreateInternalUser.PNG
-		Carmen\Labs\Images\DeploymentInTestFolder.PNG = Carmen\Labs\Images\DeploymentInTestFolder.PNG
-		Carmen\Labs\Images\ErrorWhenPublish.PNG = Carmen\Labs\Images\ErrorWhenPublish.PNG
-		Carmen\Labs\Images\IISLaunchApp.PNG = Carmen\Labs\Images\IISLaunchApp.PNG
-		Carmen\Labs\Images\LinuxConfigOptions.PNG = Carmen\Labs\Images\LinuxConfigOptions.PNG
 		Carmen\Labs\Images\SelectMember.PNG = Carmen\Labs\Images\SelectMember.PNG
 		Carmen\Labs\Images\StorageAccountAccessControl.PNG = Carmen\Labs\Images\StorageAccountAccessControl.PNG
 		Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG = Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG
-		Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\SuccessfulDeploymentAppService.PNG
-		Carmen\Labs\Images\WindowsConfigOptions.PNG = Carmen\Labs\Images\WindowsConfigOptions.PNG
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
@@ -100,6 +93,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Object", "Application Object", "{BD8DB4B7-2ABA-404A-BBBB-3A4800575402}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationObject", "Daniela\Security\Applictaion Object\ApplicationObject\ApplicationObject.csproj", "{F95C1F89-70E8-4B58-995D-8A279A840A21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D}"
+	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
+		Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG = Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG
+		Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG = Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG
+		Carmen\Labs\Images\AppService\IISLaunchApp.PNG = Carmen\Labs\Images\AppService\IISLaunchApp.PNG
+		Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG = Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG
+		Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG
+		Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG = Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAccount", "{03BADF27-B69A-4197-A6BA-DA11C15DB945}"
+	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG = Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +177,8 @@ Global
 		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F} = {62B663DF-3C22-405A-B74E-98BA6BDD5296}
 		{BD8DB4B7-2ABA-404A-BBBB-3A4800575402} = {871DF103-ED20-4A5B-B643-3B911E559C32}
 		{F95C1F89-70E8-4B58-995D-8A279A840A21} = {BD8DB4B7-2ABA-404A-BBBB-3A4800575402}
+		{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{03BADF27-B69A-4197-A6BA-DA11C15DB945} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
