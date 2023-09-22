@@ -112,6 +112,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAc
 		Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG = Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\BlobApp.csproj", "{554D3D17-6038-41C1-9E95-D2F88BE3AB64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,10 @@ Global
 		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{F95C1F89-70E8-4B58-995D-8A279A840A21} = {BD8DB4B7-2ABA-404A-BBBB-3A4800575402}
 		{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 		{03BADF27-B69A-4197-A6BA-DA11C15DB945} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
