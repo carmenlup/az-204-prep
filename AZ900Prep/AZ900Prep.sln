@@ -98,7 +98,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationObject", "Daniel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D}"
 	ProjectSection(SolutionItems) = preProject
-		Carmen\Labs\Images\ApplicationFolder.PNG = Carmen\Labs\Images\ApplicationFolder.PNG
+		Carmen\Labs\Images\AppService\ApplicationFolder.PNG = Carmen\Labs\Images\AppService\ApplicationFolder.PNG
 		Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG = Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG
 		Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG = Carmen\Labs\Images\AppService\ErrorWhenPublish.PNG
 		Carmen\Labs\Images\AppService\IISLaunchApp.PNG = Carmen\Labs\Images\AppService\IISLaunchApp.PNG
