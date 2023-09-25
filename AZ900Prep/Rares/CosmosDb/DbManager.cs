@@ -5,8 +5,8 @@ namespace CosmosDb;
 public class DbManager
 {
     string dbName = "appdb";
-    string cosmosEndpointUri = "https://az-204-oosmos-db.documents.azure.com:443/";
-    string cosmosKey = "rxK4pJ2CM5tGFtli9anF61OsdtYHXd1rDC8R7dRncYw7ck5CQ4QRSTqyzFHKoxrss5UKWelbqUvMACDbRXG7zA==";
+    string cosmosEndpointUri = "";
+    string cosmosKey = "";
     private readonly CosmosClient _cosmosClient;
     string containerName = "Orders";
 
