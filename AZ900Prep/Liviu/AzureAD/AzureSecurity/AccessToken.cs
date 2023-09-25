@@ -8,6 +8,7 @@ namespace AzureSecurity
 {
     public class AccessToken
     {
+        // this still needs to be run from an application that has an identity assigned
         public async Task RunCommands()
         {
             string resource = "http://storage.azure.com";
