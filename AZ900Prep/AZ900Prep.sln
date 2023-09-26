@@ -57,27 +57,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\AppService.md = Carmen\Labs\AppService.md
-		Carmen\Labs\SecurityInAD_MicrosoftGraph.md = Carmen\Labs\SecurityInAD_MicrosoftGraph.md
-		Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Carmen\Labs\SecurityInAD_User_Roles_ApplicationObject.md
 		Carmen\Labs\StorageAccount.md = Carmen\Labs\StorageAccount.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
-	ProjectSection(SolutionItems) = preProject
-		Carmen\Labs\Images\AllUsers.PNG = Carmen\Labs\Images\AllUsers.PNG
-		Carmen\Labs\Images\ApplicationObjectClientSecret.PNG = Carmen\Labs\Images\ApplicationObjectClientSecret.PNG
-		Carmen\Labs\Images\ApplicationObjectTenantidClientId.PNG = Carmen\Labs\Images\ApplicationObjectTenantidClientId.PNG
-		Carmen\Labs\Images\AzureActiveDirectory.PNG = Carmen\Labs\Images\AzureActiveDirectory.PNG
-		Carmen\Labs\Images\container.PNG = Carmen\Labs\Images\container.PNG
-		Carmen\Labs\Images\CreateInternalUser.PNG = Carmen\Labs\Images\CreateInternalUser.PNG
-		Carmen\Labs\Images\RegisterApp.PNG = Carmen\Labs\Images\RegisterApp.PNG
-		Carmen\Labs\Images\SelectMembberTestDaniela.PNG = Carmen\Labs\Images\SelectMembberTestDaniela.PNG
-		Carmen\Labs\Images\SelectMember.PNG = Carmen\Labs\Images\SelectMember.PNG
-		Carmen\Labs\Images\StorageAccountAccessControl.PNG = Carmen\Labs\Images\StorageAccountAccessControl.PNG
-		Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG = Carmen\Labs\Images\StorageAccountAccessRoleRoleAssignment.PNG
-		Carmen\Labs\Images\StorageAccountAddRoleAssignmentToAppObject.PNG = Carmen\Labs\Images\StorageAccountAddRoleAssignmentToAppObject.PNG
-		Carmen\Labs\Images\StorageAccountContainerFile.PNG = Carmen\Labs\Images\StorageAccountContainerFile.PNG
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAzureApp", "Liviu\AzureAD\AuthAzureApp\AuthAzureApp.csproj", "{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7}"
 EndProject
@@ -126,7 +109,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{F203D265-7257-4DC4-8F82-025D126057FE}"
 	ProjectSection(SolutionItems) = preProject
+		Daniela\Labs\SecurityInAD_MicrosoftGraph.md = Daniela\Labs\SecurityInAD_MicrosoftGraph.md
+		Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md
 		Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt = Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{A964EFEA-C8C0-4BB1-89A6-0D35CCC73837}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{03504249-5AE0-4695-9CE1-5D65A2AAF0A2}"
+	ProjectSection(SolutionItems) = preProject
+		Daniela\Labs\Images\Secutity\AllUsers.PNG = Daniela\Labs\Images\Secutity\AllUsers.PNG
+		Daniela\Labs\Images\Secutity\ApplicationObjectClientSecret.PNG = Daniela\Labs\Images\Secutity\ApplicationObjectClientSecret.PNG
+		Daniela\Labs\Images\Secutity\ApplicationObjectTenantidClientId.PNG = Daniela\Labs\Images\Secutity\ApplicationObjectTenantidClientId.PNG
+		Daniela\Labs\Images\Secutity\AzureActiveDirectory.PNG = Daniela\Labs\Images\Secutity\AzureActiveDirectory.PNG
+		Daniela\Labs\Images\Secutity\container.PNG = Daniela\Labs\Images\Secutity\container.PNG
+		Daniela\Labs\Images\Secutity\CreateInternalUser.PNG = Daniela\Labs\Images\Secutity\CreateInternalUser.PNG
+		Daniela\Labs\Images\Secutity\RegisterApp.PNG = Daniela\Labs\Images\Secutity\RegisterApp.PNG
+		Daniela\Labs\Images\Secutity\SelectMembberTestDaniela.PNG = Daniela\Labs\Images\Secutity\SelectMembberTestDaniela.PNG
+		Daniela\Labs\Images\Secutity\SelectMember.PNG = Daniela\Labs\Images\Secutity\SelectMember.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAccessControl.PNG = Daniela\Labs\Images\Secutity\StorageAccountAccessControl.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAccessRoleRoleAssignment.PNG = Daniela\Labs\Images\Secutity\StorageAccountAccessRoleRoleAssignment.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAddRoleAssignmentToAppObject.PNG = Daniela\Labs\Images\Secutity\StorageAccountAddRoleAssignmentToAppObject.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountContainerFile.PNG = Daniela\Labs\Images\Secutity\StorageAccountContainerFile.PNG
 	EndProjectSection
 EndProject
 Global
@@ -204,6 +208,8 @@ Global
 		{03BADF27-B69A-4197-A6BA-DA11C15DB945} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
 		{554D3D17-6038-41C1-9E95-D2F88BE3AB64} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{F203D265-7257-4DC4-8F82-025D126057FE} = {BAA2BFBF-5FA0-46A3-A123-219608025F66}
+		{A964EFEA-C8C0-4BB1-89A6-0D35CCC73837} = {F203D265-7257-4DC4-8F82-025D126057FE}
+		{03504249-5AE0-4695-9CE1-5D65A2AAF0A2} = {A964EFEA-C8C0-4BB1-89A6-0D35CCC73837}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
