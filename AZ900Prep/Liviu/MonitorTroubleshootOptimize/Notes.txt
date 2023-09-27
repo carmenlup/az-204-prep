@@ -1,0 +1,291 @@
+Monitor, troubleshoot and optimize solution
+
+Monitor service
+	- go to any resource - Monitor tab
+	- there you'll see key metrics for that resource - CPU utilization, Network, Disk, etc.
+
+	Apart from that, goto Monitor service - metrics - select the resource and the metrics you want to check
+	You also have Monitor - Activity log
+		- this records the changes you do on a azure resource -> admin action as part of your subscription
+
+	Create Alert rule:
+		- goto Alerts
+		- select the resource
+		- select signal type: e.g. CPU, shut down VM, etc.
+		- select threshold
+		- select evaluate every X amount of time
+		- Next -> Create Action Group (define what needs to be done when the alert is triggered)
+		- select notification type
+		- Actions: Apart from sending emails, you can also trigger some actions: e.g. functions, powershenll, logic apps, etc.
+		- Create
+		- select Severity
+		- Create -> it will have a cost per month
+		!!! You can link the action group to multiple alerts
+	Dynamic thresholds:
+		- it's using machine learning to check the historical behavior of your metrics
+		- you do not specify a threashold
+		- it will decide based on historical data
+		- you define sensitivity
+			- high - if there's a small deviation from the normal, it will tirigger an alert
+			- medium - more balanced thresholds and fewer alerts will be generated
+			- low - alerts will be triggered from large deviation from the normal
+		- Azure monitor - create alert rule - condition- select CPU for example - select Dynamic threshold
+		- select greater than High, Medium, Low
+		
+Log analytics workspace
+	- it's part of Azure monitor service
+	- central solution for all of your logs
+	- you can send your logs from both premise and cloud services
+	- you can use the Kusto query language to perform queries 
+	- you can also use solutions from the marketplace that can give you visualization and dashboards
+	LAB:
+		- create resource - Log analytics workspace
+		- How to connect azure resources (e.g. VMs)
+			- Log analytics service -> Virtual machines -> choose the VM -> connect
+			- this is installing a microsoft monitoring agent on the VM.
+			- the agent is sending the data to your log analytics service
+			- you can go to your VM -> extensions and applications -> you can see the agent there
+			- Then you need to define what data to be collected
+			- goto Log analytics service -> Legacy Agents management -> select what types of logs to add
+		- Where to find the logs
+			- Log analytics service -> Logs -> there you'll find tables where the logs are stored
+	
+	Azure Web App - Diagnostics
+		- goto web app -> Diagnostics settings -> select what data to collect
+			- Http logs, application logs, access audit, etc.
+		- you can send the logs to various destinations
+			- Log analytics service
+			- archive to storage account
+			- stream to an event hub
+			- send to partner solutions
+			
+LAB - ARM Templates - Action groups
+	- Monitor - Alerts - Action groups
+	- we'll create an ARM template to deploy an action group that will have an email receiver
+		- send email whenever the alert is generated as part of that action group
+	- create a normal arm template .json
+	- the resources object will be defined like this:
+		"resources" : [{
+			"type": "Microsoft.Insights/actionGroups",
+			"apiVersion": "2021-09-01", -- take this from the microsoft documentation
+			"name": "groupB",
+			"location": "Global",
+			"properties"{
+				"enabled": true,
+				"groupShortName": "grpB",
+				"emailReceivers": [
+				{
+					"name": "AdminEmail",
+					"emailAddress": "chifan.iontut@gmail.com",
+					"useCommonAlertSchema": false
+				}
+				]
+			}
+			
+		}]
+	- save the template, copy the content
+	- goto Create resource -> template deployment (using custom template) - build your own template -paste the new template
+	- save - select resource group - create
+	
+ARM template - deploy alert in azure monitor
+	- in the template you can use some predefined functions. For example retrieve the resourceId: resourceId("resource_type", "resource_name")
+	- "defaultValue": "[resourceId('Microsoft.Compute/virtualMachines', 'linuxvm')]",
+
+Heartbeat:
+	- Records logged by Log Analytics agents once per minute to report on agent health.
+	
+LAB - Log analytics query alert
+	- create alert based on a query
+	- go and write the query in the portal -> click New alert rule
+	- Create the alert rule from Powershell:
+		- define the log query
+		- define the resourceId of the log analytics workspace -> get it from the resource -> properties - Resource ID
+		- create the RuleSource
+		- create RuleSchedule
+		- create TriggerCondition
+		- define the ActionGroup 
+			- NOT all the PS commands that starts with New- will create a resource. Some of them are used to create an in-memory object, similar as the new keyword in c#
+		- Trigger AlertAction 
+		- create the rule: New-AzScheduledQueryRule 
+		
+Application Insights:
+	- Provides the feature of application performance management and monitoring of live web applications
+	- Here you see various aspects such as detecting performance issues or any other issues
+	- Has support for .NET, Node.js, Java and Python
+	- This can work for application hosted in cloud (Azure, other clouds) or on premise
+	- Has integration with Visual Studio IDE
+	- You can also see how users interact with your application
+	How does it work?
+		- install an instrumentation package (SDK) for your application. Or use the Application Insights agent
+		- you can instrument web application, background components and Javascript in web pages
+		- The telemetry data sent by Application Insights has very little impact on the performance of your app
+
+Configure the SDK locally:
+	- I'm using the same Web app that I used for Authentication
+	- Right click on project and configure Application Insights
+	- Choose local
+	- Install Nuget package and the Code dependency
+	- Code added in Program.cs: Services.AddApplicationInsightsTelemetry();
+	- update the package to the latest stable version
+	- goto VS - View - Other Windows - Application Insights Search - click Search Debug session telemetry -> click Search
+
+How to use it on the Azure platform:
+	- goto your web app service - Application Insights - Turn ON
+	- it creates a new Application Insights resource
+	- you can create a new Log Analytics Workspace or you can use an existing one
+	- all the telemetry data of this app Insights will be part of that workspace
+	- turn on the different aspects you want to monitor: SQL commands, Snapshot debugger, etc
+	- Now goto your project and disconect the local App Insights service. Your proj -> double click Connected Services -> disconect the local App Insights service
+	- We'll publish the web app, which will be connected to the Azure App Insights that we've just created
+	- goto Application Insights service -> Live Metrics -> navigate through the web app and notice the logs that are captured
+
+Application Insights - Performance
+	- you find there the calls to your pages, duration, count
+	- click on the operation - get more details
+	- you can Drill into, where you'll see the dependent calls -> End-to-end transaction details
+	- How to track the SQL commands that are executed from the  app, we need to configure it in Program.cs
+		- builder.Services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module,o) => {module.EnableSqlCommandTextInstrumentation = true});
+
+Application Insights - Usage features
+	- Gives you details of how your app is being used
+	- Users - how many users used the app
+	- Sessions - you can see sessions of user activity
+	- Events - how often certain feature and pages have been used
+	- Funnels - like a pipeline. You can see how your users are progressing through your app as an entire process
+	- Cohorts - A defined set of users, sessions, events or operations that have something in common. Helps tp analyze a particular set of users or events
+	- Impact - You can see how load times and other aspects impact the conversion rate for your app
+	- Retention - How many users return back to your app
+	- User Flows
+		- What do users click on a page within the app
+		- where the users spend most of the time on the site
+		- Actions that are repeated over and over again
+
+Application Insights - Availability Tests
+	- monitor the availability and responsiveness of the app
+	- send requests to your app from different points across the world
+	- you can test http/s endpoints that are accesible over the internet. You can test REST api as well
+	- goto App Insights -> Availability -> here you can define different tests
+		- Add Standard test:
+			- You specify the URL 
+			- you can check Parse dependent requests - this will check all the other resources as: Images, scripts , css, etc.
+			- Select test frequency, Test Locations
+
+Application Insights - Tracking users
+	- by default, the authenticated users are recorded as Undefined
+	- You need to make some changes so that your users' ID will show up in the app insights
+	- In your app, create a TelemetryService class that inherits from TelemetryInitializerBase
+		- here we'll get the authenticated user ID and set it on the telemetry context.
+			- telemetry.Context.User.AuthenticatedUserId = platformContext.User?.Identity.Name ?? "";
+		- in Program.cs -> 
+			- builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			- builder.Services.AddSingleton<ITelemetryInitializer, TelemetryService>();
+	- where to see the Authenticated Users?
+		- App Insights -> Users -> Show More -> Check Authenticated User ID from the Properties drop-down
+	
+Optimizing content delivery
+	- explaining the concepts of Azure Content Delivery Network service and Cache for Redis
+	
+What is Cache for Redis?
+	- in-memory caching
+	- store frequently accessed data in server memory
+	- it helps to provide low latency and high throughput 
+	Use case scenarios
+		- caching data 
+		- content cache - static files
+		- session store (chart cart for example)
+		
+LAB - Creating the cache
+	- create the Azure Cache for Redis service
+	- you can find documentation on the official site, redis.io, about the supported Data Types
+	- key - value pairs
+	- you can execute set/get commands from the service console
+		- >set top:3:courses "AZ-104,AZ-900,AZ-204"
+			- key = top:3:courses, value = "AZ-104,AZ-900,AZ-204"
+		- > set top:course:rating 4.9
+		- Change the value -> execute the set again, for the same key
+		- Check if value exists: exists top:course:rating
+		- Delete: del top:course:rating
+	Create List:
+		- use the lpush command: lpush top:3:courses "Course 1"
+		- you can use the same key to push elements to the list: lpush top:3:courses "Course 2"
+		- Get all values from the list: lrange top:3:courses 0 -1
+
+LAB .NET
+	- install nuget StackExchange.Redis
+	- get the connection string -> goto the service -> Access Keys
+	- initialize connection: ConnectionMultiplexer conn = ConnectionMultiplexer.Connect(connectionString);
+	- register the IConnectionMultilpexer to your services, so you can inject it: builder.Services.AddSingleton<IConnectionMultiplexer>(redis);
+	- get the database obj = conn.GetDatabase();
+	- use different methods to set/get/push/etc. different data types
+	- how to store complex types? you can simply serialize it to json and store it, then read the string and deserialize it to object
+	- Redis also supports the channels for pub/sub paradigm 
+	
+Key eviction (eliminate-free up memory)
+	- there's a policy to evict the key LRU (least recently used)
+	- https://redis.io/docs/reference/eviction/
+
+Invalidate cache
+	- One way is to delete the key if it exists
+	- Another way is to set the expiration time
+	
+Azure CDN (Content Delivery Network)
+	- delivers content to users across the globe by placing the content on physical nodes closed to the user
+	- The CDN has an edpoint that is attached to your web app. The users will use the CDN endpoint to access your app
+		1. User makes requests to the CDN endpoint
+		2. The CDN checks whether the Point of presence location closest to the user has the requested files
+		3. No -> CDN makes a request to the source (web app) to get the files
+		4. The server in the Point of presence will cache the file
+		6. File returned to the user
+		7. Yes -> the server returns the file from the cache
+
+LAB (TODO create a Lab)
+	- create resource Azure Front Door and CDN profile
+	- pick explore other offerings and choose Azure CDN Standard from Verizon (no reason mentioned)
+		- I didn't have the option, so I chose Azure CDN Standard from Microsoft
+		- I was getting this error: In order to create this CDN profile, please ensure that Microsoft.CDN is listed as a registered Resource Provider in your Azure subscription
+		- in order to fix it, I had to register the Azure.CDN service from Subscription - Resource providers
+	- create the Profile
+	- create a New CDN endpoint -> pick the web app name
+	- Origin type -> Web app
+	- origin hostname -> your web app
+	- goto resource and get the endpoint to your website. This is what the users will use to access your app
+	- he's making some subsequent requests from postman to demonstrate how much the response time reduced
+
+CDN caching
+	- you can use the CDN for dynamic content as well
+	- goto resource -> endpoint -> Caching rules
+		- you have the Purge button, so that you can delete all cached data
+		- Caching behavior is customizable
+			- pick Override and chose the expiration doration
+
+Azure FRONT Door
+	- has a lot more feature used for delivery content
+	- you have firewall
+	- you can route traffic based on certain criteria 
+		- based on URL you can route traffic to different endpoints
+
+Front Door - lab setup & implementation
+	- have 2 web apps (different regions) that will be placed behind the same Front Door service
+	- create front door service
+		- create the endpoint 
+		- origin type -> App Services
+		- origin host name -> pick one of the two apps
+		- no cache/no policy
+	- goto Front Door resource -> Front Door Manager
+		- For the same endpoint -> add another origin (register the app from the other location)
+		- you have the session afinity option 
+	- Front Door redirects you to the instance (reagion) with the least latency, according to you location
+	- https://www.azurespeed.com/Azure/Latency you can see the latency values here
+	- when the files are large, Front Doore request the file from origin in chunks of 8 MB
+	- when full data is received, the data is cached and returned to the user
+	- Query string behaviors when it comes to caching:
+		- Ignore query strings - the query strings from requester is passed to the origin for the first request and then the asset is cached. All further requests ignore the query strings
+		- Cache every unique URL - 
+		- Specify cache key query string - You can decide to include/exclude specific parameters to determine what gets cached
+	- you can enable file compressions
+		- compression rules	
+			- be of a MIME type
+			- be larger than 1 KB and smaller than 8MB
+		- supported compression encodings
+			- gzip
+			- brotli
