@@ -17,8 +17,12 @@ namespace AuthAzureApp.Pages
 
         public async Task OnGet()
         {
+            string[] scopes = new string[] { "https://storage.azure.com/user_impersonation" };
+
+
             var credentials = new TokenAcquisitionTokenCredential(TokenAcquisition);
             Uri blobUri = new Uri("https://csb100320026cc855a7.blob.core.windows.net/test-container/File1-000703.txt");
+
 
             var client = new BlobClient(blobUri, credentials);
             var content = await client.DownloadContentAsync();
