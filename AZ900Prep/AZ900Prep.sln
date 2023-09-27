@@ -72,7 +72,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanCalls", "PostmanCall
 		Liviu\Postman\Environments\AzureEnv.postman_environment.json = Liviu\Postman\Environments\AzureEnv.postman_environment.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{3BFB3211-88EA-47F6-AB74-5AE6DCF08F41}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daniela", "Daniela", "{BAA2BFBF-5FA0-46A3-A123-219608025F66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{871DF103-ED20-4A5B-B643-3B911E559C32}"
+	ProjectSection(SolutionItems) = preProject
+		Daniela\Security\Notes.txt = Daniela\Security\Notes.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{C4AD6930-8D85-456D-A25A-DF720599D7E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlapp", "sqlapp", "{62B663DF-3C22-405A-B74E-98BA6BDD5296}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sqlapp", "Daniela\AppService\sqlapp\sqlapp\sqlapp.csproj", "{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Object", "Application Object", "{BD8DB4B7-2ABA-404A-BBBB-3A4800575402}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationObject", "Daniela\Security\Applictaion Object\ApplicationObject\ApplicationObject.csproj", "{F95C1F89-70E8-4B58-995D-8A279A840A21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Images\AppService\ApplicationFolder.PNG = Carmen\Labs\Images\AppService\ApplicationFolder.PNG
 		Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG = Carmen\Labs\Images\AppService\DeploymentInTestFolder.PNG
@@ -83,23 +100,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", 
 		Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG = Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAccount", "{BE14DA62-1535-4333-B7B6-DD638D65BE90}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StorageAccount", "StorageAccount", "{03BADF27-B69A-4197-A6BA-DA11C15DB945}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG = Carmen\Labs\Images\StorageAccount\ReadBloAccessibility.PNG
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\BlobApp.csproj", "{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\BlobApp.csproj", "{554D3D17-6038-41C1-9E95-D2F88BE3AB64}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Daniela", "Daniela", "{D990CC20-043E-411C-AC74-72BC10711261}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{F203D265-7257-4DC4-8F82-025D126057FE}"
 	ProjectSection(SolutionItems) = preProject
-		Daniela\Readme.txt = Daniela\Readme.txt
+		Daniela\Labs\SecurityInAD_MicrosoftGraph.md = Daniela\Labs\SecurityInAD_MicrosoftGraph.md
+		Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md
+		Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt = Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sqlapp", "Daniela\AppService\sqlapp\sqlapp\sqlapp.csproj", "{A0DB6E99-3E05-4963-8FB7-5BB25C51785B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{A964EFEA-C8C0-4BB1-89A6-0D35CCC73837}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{F3DD2710-24FD-41E1-BFF3-BDCBC87257D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{03504249-5AE0-4695-9CE1-5D65A2AAF0A2}"
 	ProjectSection(SolutionItems) = preProject
-		Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt = Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt
+		Daniela\Labs\Images\Secutity\AllUsers.PNG = Daniela\Labs\Images\Secutity\AllUsers.PNG
+		Daniela\Labs\Images\Secutity\ApplicationObjectClientSecret.PNG = Daniela\Labs\Images\Secutity\ApplicationObjectClientSecret.PNG
+		Daniela\Labs\Images\Secutity\ApplicationObjectTenantidClientId.PNG = Daniela\Labs\Images\Secutity\ApplicationObjectTenantidClientId.PNG
+		Daniela\Labs\Images\Secutity\AzureActiveDirectory.PNG = Daniela\Labs\Images\Secutity\AzureActiveDirectory.PNG
+		Daniela\Labs\Images\Secutity\container.PNG = Daniela\Labs\Images\Secutity\container.PNG
+		Daniela\Labs\Images\Secutity\CreateInternalUser.PNG = Daniela\Labs\Images\Secutity\CreateInternalUser.PNG
+		Daniela\Labs\Images\Secutity\RegisterApp.PNG = Daniela\Labs\Images\Secutity\RegisterApp.PNG
+		Daniela\Labs\Images\Secutity\SelectMembberTestDaniela.PNG = Daniela\Labs\Images\Secutity\SelectMembberTestDaniela.PNG
+		Daniela\Labs\Images\Secutity\SelectMember.PNG = Daniela\Labs\Images\Secutity\SelectMember.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAccessControl.PNG = Daniela\Labs\Images\Secutity\StorageAccountAccessControl.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAccessRoleRoleAssignment.PNG = Daniela\Labs\Images\Secutity\StorageAccountAccessRoleRoleAssignment.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountAddRoleAssignmentToAppObject.PNG = Daniela\Labs\Images\Secutity\StorageAccountAddRoleAssignmentToAppObject.PNG
+		Daniela\Labs\Images\Secutity\StorageAccountContainerFile.PNG = Daniela\Labs\Images\Secutity\StorageAccountContainerFile.PNG
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "azfunction", "Rares\azfunction\azfunction.csproj", "{103BD185-6DD1-47E1-B320-0018D06EC757}"
@@ -147,14 +178,18 @@ Global
 		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29B32F58-9550-41AD-912D-F984E1FEC9BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0DB6E99-3E05-4963-8FB7-5BB25C51785B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0DB6E99-3E05-4963-8FB7-5BB25C51785B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0DB6E99-3E05-4963-8FB7-5BB25C51785B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0DB6E99-3E05-4963-8FB7-5BB25C51785B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F95C1F89-70E8-4B58-995D-8A279A840A21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{103BD185-6DD1-47E1-B320-0018D06EC757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{103BD185-6DD1-47E1-B320-0018D06EC757}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{103BD185-6DD1-47E1-B320-0018D06EC757}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -194,20 +229,23 @@ Global
 		{FAF97B6C-452B-4D8D-86C0-6CAE1F22BFC7} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{29B32F58-9550-41AD-912D-F984E1FEC9BD} = {FC868821-074F-4701-B815-AA46111F84B0}
 		{88091778-D16B-4193-99A7-C7143C761D78} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
-		{3BFB3211-88EA-47F6-AB74-5AE6DCF08F41} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
-		{BE14DA62-1535-4333-B7B6-DD638D65BE90} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
-		{B89D2C30-AD6C-4A91-AF6C-1818D3CF9F16} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
-		{A0DB6E99-3E05-4963-8FB7-5BB25C51785B} = {D990CC20-043E-411C-AC74-72BC10711261}
-		{F3DD2710-24FD-41E1-BFF3-BDCBC87257D2} = {D990CC20-043E-411C-AC74-72BC10711261}
-		{8F94B5BD-FAD0-4549-BB93-F74F829D52CA} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
-		{A9FFCD48-599A-42C6-ADD2-79BE19D63F18} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
-		{34BDD24D-AD03-4FBD-88ED-EBAF789315B2} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
-		{B2C86CA2-1B80-4DB3-806A-631201A258AD} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
-		{A59579B3-32C7-45D0-8C14-6B9EB637D721} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
+		{871DF103-ED20-4A5B-B643-3B911E559C32} = {BAA2BFBF-5FA0-46A3-A123-219608025F66}
+		{C4AD6930-8D85-456D-A25A-DF720599D7E2} = {BAA2BFBF-5FA0-46A3-A123-219608025F66}
+		{62B663DF-3C22-405A-B74E-98BA6BDD5296} = {C4AD6930-8D85-456D-A25A-DF720599D7E2}
+		{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F} = {62B663DF-3C22-405A-B74E-98BA6BDD5296}
+		{BD8DB4B7-2ABA-404A-BBBB-3A4800575402} = {871DF103-ED20-4A5B-B643-3B911E559C32}
+		{F95C1F89-70E8-4B58-995D-8A279A840A21} = {BD8DB4B7-2ABA-404A-BBBB-3A4800575402}
+		{8807D618-FE10-4FDA-98CA-CFAFFBA5F94D} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{03BADF27-B69A-4197-A6BA-DA11C15DB945} = {B9328774-E9E6-42B4-A1DF-B4477DE545CF}
+		{554D3D17-6038-41C1-9E95-D2F88BE3AB64} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{F203D265-7257-4DC4-8F82-025D126057FE} = {BAA2BFBF-5FA0-46A3-A123-219608025F66}
+		{A964EFEA-C8C0-4BB1-89A6-0D35CCC73837} = {F203D265-7257-4DC4-8F82-025D126057FE}
+		{03504249-5AE0-4695-9CE1-5D65A2AAF0A2} = {A964EFEA-C8C0-4BB1-89A6-0D35CCC73837}
 		{103BD185-6DD1-47E1-B320-0018D06EC757} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
 		{2D8D2ADA-B17C-4D6E-974A-7673D235863E} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
 		{68D929A8-1E6B-44E0-9658-AD4ED96EC669} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
 		{40A52F3D-1F37-4241-9198-13A374E625C6} = {667C9E70-DD30-4BF1-8312-214F31575F2E}
+		{A59579B3-32C7-45D0-8C14-6B9EB637D721} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}
