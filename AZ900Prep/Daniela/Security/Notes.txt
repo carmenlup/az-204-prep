@@ -1,0 +1,14 @@
+Azure Active Directory
+
+Is a cloud-based identity and access management service
+Can be used  as an identity provider  for Azure, microsft 365 and other saas product as well
+You can manage identities such as users, groups  and even applications
+Manage security aspescts when it comes to your  Identities
+
+Free:
+- user and group management
+
+Premium P1:
+- Dynamic Groups,  hybrid identities,  self-service password reset for on-premise users
+
+Premium P2 - Azure AD Identity  protection and  Privileged identity Management

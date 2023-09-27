@@ -5,6 +5,11 @@ using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AuthAzureApp.Data;
+using Microsoft.ApplicationInsights.DependencyCollector;
+using AuthAzureApp.Services;
+using Microsoft.ApplicationInsights.Extensibility;
+using StackExchange.Redis;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthAzureAppContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthAzureAppContextConnection' not found.");
 
@@ -27,6 +32,17 @@ builder.Services.AddRazorPages().AddMvcOptions(options =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new AuthorizeFilter(policy));
 }).AddMicrosoftIdentityUI();
+builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) => { module.EnableSqlCommandTextInstrumentation = true; });
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<ITelemetryInitializer, TelemetryService>();
+
+// goto cache for redis service -> Keys
+const string redisConnectionString = "";
+IConnectionMultiplexer redis = ConnectionMultiplexer.Connect(redisConnectionString);
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(redis);
 
 var app = builder.Build();
 
