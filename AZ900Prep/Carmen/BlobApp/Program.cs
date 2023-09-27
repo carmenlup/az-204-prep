@@ -17,8 +17,6 @@ Console.WriteLine("Host created and User Secret config added to the builder");
 
 var storageConnectionString = builder.Configuration.GetConnectionString("StorageAccountConnectionString");
 
-Console.WriteLine(storageConnectionString);
-
 // Application code should start here.
 string containerName = "newcontainer";
 BlobServiceClient blobServiceCLient = new BlobServiceClient(storageConnectionString);
