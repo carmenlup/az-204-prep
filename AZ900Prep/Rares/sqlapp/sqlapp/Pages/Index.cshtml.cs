@@ -16,12 +16,11 @@ namespace sqlapp.Pages
             _productService = productService;
         }
 
-        public List<Product> Products; 
+        public List<Product> Products;
         public void OnGet()
         {
             IsBeta = _productService.IsBeta().Result;
-            Products= _productService.GetProducts();
-
+            Products = _productService.GetProducts().GetAwaiter().GetResult();
         }
     }
 }
