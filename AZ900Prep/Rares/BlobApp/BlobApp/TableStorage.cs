@@ -5,7 +5,11 @@ namespace BlobApp
 {
     public class TableStorage
     {
-        private const string connectionString = "DefaultEndpointsProtocol=https;AccountName=az204bd17;AccountKey=A9FgIxh2tHYHPirtiP9ocOvyGtBrwiijjrs9Jwls+dHK0inZa8jmTP8hoIce2ifycAFYGgfa0VBt+ASt7Vq4/w==;EndpointSuffix=core.windows.net";
+        private const string connectionString = "";
+
+        // for cosmos table api:
+        //private const string connectionString = "";
+
         private const string tableName = "Orders";
         private TableClient _client;
 
