@@ -2,7 +2,8 @@
 {
     public class Order
     {
-        public string Name { get; set; }
+        public string RowKey { get; set; }
+        public string PartitionKey { get; set; }
 
         public int Quantity { get; set; }
     }
