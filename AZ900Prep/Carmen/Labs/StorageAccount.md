@@ -56,7 +56,9 @@ We will use hosting approach. Hosting package already contains Microsoft.Extensi
 5. Console app as a host
 
 	a. right ckick on dependecies
+		
 	b. uninstall Microsoft.Extensions.Configuration.UserSecrets
+		
 	c. add Microsoft.Extensions.Hosting package 
 
 6. Create the host
@@ -67,6 +69,7 @@ We will use hosting approach. Hosting package already contains Microsoft.Extensi
 7. Add User secret to the configuration
 	
 	a. Go to Program.cs	
+
 	b. Add the secret config to the builder
 		
 			builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
