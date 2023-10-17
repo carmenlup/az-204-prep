@@ -29,9 +29,9 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 		
 		By enabling Manage user secrets, it will do next changes
 
-			- generate a secrets.json file under current user ~/AppData/Roaming/Microsoft/UserSecrets/<local_generated_id>
-			- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
-			- <UserSecretsId>local_generated_id</UserSecretsId> is added to csproj file
+		- generate a secrets.json file under current user ~/AppData/Roaming/Microsoft/UserSecrets/<local_generated_id>
+		- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
+		- <UserSecretsId>local_generated_id</UserSecretsId> is added to csproj file
 
 4. Add sensitive configuration to secrets.json on your local
 			
@@ -41,9 +41,7 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 			"MySecretConfiguration":  "this configuration is local on my secret and is not avalable under source control"
 		}
 -------------------------------------------------------------------
-** $\color{green}{Remark:}$ **
-
--> Options to add configuration to console app are
+$\color{green}{Remark:}$ Options to add configuration to console app are
 
 a. Using configuration builder Microsoft.Extensions.Configuration
 
@@ -51,7 +49,7 @@ b. Hosting approach
 
 -> Console app can be changed to a host app by using Package: Microsoft.Extensions.Hosting
 
-We will use hosting approach. Hosting package already contains Microsoft.Extensions.Configuration.UserSecrets so we will remove installed package firs and install the Hosting package.
+We will use hosting approach. Hosting package already contains Microsoft.Extensions.Configuration.UserSecrets so we will remove installed package first and install the Hosting package.
 
 --------------------------------------------------------------------
 
@@ -59,18 +57,21 @@ We will use hosting approach. Hosting package already contains Microsoft.Extensi
 
 	a. right ckick on dependecies
 	b. uninstall Microsoft.Extensions.Configuration.UserSecrets
-	b. add Microsoft.Extensions.Hosting package 
+	c. add Microsoft.Extensions.Hosting package 
+
 6. Create the host
 
-		Build the host:
+		// Build the host:
 		var builder = Host.CreateApplicationBuilder(args);
 
 7. Add User secret to the configuration
-	a. Go to Program.cs
+	
+	a. Go to Program.cs	
 	b. Add the secret config to the builder
 		
 			builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 			var host = builder.Build();
+
 8. Get configuration from configuration file and print to the console
 
 		var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
@@ -102,6 +103,9 @@ After step 9 the code frome Program.cs should look like this:
 
 Result: The text "this configuration is local on my secret and is not avalable under source control" is printed.
 
+11. Keep your code clean and safe. Remove line that prints your secret before push under source control :)
+			
+			Console.WriteLine(storageConnectionString);
 
 ### LAB 2 - Manage blobs in Storage account from .Net Core application	
 $\color{green}{Objective:}$ Implementation in .Net Core for managing blobs in Azure
@@ -124,6 +128,7 @@ the namespace Azure.Storage contains the next important packages (not all packag
 		"ConnectionStrings": {
 			"StorageAccountConnectionString": "replace the connection string with your account connection string"
 		}
+
 4. Replace "MySecretConfiguration" with "StorageAccountConnectionString" in the preview writed code 
 5. Go to portal -> Access keys -> copy connection key of key1
 6. Replace value set for  "StorageAccountConnectionString" with your Storage account connection string 
