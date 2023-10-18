@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using System.Data.SqlClient;
 using WebApp.Models;
 
 namespace WebApp.Service
@@ -13,7 +15,15 @@ namespace WebApp.Service
 
         private SqlConnection GetConnection()
         {
-            return new SqlConnection(Configuration.GetConnectionString("DbConnectionString"));
+            // connection from secrets -> key vault
+            var uri = new Uri(Configuration["Uri"]);
+            var tenantId = Configuration["TenantId"];
+            var clientId = Configuration["ClientId"];
+            var clientSecret = Configuration["clientSecret"];
+            var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            var keyVaultClient = new SecretClient(uri, clientSecretCredential);
+            var dbConnectionString = keyVaultClient.GetSecret("db-connection-string");
+            return new SqlConnection(dbConnectionString.Value.Value);
         }
 
         public List<Product> GetProduct()
