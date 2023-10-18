@@ -5,7 +5,7 @@ namespace BlobApp
 {
     public class Blob
     {
-        private const string connectionString = "DefaultEndpointsProtocol=https;AccountName=az204bd17;AccountKey=M14U6hJmEbHxuBZ7XuMPpiQDz9w9fegEwD95ux2jAYht8iuySlNwwyA9+trnAP4e+ki35DzTi5Ia+AStrU4Q0w==;EndpointSuffix=core.windows.net";
+        private const string connectionString = "";
         private const string containerName = "data1";
         private const string blobName = "journal.txt";
         private const string filePath = "C:\\temp\\journal.txt";

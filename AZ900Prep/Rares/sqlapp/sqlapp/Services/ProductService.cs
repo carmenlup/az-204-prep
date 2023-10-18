@@ -20,7 +20,7 @@ namespace sqlapp.Services
 
         public async Task<List<Product>> GetProducts()
         {
-            var functionUrl = "https://az204-function4pp.azurewebsites.net/api/GetProducts?code=ITp6b05GpmaRHvdiITZKOtZtxYNJumZggs2qKsu-U3JJAzFur-_PqQ==";
+            var functionUrl = "";
 
             using (var client = new HttpClient())
             {
