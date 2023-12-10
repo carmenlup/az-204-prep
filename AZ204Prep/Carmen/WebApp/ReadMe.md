@@ -1,6 +1,10 @@
 # Run app on local
 
-1. Secure configurations by using user secrets on local development:
+1. DB Prerequisites:		
+   Ensure you have installed local: 
+	- SSMS - to connect to the  database
+	- SQL Server - if you whant to run the  application with local DB
+2. Secure configurations by using user secrets on local development:
 	- In order to secure the configuration for an app, local user secrets can be used.
 	- How to use user secrets from Visual Studio
 	```	
@@ -14,7 +18,7 @@
 	- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
 	- <UserSecretsId>local_generated_id</UserSecretsId> is added to csproj file
 	```
-2. Add sensitive configuration to secrets.json on your local
+3. Add sensitive configuration to secrets.json on your local
 			
 	Add the next config to your secret.json file
 ->  For local db:
@@ -36,6 +40,6 @@
 	```
 -------------------------------------------------------------------
 
-3. Build the application and run
+4. Build the application and run
 
 		
