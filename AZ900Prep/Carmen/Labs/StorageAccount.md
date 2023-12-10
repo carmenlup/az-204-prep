@@ -29,21 +29,20 @@ For more details follow [Configuration in .Net](https://learn.microsoft.com/en-u
 		
 		By enabling Manage user secrets, it will do next changes
 
-			- generate a secrets.json file under current user ~/AppData/Roaming/Microsoft/UserSecrets/<local_generated_id>
-			- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
-			- <UserSecretsId>local_generated_id</UserSecretsId> is added to csproj file
+		- generate a secrets.json file under current user ~/AppData/Roaming/Microsoft/UserSecrets/<local_generated_id>
+		- package Microsoft.Extensions.Configuration.UserSecrets will be added to the project Dependencies/Packages
+		- <UserSecretsId>local_generated_id</UserSecretsId> is added to csproj file
 
 4. Add sensitive configuration to secrets.json on your local
 			
 	Add the next config to your secret.json file
-		
-		{
-			"MySecretConfiguration":  "this configuration is local on my secret and is not avalable under source control"
-		}
+	```	
+	{
+		"MySecretConfiguration":  "this configuration is local on my secret and is not avalable under source control"
+	}
+	```
 -------------------------------------------------------------------
-** $\color{green}{Remark:}$ **
-
--> Options to add configuration to console app are
+$\color{green}{Remark:}$ Options to add configuration to console app are
 
 a. Using configuration builder Microsoft.Extensions.Configuration
 
@@ -51,61 +50,72 @@ b. Hosting approach
 
 -> Console app can be changed to a host app by using Package: Microsoft.Extensions.Hosting
 
-We will use hosting approach. Hosting package already contains Microsoft.Extensions.Configuration.UserSecrets so we will remove installed package firs and install the Hosting package.
+We will use hosting approach. Hosting package already contains Microsoft.Extensions.Configuration.UserSecrets so we will remove installed package first and install the Hosting package.
 
 --------------------------------------------------------------------
 
 5. Console app as a host
 
 	a. right ckick on dependecies
-	b. uninstall Microsoft.Extensions.Configuration.UserSecrets
-	b. add Microsoft.Extensions.Hosting package 
-6. Create the host
-
-		Build the host:
-		var builder = Host.CreateApplicationBuilder(args);
-
-7. Add User secret to the configuration
-	a. Go to Program.cs
-	b. Add the secret config to the builder
 		
-			builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
-			var host = builder.Build();
+	b. uninstall Microsoft.Extensions.Configuration.UserSecrets
+		
+	c. add Microsoft.Extensions.Hosting package 
+
+6. Create the host
+	```
+	// Build the host:
+	var builder = Host.CreateApplicationBuilder(args);
+	```
+7. Add User secret to the configuration
+	
+	a. Go to Program.cs	
+
+	b. Add the secret config to the builder
+	```	
+	builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+	var host = builder.Build();
+	```
 8. Get configuration from configuration file and print to the console
-
-		var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
-		Console.WriteLine(storageConnectionString);
-
+	```
+	var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
+	Console.WriteLine(storageConnectionString);
+	```
 9. Run the host
-
-		await host.RunAsync();
-
+	```
+	await host.RunAsync();
+	```
 
 After step 9 the code frome Program.cs should look like this:
-		
-	using Microsoft.Extensions.Configuration;
-	using Microsoft.Extensions.Hosting;
-	using System.Reflection;
-	
-	var builder = Host.CreateApplicationBuilder(args);
-	
-	builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+```		
+ using Microsoft.Extensions.Configuration;
+ using Microsoft.Extensions.Hosting;
+ using System.Reflection;
+ 
+ var builder = Host.CreateApplicationBuilder(args);
+ 
+ builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+ 
+ var host = builder.Build();
+ 
+ var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
+ 
+ Console.WriteLine(storageConnectionString);
+ 
+ await host.RunAsync();
+```
 
-	var host = builder.Build();
-
-	var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
-
-	Console.WriteLine(storageConnectionString);
-
-	await host.RunAsync();
 **10. Observe the result**
 
 Result: The text "this configuration is local on my secret and is not avalable under source control" is printed.
 
+11. Keep your code clean and safe. Remove line that prints your secret before push under source control :)
+```			
+Console.WriteLine(storageConnectionString);
+```
 
 ### LAB 2 - Manage blobs in Storage account from .Net Core application	
 $\color{green}{Objective:}$ Implementation in .Net Core for managing blobs in Azure
-
 
 ----------------------------------------------------------------------------------
 ** $\color{green}{Remark:}$ **
@@ -120,24 +130,26 @@ the namespace Azure.Storage contains the next important packages (not all packag
 1. Go to portal and a Storage Account - General Propose V2 
 2. Add Azure.Storage.Blob package to the project created at Lab 1
 3. Add configuration string to the Storage account to the secret.json (replace the initial config with the next configuration)
-
-		"ConnectionStrings": {
-			"StorageAccountConnectionString": "replace the connection string with your account connection string"
-		}
+	```
+	"ConnectionStrings": {
+		"StorageAccountConnectionString": "replace the connection string with your account connection string"
+	}
+	```
 4. Replace "MySecretConfiguration" with "StorageAccountConnectionString" in the preview writed code 
 5. Go to portal -> Access keys -> copy connection key of key1
 6. Replace value set for  "StorageAccountConnectionString" with your Storage account connection string 
 7. Create a container for store blobs
 	Obs. Blob package provide BlobServiceClient class that is used for manage blobs.  
+	```
+	string containerName = "newcontainer";
+	BlobServiceClient blobServiceCLient = new BlobServiceClient(storageConnectionString);
 
-		string containerName = "newcontainer";
-		BlobServiceClient blobServiceCLient = new BlobServiceClient(storageConnectionString);
-
-		var containers = blobServiceCLient.GetBlobContainers();
-		Console.WriteLine(containers.Count());
-		var container = containers.FirstOrDefault(c => c.Name == containerName);
-		if (container == null)
-			blobServiceCLient.CreateBlobContainer(containerName, PublicAccessType.Blob);
+	var containers = blobServiceCLient.GetBlobContainers();
+	Console.WriteLine(containers.Count());
+	var container = containers.FirstOrDefault(c => c.Name == containerName);
+	if (container == null)
+		blobServiceCLient.CreateBlobContainer(containerName, PublicAccessType.Blob);
+	```
 8. Run the app
 9. Observe the result:
 - Go to portal and verify in Storage account that the **newcontainer** was created
