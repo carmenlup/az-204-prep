@@ -1,4 +1,4 @@
-﻿using WebApp.Models;
+﻿using WebApp.Data.Entities;
 
 namespace WebApp.Service
 {
