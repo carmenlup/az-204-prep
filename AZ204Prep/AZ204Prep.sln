@@ -57,8 +57,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{7DF30B9B-E520-4F5F-95E2-52A903259BD5}"
 	ProjectSection(SolutionItems) = preProject
 		Carmen\Labs\AppService.md = Carmen\Labs\AppService.md
-		Carmen\Labs\StorageAccount.md = Carmen\Labs\StorageAccount.md
 		Carmen\Labs\Security.md = Carmen\Labs\Security.md
+		Carmen\Labs\StorageAccount.md = Carmen\Labs\StorageAccount.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B9328774-E9E6-42B4-A1DF-B4477DE545CF}"
