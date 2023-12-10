@@ -110,9 +110,9 @@ After step 9 the code frome Program.cs should look like this:
 Result: The text "this configuration is local on my secret and is not avalable under source control" is printed.
 
 11. Keep your code clean and safe. Remove line that prints your secret before push under source control :)
-			
-			Console.WriteLine(storageConnectionString);
-
+```			
+Console.WriteLine(storageConnectionString);
+```
 ### LAB 2 - Manage blobs in Storage account from .Net Core application	
 $\color{green}{Objective:}$ Implementation in .Net Core for managing blobs in Azure
 
