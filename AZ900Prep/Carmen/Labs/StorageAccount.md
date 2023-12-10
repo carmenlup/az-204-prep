@@ -113,9 +113,9 @@ Result: The text "this configuration is local on my secret and is not avalable u
 ```			
 Console.WriteLine(storageConnectionString);
 ```
+
 ### LAB 2 - Manage blobs in Storage account from .Net Core application	
 $\color{green}{Objective:}$ Implementation in .Net Core for managing blobs in Azure
-
 
 ----------------------------------------------------------------------------------
 ** $\color{green}{Remark:}$ **
