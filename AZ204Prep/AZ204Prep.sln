@@ -149,7 +149,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MonitorTroubleshootOptimize
 		Liviu\MonitorTroubleshootOptimize\Notes.txt = Liviu\MonitorTroubleshootOptimize\Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultApp", "Carmen\VaultApp\VaultApp.csproj", "{7982092B-82D8-4BA3-8AFA-81544935A66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultApp", "Carmen\VaultApp\VaultApp.csproj", "{7982092B-82D8-4BA3-8AFA-81544935A66A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automation", "Carmen\WebApp\Automation\Automation.csproj", "{A6281A17-C582-41A5-8180-9C2B010AB314}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,6 +215,10 @@ Global
 		{7982092B-82D8-4BA3-8AFA-81544935A66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7982092B-82D8-4BA3-8AFA-81544935A66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7982092B-82D8-4BA3-8AFA-81544935A66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6281A17-C582-41A5-8180-9C2B010AB314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6281A17-C582-41A5-8180-9C2B010AB314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6281A17-C582-41A5-8180-9C2B010AB314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6281A17-C582-41A5-8180-9C2B010AB314}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
