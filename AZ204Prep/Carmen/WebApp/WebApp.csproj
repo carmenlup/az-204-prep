@@ -9,10 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Automation\**" />
-    <Content Remove="Automation\**" />
-    <EmbeddedResource Remove="Automation\**" />
-    <None Remove="Automation\**" />
+    <None Include="Automation\App.config" />
+    <None Include="Automation\Automation.csproj" />
+    <None Include="Automation\Automation.sln" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +26,12 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="120.0.6099.7100" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.14.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Automation\bin\Debug\" />
+    <Folder Include="Automation\bin\Release\" />
+    <Folder Include="Automation\obj\Debug\TempPE\" />
   </ItemGroup>
 
 </Project>
