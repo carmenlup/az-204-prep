@@ -1,17 +1,12 @@
-﻿using Automation.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
 
-namespace Automation.Helpers
+namespace WebApp.TestAutomation.Helpers
 {
-    public class NavigationHelper
+    public static class NavigationHelper
     {
-        public static void NavigateToUrl(string url)
+        public static void NavigateToUrl(this IWebDriver driver, string url)
         {
-            ObjectRepository.Driver.Navigate().GoToUrl(url);
+            driver.Navigate().GoToUrl(url);
         }
     }
 }
