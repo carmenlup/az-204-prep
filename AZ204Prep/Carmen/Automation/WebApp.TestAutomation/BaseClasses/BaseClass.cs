@@ -8,9 +8,11 @@ using WebApp.TestAutomation.Settings;
 
 namespace WebApp.TestAutomation.BaseClasses
 {
+    [TestClass]
     public class BaseClass
     {
-        public static IConfiguration Congfiguration { get; set; }
+        public static IConfiguration Configuration { get; set; }
+        public static IWebDriver _driver { get; set; }
 
         public static IConfiguration InitConfiguration()
         {
@@ -34,7 +36,7 @@ namespace WebApp.TestAutomation.BaseClasses
 
         public static IWebDriver InitWebDriver()
         {
-            Congfiguration = InitConfiguration();
+            Configuration = InitConfiguration();
             switch (ObjectRepository.Browser)
             {
                 case BrowserType.Chrome:
@@ -44,10 +46,26 @@ namespace WebApp.TestAutomation.BaseClasses
                     ObjectRepository.Driver = GetFireFoxDriver();
                     break;
                 default:
-                    throw new NoDriverFound("Driver not found: " + Congfiguration["Browser"]);
+                    throw new NoDriverFound("Driver not found: " + Configuration["Browser"]);
             }
 
             return ObjectRepository.Driver;
+        }
+
+        [AssemblyInitialize]
+        public static void AssemblyInit(TestContext context)
+        {
+            _driver = InitWebDriver();
+        }
+
+        [AssemblyCleanup]
+        public static void TearDown()
+        {
+            if (_driver != null)
+            {
+                _driver.Close();
+                _driver.Quit();
+            }
         }
     }
 }
