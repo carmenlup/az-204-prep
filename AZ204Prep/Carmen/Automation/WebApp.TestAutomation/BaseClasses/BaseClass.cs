@@ -30,15 +30,9 @@ namespace WebApp.TestAutomation.BaseClasses
 
         private IWebDriver GetChromeDriver()
         {
-            //var DeviceDriver = ChromeDriverService.CreateDefaultService();
-            //DeviceDriver.HideCommandPromptWindow = true;
-            //ChromeOptions options = new ChromeOptions();
-            //options.AddArguments("--disable-infobars");
-            //options.AddArguments("incognito");
+            //TODO - run web proj for local env
             IWebDriver driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-
-           // IWebDriver driver = new ChromeDriver();
             return driver;
         }
 
@@ -50,7 +44,6 @@ namespace WebApp.TestAutomation.BaseClasses
 
         public IWebDriver InitWebDriver()
         {
-            //Configuration = InitConfiguration();
             switch (ObjectRepository.Browser)
             {
                 case BrowserType.Chrome:
@@ -65,21 +58,5 @@ namespace WebApp.TestAutomation.BaseClasses
 
             return ObjectRepository.Driver;
         }
-
-        /*[AssemblyInitialize]
-        public static void AssemblyInit(TestContext context)
-        {
-            _driver = InitWebDriver();
-        }*/
-
-        /*[AssemblyCleanup]
-        public static void TearDown()
-        {
-            if (Driver != null)
-            {
-                Driver.Close();
-                Driver.Quit();
-            }
-        }*/
     }
 }
