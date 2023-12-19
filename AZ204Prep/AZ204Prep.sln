@@ -98,6 +98,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", 
 		Carmen\Labs\Images\AppService\IISLaunchApp.PNG = Carmen\Labs\Images\AppService\IISLaunchApp.PNG
 		Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG = Carmen\Labs\Images\AppService\LinuxConfigOptions.PNG
 		Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG = Carmen\Labs\Images\AppService\SuccessfulDeploymentAppService.PNG
+		Carmen\Labs\Images\AppService\VirtualPathTest.png = Carmen\Labs\Images\AppService\VirtualPathTest.png
 		Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG = Carmen\Labs\Images\AppService\WindowsConfigOptions.PNG
 	EndProjectSection
 EndProject
@@ -149,7 +150,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MonitorTroubleshootOptimize
 		Liviu\MonitorTroubleshootOptimize\Notes.txt = Liviu\MonitorTroubleshootOptimize\Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultApp", "Carmen\VaultApp\VaultApp.csproj", "{7982092B-82D8-4BA3-8AFA-81544935A66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultApp", "Carmen\VaultApp\VaultApp.csproj", "{7982092B-82D8-4BA3-8AFA-81544935A66A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
