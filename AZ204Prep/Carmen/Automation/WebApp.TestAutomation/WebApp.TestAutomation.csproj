@@ -43,4 +43,10 @@
     <ProjectReference Include="..\..\WebApp\WebApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Queries\Queries.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
