@@ -1,7 +1,7 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using System.Data.SqlClient;
-using WebApp.Models;
+using WebApp.Data.Entities;
 
 namespace WebApp.Service
 {
@@ -28,9 +28,10 @@ namespace WebApp.Service
 
         public List<Product> GetProduct()
         {
-            SqlConnection connection = GetConnection();
+            var dbConnection = Configuration.GetConnectionString("DbConnectionString");
+            SqlConnection connection = new SqlConnection(dbConnection);// GetConnection();
             var productList = new List<Product>();
-            string statement = "SELECT ProductID, ProductName, Quantity from Products";
+            string statement = "SELECT Id, Name, Quantity from Products";
             connection.Open();
 
             SqlCommand cmd = new SqlCommand(statement, connection);
