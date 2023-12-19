@@ -42,11 +42,13 @@ This lab will explain how App Service should be configured in this case.
 ![Default web page Windows](./Images/AppService/SuccessfulDeploymentAppService.PNG "Default Web Server page Windows")
 
 #### Change your app for run on different folder
-1. Right click on your web app -> Properties
+
+1. Right click on your web app ->> Properties
 2. Expand Build section 
 3. Select Output and add $\color{red}{bin\test}$ as a Base output path
 4. Go to Debug Section and click on Open Debug lunch UI 
 5. On the IIS Experess fo to the App URL and add test to the url like in immage below:
+
 ![Deploy on custom folder in Azure](./Images/AppService/IISLaunchApp.PNG "Launch app on test")
 
 #### Deploy your app
