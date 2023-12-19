@@ -11,13 +11,31 @@ using WebApp.TestAutomation.Settings;
 
 namespace WebApp.TestAutomation
 {
+
+    
     [TestClass]
     public class UnitTest1 : BaseClass 
     {
+        [AssemblyInitialize]
+        public static void AssemblyInit(TestContext context)
+        {
+        }
+
         [TestMethod]
         public void TestOpenPage()
         {
-            _driver.NavigateToUrl(Configuration["Website"]!);
+
+            Driver.NavigateToUrl(Configuration["Website"]!);
+        }
+
+        [AssemblyCleanup]
+        public static void TearDown()
+        {
+            if (Driver != null)
+            {
+                Driver.Close();
+                Driver.Quit();
+            }
         }
     }
 }

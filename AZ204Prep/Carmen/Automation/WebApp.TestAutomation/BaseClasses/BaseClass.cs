@@ -8,11 +8,17 @@ using WebApp.TestAutomation.Settings;
 
 namespace WebApp.TestAutomation.BaseClasses
 {
-    [TestClass]
+   // [TestClass]
     public class BaseClass
     {
-        public static IConfiguration Configuration { get; set; }
-        public static IWebDriver _driver { get; set; }
+        public IConfiguration Configuration;
+        public static IWebDriver Driver;
+
+        public BaseClass()
+        {
+            Driver = InitWebDriver();
+            Configuration = InitConfiguration();
+        }
 
         public static IConfiguration InitConfiguration()
         {
@@ -22,9 +28,17 @@ namespace WebApp.TestAutomation.BaseClasses
             return config;
         }
 
-        private static IWebDriver GetChromeDriver()
+        private IWebDriver GetChromeDriver()
         {
+            //var DeviceDriver = ChromeDriverService.CreateDefaultService();
+            //DeviceDriver.HideCommandPromptWindow = true;
+            //ChromeOptions options = new ChromeOptions();
+            //options.AddArguments("--disable-infobars");
+            //options.AddArguments("incognito");
             IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+
+           // IWebDriver driver = new ChromeDriver();
             return driver;
         }
 
@@ -34,9 +48,9 @@ namespace WebApp.TestAutomation.BaseClasses
             return driver;
         }
 
-        public static IWebDriver InitWebDriver()
+        public IWebDriver InitWebDriver()
         {
-            Configuration = InitConfiguration();
+            //Configuration = InitConfiguration();
             switch (ObjectRepository.Browser)
             {
                 case BrowserType.Chrome:
@@ -52,20 +66,20 @@ namespace WebApp.TestAutomation.BaseClasses
             return ObjectRepository.Driver;
         }
 
-        [AssemblyInitialize]
+        /*[AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
             _driver = InitWebDriver();
-        }
+        }*/
 
-        [AssemblyCleanup]
+        /*[AssemblyCleanup]
         public static void TearDown()
         {
-            if (_driver != null)
+            if (Driver != null)
             {
-                _driver.Close();
-                _driver.Quit();
+                Driver.Close();
+                Driver.Quit();
             }
-        }
+        }*/
     }
 }
