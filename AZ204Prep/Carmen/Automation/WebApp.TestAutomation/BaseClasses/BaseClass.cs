@@ -2,6 +2,8 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using WebApp.Data.Entities;
+using WebApp.Service;
 using WebApp.TestAutomation.Config;
 using WebApp.TestAutomation.CustomException;
 using WebApp.TestAutomation.Settings;
@@ -13,6 +15,7 @@ namespace WebApp.TestAutomation.BaseClasses
     {
         public static IConfiguration Configuration { get; set; }
         public static IWebDriver _driver { get; set; }
+        private static IProductService _productService { get ; set;}
 
         public static IConfiguration InitConfiguration()
         {
@@ -26,6 +29,12 @@ namespace WebApp.TestAutomation.BaseClasses
         {
             IWebDriver driver = new ChromeDriver();
             return driver;
+        }
+
+        private static List<Product> GetProducts()
+        {
+            var products = new List<Product>();
+            return products;
         }
 
         private static IWebDriver GetFireFoxDriver()

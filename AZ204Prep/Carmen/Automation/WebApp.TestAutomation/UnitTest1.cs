@@ -15,13 +15,11 @@ namespace WebApp.TestAutomation
     [TestClass]
     public class UnitTest1 : BaseClass
     {
-        private IProductService _productService;
         [TestMethod]
         public void TestOpenPage()
         {
 
             //_driver.NavigateToUrl(Configuration["Website"]!);
-            var product = new DatabaseConnection(Configuration, _productService);
             var list = _productService.GetProduct();
         }
         [AssemblyInitialize]
