@@ -5,7 +5,6 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Configuration;
 using System.Data;
-using WebApp.Service;
 using WebApp.TestAutomation.BaseClasses;
 using WebApp.TestAutomation.Helpers;
 using WebApp.TestAutomation.Settings;
@@ -16,16 +15,18 @@ namespace WebApp.TestAutomation
     public class UnitTest1 : BaseClass
     {
         [TestMethod]
-        public void TestOpenPage()
+        public void TestMainPage()
         {
+            _driver.NavigateToUrl(Configuration["Website"]!);
+        }
 
-            //_driver.NavigateToUrl(Configuration["Website"]!);
-            var list = _productService.GetProduct();
-        }
-        [AssemblyInitialize]
-        public static void AssemblyInit(TestContext context)
+        [TestMethod]
+        public void TestDbValues()
         {
-            _driver = InitWebDriver();
+            var list = new DatabaseConnection(Configuration).GetProduct();
+            Assert.AreEqual(3, list.Count);
+
         }
+
     }
 }

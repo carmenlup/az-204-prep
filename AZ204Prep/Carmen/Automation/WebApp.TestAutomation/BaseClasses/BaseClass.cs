@@ -2,39 +2,33 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
-using WebApp.Data.Entities;
-using WebApp.Service;
+using System.Reflection;
 using WebApp.TestAutomation.Config;
 using WebApp.TestAutomation.CustomException;
 using WebApp.TestAutomation.Settings;
+using Product = WebApp.TestAutomation.DbModel.Product;
 
 namespace WebApp.TestAutomation.BaseClasses
 {
     [TestClass]
     public class BaseClass
     {
-        public static IConfiguration Configuration { get; set; }
+        public static IConfigurationRoot Configuration { get; set; }
         public static IWebDriver _driver { get; set; }
-        private static IProductService _productService { get ; set;}
 
-        public static IConfiguration InitConfiguration()
+        public static IConfigurationRoot  InitConfigurationRoot()
         {
-            var config = new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddUserSecrets(Assembly.GetExecutingAssembly(), true)
                 .Build();
-            return config;
+            return Configuration;
         }
 
         private static IWebDriver GetChromeDriver()
         {
             IWebDriver driver = new ChromeDriver();
             return driver;
-        }
-
-        private static List<Product> GetProducts()
-        {
-            var products = new List<Product>();
-            return products;
         }
 
         private static IWebDriver GetFireFoxDriver()
@@ -45,7 +39,7 @@ namespace WebApp.TestAutomation.BaseClasses
 
         public static IWebDriver InitWebDriver()
         {
-            Configuration = InitConfiguration();
+           
             switch (ObjectRepository.Browser)
             {
                 case BrowserType.Chrome:
@@ -65,6 +59,7 @@ namespace WebApp.TestAutomation.BaseClasses
         public static void AssemblyInit(TestContext context)
         {
             _driver = InitWebDriver();
+            Configuration = InitConfigurationRoot();
         }
 
         [AssemblyCleanup]

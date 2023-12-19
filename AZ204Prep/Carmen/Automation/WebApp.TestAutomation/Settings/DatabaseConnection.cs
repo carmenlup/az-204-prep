@@ -1,46 +1,53 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework.Internal;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Reflection;
-using WebApp.Data;
-using WebApp.Data.Entities;
-using WebApp.Service;
-using WebApp.TestAutomation.BaseClasses;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using WebApp.TestAutomation.DbModel;
+
+namespace WebApp.TestAutomation.Settings;
+
 public class DatabaseConnection
 {
-    private IProductService _productService;
-    private IConfiguration _configuration;
-    public DatabaseConnection(IConfiguration configuration, IProductService product)
+    private readonly IConfigurationRoot _configuration;
+
+    public DatabaseConnection(IConfigurationRoot configuration)
     {
         _configuration = configuration;
-        _productService = product;
     }
-    public SqlConnection GetConnection()
+
+    private string GetQuery()
     {
-        SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DbConnectionString"]);
+        var queries =
+            JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@"Queries\Queries.json"));
+        return queries["GetProductList"];
+    }
+
+    public List<Product> GetProduct()
+    {
+        var queryString = GetQuery();
+
+        var products = new List<Product>();
+
+        var connectionString = _configuration.GetConnectionString("DbConnectionString");
+        using var connection = new SqlConnection(connectionString);
+        SqlCommand command = new SqlCommand(queryString, connection);
+
         connection.Open();
-        return connection;
-    }
 
-    public void CloseConnection(SqlConnection connection)
-    {
-        connection.Close();
-    }
+        using SqlDataReader rdr = command.ExecuteReader();
+        while (rdr.Read())
+        {
+            var product = new Product
+            {
+                Id = Convert.ToInt32(rdr["Id"]),
+                Name = rdr["Name"].ToString() ?? string.Empty,
+                Quantity = Convert.ToInt32(rdr["Quantity"])
+            };
 
-    public string GetQuery(string queryName)
-    {
-        var queries = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(@"Queries\Queries.json"));
-        return queries[queryName];
-    }
+            products.Add(product);
+        }
 
-    public List<Product> ExecuteQuery()
-    {
-        var result = _productService.GetProduct();
-        return result; 
+        return products;
     }
-
 }
