@@ -4,20 +4,29 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Configuration;
+using System.Data;
 using WebApp.TestAutomation.BaseClasses;
-using WebApp.TestAutomation.Config;
 using WebApp.TestAutomation.Helpers;
 using WebApp.TestAutomation.Settings;
 
 namespace WebApp.TestAutomation
 {
     [TestClass]
-    public class UnitTest1 : BaseClass 
+    public class UnitTest1 : BaseClass
     {
         [TestMethod]
-        public void TestOpenPage()
+        public void TestMainPage()
         {
-            _driver.NavigateToUrl(Configuration["Website"]!);
+            Driver.NavigateToUrl(Configuration["Website"]!);
         }
+
+        [TestMethod]
+        public void TestDbValues()
+        {
+            var list = new DatabaseConnection(Configuration).GetProduct();
+            Assert.AreEqual(3, list.Count);
+
+        }
+
     }
 }
