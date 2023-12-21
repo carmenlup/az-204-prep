@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using System.Reflection;
 using WebApp.TestAutomation.Config;
@@ -56,6 +57,16 @@ namespace WebApp.TestAutomation.BaseClasses
         }
 
         /// <summary>
+        /// This method is responsible for creating and initializing a new instance of the EdgeDriver class.
+        /// </summary>
+        /// <returns>Returns an instance of the IWebDriver interface, specifically a EdgeDriver object.</returns>
+        private static IWebDriver GetEdgeDriver()
+        {
+            IWebDriver driver = new EdgeDriver();
+            return driver;
+        }
+
+        /// <summary>
         /// This method is responsible for initializing and returning an instance of IWebDriver interface based on the value of the Browser property.
         /// </summary>
         /// <returns>Returns the ObjectRepository.Driver property, which holds the initialized driver.</returns>
@@ -71,6 +82,9 @@ namespace WebApp.TestAutomation.BaseClasses
                 case BrowserType.Firefox:
                     ObjectRepository.Driver = GetFireFoxDriver();
                     break;
+                case BrowserType.Edge:
+                    ObjectRepository.Driver = GetEdgeDriver();
+                    break;
                 default:
                     throw new NoDriverFound("Driver not found: " + Configuration["Browser"]);
             }
@@ -85,8 +99,10 @@ namespace WebApp.TestAutomation.BaseClasses
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
-            Driver = InitWebDriver();
+            
             Configuration = InitConfigurationRoot();
+            ObjectRepository.Browser = (BrowserType)System.Enum.Parse(typeof(BrowserType), Configuration["Browser"]);
+            Driver = InitWebDriver();
         }
 
         /// <summary>
