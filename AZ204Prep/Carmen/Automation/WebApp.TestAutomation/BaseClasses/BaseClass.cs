@@ -20,7 +20,7 @@ namespace WebApp.TestAutomation.BaseClasses
         /// <summary>
         /// This property is responsible for holding the IWebDriver object.
         /// </summary>
-        public static IWebDriver _driver { get; set; }
+        public static IWebDriver Driver { get; set; }
 
         /// <summary>
         /// This constructor is responsible for injecting the IConfigurationRoot object into the class.
@@ -85,7 +85,7 @@ namespace WebApp.TestAutomation.BaseClasses
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
-            _driver = InitWebDriver();
+            Driver = InitWebDriver();
             Configuration = InitConfigurationRoot();
         }
 
@@ -95,10 +95,10 @@ namespace WebApp.TestAutomation.BaseClasses
         [AssemblyCleanup]
         public static void TearDown()
         {
-            if (_driver != null)
+            if (Driver != null)
             {
-                _driver.Close();
-                _driver.Quit();
+                Driver.Close();
+                Driver.Quit();
             }
         }
     }

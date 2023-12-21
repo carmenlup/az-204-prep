@@ -17,7 +17,7 @@ namespace WebApp.TestAutomation
         [TestMethod]
         public void TestMainPage()
         {
-            _driver.NavigateToUrl(Configuration["Website"]!);
+            Driver.NavigateToUrl(Configuration["Website"]!);
         }
 
         [TestMethod]
