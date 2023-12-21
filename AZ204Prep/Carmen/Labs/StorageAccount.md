@@ -78,7 +78,7 @@ We will use hosting approach. Hosting package already contains Microsoft.Extensi
 	```
 8. Get configuration from configuration file and print to the console
 	```
-	var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
+	var storageConnectionString = builder.Configuration["MySecretConfiguration"];
 	Console.WriteLine(storageConnectionString);
 	```
 9. Run the host
@@ -98,7 +98,7 @@ After step 9 the code frome Program.cs should look like this:
  
  var host = builder.Build();
  
- var storageConnectionString = builder.Configuration.GetConnectionString("MySecretConfiguration");
+ var storageConnectionString = builder.Configuration["MySecretConfiguration"];
  
  Console.WriteLine(storageConnectionString);
  
@@ -135,9 +135,21 @@ the namespace Azure.Storage contains the next important packages (not all packag
 		"StorageAccountConnectionString": "replace the connection string with your account connection string"
 	}
 	```
+
 4. Replace "MySecretConfiguration" with "StorageAccountConnectionString" in the preview writed code 
 5. Go to portal -> Access keys -> copy connection key of key1
-6. Replace value set for  "StorageAccountConnectionString" with your Storage account connection string 
+6. Replace value set for  "StorageAccountConnectionString" with your Storage account connection string and update the initial code									
+
+Replace the code:
+```
+var storageConnectionString = builder.Configuration["MySecretConfiguration"];
+```
+
+with
+
+```
+var storageConnectionString = builder.Configuration.GetConnectionString("StorageAccountConnectionString");
+```
 7. Create a container for store blobs
 	Obs. Blob package provide BlobServiceClient class that is used for manage blobs.  
 	```
