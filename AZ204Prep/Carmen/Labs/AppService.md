@@ -42,11 +42,13 @@ This lab will explain how App Service should be configured in this case.
 ![Default web page Windows](./Images/AppService/SuccessfulDeploymentAppService.PNG "Default Web Server page Windows")
 
 #### Change your app for run on different folder
-1. Right click on your web app -> Properties
+
+1. Right click on your web app ->> Properties
 2. Expand Build section 
 3. Select Output and add $\color{red}{bin\test}$ as a Base output path
 4. Go to Debug Section and click on Open Debug lunch UI 
 5. On the IIS Experess fo to the App URL and add test to the url like in immage below:
+
 ![Deploy on custom folder in Azure](./Images/AppService/IISLaunchApp.PNG "Launch app on test")
 
 #### Deploy your app
@@ -64,8 +66,11 @@ To check this step try to publish your app from Visual Studion and web depolymen
 3. Add **/test** to the URL and run - the response should be HTTP ERROR 500 
 4. Goo back in portal on your App Service resource
 5. Go to the configutation feature then choose Path mappting
-6. Add a new Virtual application and directory 
+6. Add a new Virtual Application with the virtual path /test (under section Virtual applications and directories)
 ![Configutation for custom app folder](./Images/AppService/ApplicationFolder.PNG "Configuration for custom app folder")
+Now you should have 2 virtual applications: the default (/) and the new created (/test) one:
+![Virtual path config in Azure](./Images/AppService/VirtualPathTest.PNG "Deploy web app in a custom virtual path")
+
 7. Save the configuration
 8. Go to overview and restart the Web app
 9. Check the web again in a new tab. Yut URL should be **azure-web-app-URL/test**
