@@ -1,0 +1,3 @@
+{
+  "GetProductList": "SELECT * FROM dbo.Products"
+}

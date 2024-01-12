@@ -73,7 +73,7 @@ Now you should have 2 virtual applications: the default (/) and the new created 
 
 7. Save the configuration
 8. Go to overview and restart the Web app
-9. Check the web again in a new tab. Yut URL should be **azure-web-app-URL/test**
+9. Check the web again in a new tab. You URL should be **azure-web-app-URL/test**
 	-> application was not deployed yet but the urs should respond with the message: 
 	```diff
 	+ The resource you are looking for has been removed, had its name changed, or is temporarily unavailable.
@@ -81,7 +81,7 @@ Now you should have 2 virtual applications: the default (/) and the new created 
 
 **Deploy your app**
 
-11. Deploy your app again from VS - now the deployment and app should work
+10. Deploy your app again from VS - now the deployment and app should work
 
 
 ### Lab 3 - Application configuration - ASPNETCORE_ENVIRONMENT
