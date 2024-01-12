@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Service;
+using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
@@ -10,7 +11,9 @@ builder.Services.AddTransient<IProductService, ProductService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString))
+    .AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -44,7 +47,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

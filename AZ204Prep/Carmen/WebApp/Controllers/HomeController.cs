@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApp.Models;
 using WebApp.Service;
 
 namespace WebApp.Controllers
 {
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,6 +18,7 @@ namespace WebApp.Controllers
             _product = product;
         }
 
+        
         public IActionResult Index()
         {
             var products = _product.GetProduct();
