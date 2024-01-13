@@ -154,6 +154,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaultApp", "Carmen\VaultApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.TestAutomation", "Carmen\Automation\WebApp.TestAutomation\WebApp.TestAutomation.csproj", "{7E074397-6047-4194-A843-3E64344040DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Carmen\Authentication\Authentication.csproj", "{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -220,6 +222,10 @@ Global
 		{7E074397-6047-4194-A843-3E64344040DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E074397-6047-4194-A843-3E64344040DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E074397-6047-4194-A843-3E64344040DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -262,6 +268,7 @@ Global
 		{A59579B3-32C7-45D0-8C14-6B9EB637D721} = {49234E1A-B69F-4F5E-9BB4-566054E142AD}
 		{7982092B-82D8-4BA3-8AFA-81544935A66A} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{7E074397-6047-4194-A843-3E64344040DC} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}

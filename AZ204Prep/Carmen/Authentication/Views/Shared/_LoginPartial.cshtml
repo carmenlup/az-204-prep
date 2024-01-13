@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Authentication.Areas.Identity.Data
+
+@inject SignInManager<AuthenticationUser> SignInManager
+@inject UserManager<AuthenticationUser> UserManager
+
+<ul class="navbar-nav">
+@if (User.Identity.IsAuthenticated)
+{
+     <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+
+    <li class="nav-item">
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link text-dark" id="logout" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">logout</a>
+    </li>
+}
+else
+{
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" id="logout" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="Login">Login</a>
+    </li>
+}
+</ul>
