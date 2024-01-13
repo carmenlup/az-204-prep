@@ -4,18 +4,36 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Service;
 using Microsoft.Identity.Web;
+using Authentication.Data;
+using Authentication.Areas.Identity.Data;
+using Microsoft.Identity.Web.UI;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if(!builder.Environment.IsDevelopment())
+{
+    var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+    builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+}
+
+
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 builder.Services.AddTransient<IProductService, ProductService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(connectionString))
-    .AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
+    options.UseSqlServer(connectionString));
 
+var connectionStringIdentity = builder.Configuration.GetConnectionString("AuthenticationContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationContextConnection' not found.");
+
+builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationContext>();
+
+builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddMicrosoftIdentityUI();
+
 
 var app = builder.Build();
     
