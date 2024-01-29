@@ -3,8 +3,13 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Service;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 builder.Services.AddTransient<IProductService, ProductService>();
 

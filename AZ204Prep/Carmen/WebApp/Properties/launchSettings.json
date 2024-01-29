@@ -5,6 +5,10 @@
     "iisExpress": {
       "applicationUrl": "http://localhost:8838/test",
       "sslPort": 44350
+    },
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development",
+      "VaultUri": "https://learn-key-vault-cd.vault.azure.net/"
     }
   },
   "profiles": {
@@ -14,7 +18,8 @@
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5008",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://learn-key-vault-cd.vault.azure.net/"
       }
     },
     "https": {
@@ -23,14 +28,16 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7157;http://localhost:5008",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://learn-key-vault-cd.vault.azure.net/"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://learn-key-vault-cd.vault.azure.net/"
       }
     }
   }
