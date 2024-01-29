@@ -24,7 +24,7 @@ namespace WebApp.Service
             var clientSecret = Configuration["KeyVault:ClientSecret"];
             var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
             var keyVaultClient = new SecretClient(uri, clientSecretCredential);
-            var dbConnectionString = keyVaultClient.GetSecret("db-connection-string");
+            var dbConnectionString = keyVaultClient.GetSecret("connection-string");
             _dbConnectionString = dbConnectionString.Value.Value;
             return new SqlConnection(_dbConnectionString);
         }
@@ -32,7 +32,7 @@ namespace WebApp.Service
         public List<Product> GetProduct()
         {
             var dbConnection = Configuration.GetConnectionString("DbConnectionString");
-            SqlConnection connection = new SqlConnection(dbConnection);// GetConnection(); //- use get connection for azure key vault usage
+            SqlConnection connection = GetConnection(); //- use get connection for azure key vault usage
             var productList = new List<Product>();
             var statement = "SELECT Id, Name, Quantity from Products";
             connection.Open();

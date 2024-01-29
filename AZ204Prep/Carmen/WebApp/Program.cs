@@ -11,7 +11,7 @@ using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-if(!builder.Environment.IsDevelopment())
+//if(!builder.Environment.IsDevelopment())
 {
     var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
     builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
@@ -32,7 +32,7 @@ builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignI
 
 builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddMicrosoftIdentityUI();
+builder.Services.AddControllersWithViews();//.AddMicrosoftIdentityUI();
 
 
 var app = builder.Build();
@@ -65,7 +65,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
