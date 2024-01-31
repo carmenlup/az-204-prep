@@ -13,10 +13,10 @@ namespace StorageAccountApp
         // 1st Create an Application Object. From AD -> App Registrations -> New Registration
 
         // Get them from your Application Object - overview
-        string clientId = "3ef5d31a-92c0-4944-b554-4a2f29f6e98f";
-        string tenantId = "62d18f9f-8f85-4e0b-901a-d292a89d516e";
+        string clientId = "";
+        string tenantId = "";
         // Get it from Application Object -> Certificates & Secrets -> Add new Secret -> Copy the value
-        string clientSecret = "nsm8Q~IDONAmPJHREqCuzrSePsKYHt1U4feo0aEE";
+        string clientSecret = "";
 
         string blobUrl = "https://csb100320026cc855a7.blob.core.windows.net/test-container/File1-002123.txt";
 
