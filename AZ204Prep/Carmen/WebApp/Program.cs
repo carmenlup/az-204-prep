@@ -18,7 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("DbConnectionSt
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
 
-var connectionStringIdentity = builder.Configuration.GetConnectionString("AuthenticationContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationContextConnection' not found.");
+//var connectionStringIdentity = builder.Configuration.GetConnectionString("AuthenticationContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationContextConnection' not found.");
 
 //builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(connectionString));
 //builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationContext>();
