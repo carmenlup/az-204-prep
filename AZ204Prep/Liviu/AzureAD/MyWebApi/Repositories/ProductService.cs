@@ -29,7 +29,7 @@ namespace MyWebApi.Repositories
 
         private SqlConnection GetConnection()
         {
-            string connectionString = "Server=tcp:sqldbserveraz204.database.windows.net,1433;Initial Catalog=DBLiviu01;Persist Security Info=False;User ID=liviu;Password=admin#10;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = "";
             return new SqlConnection(connectionString);
         }
 
