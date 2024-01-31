@@ -3,10 +3,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Service;
-using Microsoft.Identity.Web;
-using Authentication.Data;
-using Authentication.Areas.Identity.Data;
-using Microsoft.Identity.Web.UI;
 using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,10 +20,10 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 var connectionStringIdentity = builder.Configuration.GetConnectionString("AuthenticationContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationContextConnection' not found.");
 
-builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationContext>();
+//builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationContext>();
 
-builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
+//builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
 // Add services to the container.
 builder.Services.AddControllersWithViews();//.AddMicrosoftIdentityUI();
 
