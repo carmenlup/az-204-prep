@@ -69,7 +69,7 @@ To check this step try to publish your app from Visual Studion and web depolymen
 6. Add a new Virtual Application with the virtual path /test (under section Virtual applications and directories)
 ![Configutation for custom app folder](./Images/AppService/ApplicationFolder.PNG "Configuration for custom app folder")
 Now you should have 2 virtual applications: the default (/) and the new created (/test) one:
-![Virtual path config in Azure](./Images/AppService/VirtualPathTest.PNG "Deploy web app in a custom virtual path")
+![Virtual path config in Azure](./Images/AppService/VirtualPathTest.png "Deploy web app in a custom virtual path")
 
 7. Save the configuration
 8. Go to overview and restart the Web app
