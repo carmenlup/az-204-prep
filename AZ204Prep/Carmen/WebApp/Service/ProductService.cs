@@ -8,6 +8,7 @@ namespace WebApp.Service
     public class ProductService : IProductService
     {
         private readonly IConfiguration Configuration;
+        private string _dbConnectionString;
         public ProductService(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -16,22 +17,24 @@ namespace WebApp.Service
         private SqlConnection GetConnection()
         {
             // connection from secrets -> key vault
-            var uri = new Uri(Configuration["Uri"]);
-            var tenantId = Configuration["TenantId"];
-            var clientId = Configuration["ClientId"];
-            var clientSecret = Configuration["clientSecret"];
-            var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            var keyVaultClient = new SecretClient(uri, clientSecretCredential);
-            var dbConnectionString = keyVaultClient.GetSecret("db-connection-string");
-            return new SqlConnection(dbConnectionString.Value.Value);
+            //var uriString = Configuration["KeyVault:Uri"];
+            //var uri = new Uri(uriString);
+            //var tenantId = Configuration["KeyVault:TenantId"];
+            //var clientId = Configuration["KeyVault:ClientId"];
+            //var clientSecret = Configuration["KeyVault:ClientSecret"];
+            //var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            //var keyVaultClient = new SecretClient(uri, clientSecretCredential);
+            //var dbConnectionString = keyVaultClient.GetSecret("connection-string");
+            //_dbConnectionString = dbConnectionString.Value.Value;
+            return new SqlConnection(Configuration["connection-string"]);
         }
 
         public List<Product> GetProduct()
         {
             var dbConnection = Configuration.GetConnectionString("DbConnectionString");
-            SqlConnection connection = new SqlConnection(dbConnection);// GetConnection();
+            SqlConnection connection = GetConnection(); //- use get connection for azure key vault usage
             var productList = new List<Product>();
-            string statement = "SELECT Id, Name, Quantity from Products";
+            var statement = "SELECT Id, Name, Quantity from Products";
             connection.Open();
 
             SqlCommand cmd = new SqlCommand(statement, connection);
