@@ -7,7 +7,7 @@ namespace StorageAccountApp
     public class BloblService
     {
 
-        string _connectionString = "DefaultEndpointsProtocol=https;AccountName=csb100320026cc855a7;AccountKey=MistAGZYThcYx/B69m6Jsath+x3baFBoEiEpoyhXEeORYHk+7UAfa23mRHkLNCj5O6v3NhS9Z07M+AStRsn1pQ==;EndpointSuffix=core.windows.net";
+        string _connectionString = "";
         string _containerName = "test-container";
 
         public async Task RunBlobServiceCommandsAsync()
