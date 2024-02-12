@@ -1,0 +1,5 @@
+{
+  "Id": int,
+  "Name": string,
+  "Quantity": int
+}
