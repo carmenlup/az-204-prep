@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SqlFunction.Services;
 using System.Data.SqlClient;
 using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace SqlFunction
 {
@@ -17,11 +18,13 @@ namespace SqlFunction
     {
         private readonly HttpClient _client;
         private readonly IDbService _dbService;
+        private readonly IConfiguration _configuration;
 
-        public AddProduct(IHttpClientFactory httpClientFactory, IDbService service)
+        public AddProduct(IHttpClientFactory httpClientFactory, IDbService service,  IConfiguration configuration)
         {
             this._client = httpClientFactory.CreateClient();
             this._dbService = service;
+            _configuration = configuration;
         }
 
         [FunctionName("AddProduct")]
@@ -31,7 +34,7 @@ namespace SqlFunction
         {
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<Product>(requestBody);
-            var connection = _dbService.GetConnection();
+            var connection = _dbService.GetConnection(_configuration);
             connection.Open();
 
             string statement = "insert into Products(Name,Quantity) values (@param2, @param3)";

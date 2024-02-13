@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace SqlFunction.Services
 {
     public class DbService : IDbService
     {
-        public SqlConnection GetConnection()
+        public SqlConnection GetConnection(IConfiguration configuration)
         {
-            string connectionString = "";
+            string connectionString = configuration.GetConnectionString("DbConnectionString");
             return new SqlConnection(connectionString);
         }
     }

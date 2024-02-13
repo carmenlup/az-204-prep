@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace SqlFunction.Services
 {
     public interface IDbService
     {
-        SqlConnection GetConnection();
+        SqlConnection GetConnection(IConfiguration configuration);
     }
 }

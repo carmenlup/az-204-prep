@@ -10,20 +10,34 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Xml.Linq;
+using Microsoft.Extensions.Configuration;
+using SqlFunction.Services;
+using System.Net.Http;
 
 namespace SqlFunction
 {
-    public static class GetProduct
+    public class GetProduct
     {
+        private readonly HttpClient _client;
+        private readonly IDbService _dbService;
+        private readonly IConfiguration _configuration;
+      
+        public GetProduct(IHttpClientFactory httpClientFactory, IDbService service, IConfiguration configuration)
+        {
+            _client = httpClientFactory.CreateClient();
+            _dbService = service;
+            _configuration = configuration;
+        }
+
         [FunctionName("GetProducts")]
-        public static async Task<IActionResult> RunProducts(
+        public async Task<IActionResult> RunProducts(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Get data from the database");
             List<Product> _product_lst = new List<Product>();
             string _statement = "SELECT Id,Name,Quantity from Products";
-            SqlConnection _connection = GetConnection();
+            SqlConnection _connection = _dbService.GetConnection(_configuration);
 
             _connection.Open();
 
@@ -44,23 +58,17 @@ namespace SqlFunction
             }
             _connection.Close();
 
-            return new OkObjectResult(_product_lst);
-        }
-
-        private static SqlConnection GetConnection()
-        {
-            string connectionString = "Server=tcp:appserver73.database.windows.net,1433;Initial Catalog=WebApplicationDb;Persist Security Info=False;User ID=sqladmin;Password=MySqlServer@k20;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
-            return new SqlConnection(connectionString);
+            return new OkObjectResult(JsonConvert.SerializeObject(_product_lst));
         }
 
         [FunctionName("GetProduct")]
-        public static async Task<IActionResult> RunProduct(
+        public async Task<IActionResult> RunProduct(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
             var productId = int.Parse(req.Query["id"]);
             string _statement = $"SELECT Id,Name,Quantity from Products where Id = {productId}";
-            SqlConnection _connection = GetConnection();
+            SqlConnection _connection = _dbService.GetConnection(_configuration);
 
             _connection.Open();
             SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
