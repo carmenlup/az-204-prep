@@ -49,6 +49,7 @@ namespace SqlFunction
                 {
                     Product _product = new Product()
                     {
+                        Id = _reader.GetInt32(0),
                         Name = _reader.GetString(1),
                         Quantity = _reader.GetInt32(2)
                     };
