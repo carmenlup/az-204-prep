@@ -18,15 +18,16 @@ namespace WebApp.Service
         private SqlConnection GetConnection()
         {
             //connection from secrets->key vault
-           var uriString = Configuration["KeyVault:Uri"];
-            var uri = new Uri(uriString);
-            var tenantId = Configuration["KeyVault:TenantId"];
-            var clientId = Configuration["KeyVault:ClientId"];
-            var clientSecret = Configuration["KeyVault:ClientSecret"];
-            var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            var keyVaultClient = new SecretClient(uri, clientSecretCredential);
-            var dbConnectionString = keyVaultClient.GetSecret("connection-string");
-            _dbConnectionString = dbConnectionString.Value.Value;
+            //var uriString = Configuration["KeyVault:Uri"];
+            // var uri = new Uri(uriString);
+            // var tenantId = Configuration["KeyVault:TenantId"];
+            // var clientId = Configuration["KeyVault:ClientId"];
+            // var clientSecret = Configuration["KeyVault:ClientSecret"];
+            // var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            // var keyVaultClient = new SecretClient(uri, clientSecretCredential);
+            // var dbConnectionString = keyVaultClient.GetSecret("connection-string");
+            //_dbConnectionString = dbConnectionString.Value.Value;
+            _dbConnectionString = Configuration["connection-string"];
             return new SqlConnection(_dbConnectionString);
         }
 
