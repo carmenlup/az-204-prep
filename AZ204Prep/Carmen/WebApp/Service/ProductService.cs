@@ -1,6 +1,7 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using System.Data.SqlClient;
+using WebApp.Controllers;
 using WebApp.Data.Entities;
 
 namespace WebApp.Service
