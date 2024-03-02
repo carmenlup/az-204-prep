@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Data;
 using WebApp.Service;
 using Azure.Identity;
+using DataModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
