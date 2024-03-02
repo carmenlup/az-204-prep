@@ -1,4 +1,4 @@
-﻿using WebApp.Data.Entities;
+﻿using DataModel.Entities;
 
 namespace WebApp.Service
 {
