@@ -1,14 +1,21 @@
 using Microsoft.FeatureManagement;
-using sqlapp.Services;
+using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = "Endpoint=https://azureappconfig3000.azconfig.io;Id=Kicx;Secret=/TJr0TaLJZc85P7Aq575v5qpWS3r3OUEsanWyqatO1Q=";
+//var connectionString = "Endpoint=https://azureappconfig3000.azconfig.io;Id=Kicx;Secret=/TJr0TaLJZc85P7Aq575v5qpWS3r3OUEsanWyqatO1Q=";
 
-builder.Host.ConfigureAppConfiguration(builder =>
+//builder.Host.ConfigureAppConfiguration(builder =>
+//{
+//    //builder.AddAzureAppConfiguration(options =>
+//    options.Connect(connectionString).UseFeatureFlags());
+//});
+
+var connectionString = "Endpoint=https://azureappconfig10000.azconfig.io;Id=FMeS;Secret=WZwtn8QAkiS+Ca+uMS6NBQyXWVuvuGAEQKm45jxnM5I=";
+builder.Host.ConfigureAppConfiguration(app =>
 {
-    builder.AddAzureAppConfiguration(options =>
-    options.Connect(connectionString).UseFeatureFlags());
+    app.AddAzureAppConfiguration(options => 
+        options.Connect(connectionString).UseFeatureFlags());
 });
 
 builder.Services.AddTransient<IProductService, ProductService>();

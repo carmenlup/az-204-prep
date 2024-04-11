@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using sqlapp.Models;
-using sqlapp.Services;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApp.Models;
+using WebApp.Services;
 
-namespace sqlapp.Pages
+namespace WebApp.Pages
 {
     public class IndexModel : PageModel
     {
         public List<Product> Products;
-        private readonly IProductService _productService;
+         private readonly IProductService _productService;
 
         public bool IsBeta;
 
@@ -20,6 +19,9 @@ namespace sqlapp.Pages
         public void OnGet()
         {
             IsBeta = _productService.IsBeta().Result;
+            //Products = _productService.GetProducts();
+
+           // ProductService productService = new ProductService();
             Products = _productService.GetProducts();
 
         }

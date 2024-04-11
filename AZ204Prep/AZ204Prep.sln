@@ -84,7 +84,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlapp", "sqlapp", "{62B663DF-3C22-405A-B74E-98BA6BDD5296}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sqlapp", "Daniela\AppService\sqlapp\sqlapp\sqlapp.csproj", "{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "Daniela\AppService\sqlapp\sqlapp\WebApp.csproj", "{D65A64F2-9F79-4A3A-B7E4-8DD48AAB377F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Object", "Application Object", "{BD8DB4B7-2ABA-404A-BBBB-3A4800575402}"
 EndProject
@@ -111,6 +111,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobApp", "Carmen\BlobApp\B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{F203D265-7257-4DC4-8F82-025D126057FE}"
 	ProjectSection(SolutionItems) = preProject
+		Carmen\Labs\AppService.md = Carmen\Labs\AppService.md
 		Daniela\Labs\SecurityInAD_MicrosoftGraph.md = Daniela\Labs\SecurityInAD_MicrosoftGraph.md
 		Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md = Daniela\Labs\SecurityInAD_User_Roles_ApplicationObject.md
 		Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt = Daniela\Labs\StaticHTMLWebAppUsingAzureCloudShell.txt
@@ -157,6 +158,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Carmen\Authentication\Authentication.csproj", "{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlFunction", "Carmen\SqlFunction\SqlFunction.csproj", "{DB071F40-5670-4181-A27E-B91D009A0A19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{76853571-A19D-4B20-966D-780036F2F2DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -276,6 +279,7 @@ Global
 		{7E074397-6047-4194-A843-3E64344040DC} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{18E4E579-1164-4A4F-BFC8-EEE20B9B54A2} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
 		{DB071F40-5670-4181-A27E-B91D009A0A19} = {F05644B6-E194-4EAD-A6DC-EDA2FEA4E429}
+		{76853571-A19D-4B20-966D-780036F2F2DA} = {A964EFEA-C8C0-4BB1-89A6-0D35CCC73837}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C999FAEA-5E05-4D11-9E89-12C32B899FB4}

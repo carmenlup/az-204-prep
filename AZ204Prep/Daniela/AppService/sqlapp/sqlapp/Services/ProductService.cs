@@ -1,30 +1,28 @@
-﻿using Microsoft.FeatureManagement;
-using sqlapp.Models;
+﻿namespace WebApp.Services;
+
+using Microsoft.FeatureManagement;
 using System.Data.SqlClient;
+using WebApp.Models;
 
-namespace sqlapp.Services;
-
-
-// This service will interact with our Product data in the SQL database
 public class ProductService : IProductService
 {
-    //private static string db_source = "appserver30000.database.windows.net";
-    //private static string db_user = "sqladmin";
-    //private static string db_password = "Adamut12#45";
-    //private static string db_database = "appdb";
+    private readonly IConfiguration configuration;
+    private readonly IFeatureManager featureManager;
 
-    private readonly IConfiguration _configuration;
-    private readonly IFeatureManager _featureManager;
+    //private static string db_source = "server-204.database.windows.net";
+    //private static string db_user = "admin204";
+    //private static string db_password = "";
+    //private static string db_database = "db-204";
 
-    public ProductService(IConfiguration configuration, IFeatureManager featureManager)
+
+    public ProductService(IConfiguration _configuration, IFeatureManager _featureManager)
     {
-        _configuration = configuration;
-        _featureManager = featureManager;
+        configuration = _configuration;
+        featureManager = _featureManager;
     }
-
     public async Task<bool> IsBeta()
     {
-        if ( await _featureManager.IsEnabledAsync("beta"))
+        if (await featureManager.IsEnabledAsync("beta"))
         {
             return true;
         }
@@ -33,41 +31,43 @@ public class ProductService : IProductService
     }
     private SqlConnection GetConnection()
     {
+        var builder = new SqlConnectionStringBuilder();
+        //builder.DataSource = db_source;
+        //builder.UserID = db_user;
+        //builder.Password = db_password;
+        //builder.InitialCatalog = db_database;
 
-        //var _builder = new SqlConnectionStringBuilder();
-        //_builder.DataSource = db_source;
-        //_builder.UserID = db_user;
-        //_builder.Password = db_password;
-        //_builder.InitialCatalog = db_database;
-        return new SqlConnection(_configuration["SQLConnection"]);
+        //return new SqlConnection(builder.ConnectionString);
+
+        return new SqlConnection(configuration["SQLConnection"]);
     }
+
     public List<Product> GetProducts()
     {
-        List<Product> _product_lst = new List<Product>();
-        string _statement = "SELECT ProductID,ProductName,Quantity from Products";
-        SqlConnection _connection = GetConnection();
+        SqlConnection connection = GetConnection();
+        List<Product> products = new List<Product>();
 
-        _connection.Open();
+        string statement = "SELECT ProductID, ProductName, Quantity FROM Products";
 
-        SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
-
-        using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
+        connection.Open();
+        SqlCommand command = new SqlCommand(statement, connection);
+        using (SqlDataReader reader = command.ExecuteReader())
         {
-            while (_reader.Read())
+            while (reader.Read())
             {
-                Product _product = new Product()
+                Product product = new Product()
                 {
-                    ProductID = _reader.GetInt32(0),
-                    ProductName = _reader.GetString(1),
-                    Quantity = _reader.GetInt32(2)
+                    ProductID = reader.GetInt32(0),
+                    ProductName = reader.GetString(1),
+                    Quantity = reader.GetInt32(2)
                 };
 
-                _product_lst.Add(_product);
+                products.Add(product);
             }
         }
-        _connection.Close();
-        return _product_lst;
+
+        connection.Close();
+
+        return products;
     }
-
 }
-

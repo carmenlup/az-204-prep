@@ -1,6 +1,6 @@
-﻿using sqlapp.Models;
+﻿using WebApp.Models;
 
-namespace sqlapp.Services
+namespace WebApp.Services
 {
     public interface IProductService
     {
