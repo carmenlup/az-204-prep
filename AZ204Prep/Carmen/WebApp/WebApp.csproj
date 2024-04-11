@@ -11,22 +11,28 @@
 
   <ItemGroup>
     <Compile Remove="Automation\**" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="Migrations\**" />
     <Content Remove="Automation\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Migrations\**" />
     <EmbeddedResource Remove="Automation\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <None Remove="Automation\**" />
+    <None Remove="Data\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.10.4" />
     <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.5.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.csproj" />
   </ItemGroup>
 
 </Project>
