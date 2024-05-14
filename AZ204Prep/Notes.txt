@@ -1,0 +1,19 @@
+- he's showing how to deploy web app from VS Code
+	- publish to local folder
+	- install extension Web App Service
+	- from VS Code right click on the folder -> Deploy to Web App
+
+Availabl runtimes
+	.Net
+	Java
+	Python
+	Node
+	PHP
+	
+Operating systems
+	Windows
+	Linux
+Need to find what is the difference??
+
+- How to enable Publish from VS
+	- go to the Webb App - Settings - Configuration - Enable SCM Basic Auth Publishing Credentials
