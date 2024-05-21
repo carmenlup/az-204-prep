@@ -8,7 +8,10 @@ namespace WebApp2
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            builder.Configuration
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<Program>()
+                .AddEnvironmentVariables();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

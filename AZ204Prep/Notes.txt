@@ -17,3 +17,20 @@ Need to find what is the difference??
 
 - How to enable Publish from VS
 	- go to the Webb App - Settings - Configuration - Enable SCM Basic Auth Publishing Credentials
+
+- App Service plan
+	Shared:
+		Free: 60 minutes of compute per day
+		Shared
+	Dedicaed:
+		Basic
+		Standard
+		Premium
+		Premium V2
+		Premium V3
+	Isolated
+		Isolated
+		Isolated V2
+
+	SQL server and DB
+		- set server firewall in order to allow connections

@@ -1,0 +1,31 @@
+﻿@page
+@using WebApp2.PageModels
+@model WebApp2.Pages.CoursesFromDBModel
+@{
+}
+
+<div class="container-sm">
+
+    <h1>This is a list of Courses</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th class="th-sm" scope="col">Course ID</th>
+                <th class="th-sm" scope="col">Course Name</th>
+                <th class="th-sm" scope="col">Rating</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Course course in @Model.Courses)
+            {
+                <tr>
+                    <th scope="row">@course.CourseID</th>
+                    <td>@course.CourseName</td>
+                    <td>@course.Rating</td>
+                </tr>
+            }
+
+        </tbody>
+</div>

@@ -169,7 +169,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{CE4583
 		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp2", "Liviu\WebApp\WebApp2\WebApp2.csproj", "{B9B1050E-8286-4EA2-A7E7-0F37FDB3E061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp2", "Liviu\WebApp\WebApp2\WebApp2.csproj", "{B9B1050E-8286-4EA2-A7E7-0F37FDB3E061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
