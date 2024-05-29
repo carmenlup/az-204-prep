@@ -34,3 +34,42 @@ Need to find what is the difference??
 
 	SQL server and DB
 		- set server firewall in order to allow connections
+
+	Using TLS
+
+	How to use custom domain names and certificates
+		1. Upgrade service plan to minimum Basic
+		2. Go to the web app - Custom Domains 
+			- from there you copy the so called Records (some info that will help Azure to validate the domain) and add them onto the external provider platform (dns records)
+			- click Validate & Add
+
+	Service plan
+		- Free & Shared: you share the VMs. Limited computing time
+		- Basic and Higher: dedicated VMs, no limitation in term of computing time
+
+	Auto Scaling
+		- With standard you can scale based on Rules
+			- Azure monitor will check your resources and monitor some metrics 
+			- Set min - max instances
+			- Add scale rules
+			- The monitored metrics is for the entire app service infrastructure (NOT for a single VM). 
+
+		- With premium you can have automatic scaling based on traffic 
+
+	Deployment Slots
+		- From Standard service plan or higher
+		- When creating configuration settings that should be available only for that specific deployment slot (not swapable), you need to check Deployment Slot Setting
+	
+	Azure app service Logging 
+		- From Web app level - Application Service Logs
+		- Enable/Disable: 
+			Application Logs (saved to File sistem or Blob) / 
+			Web Server Logging (File sistem or Storage. You can specify retention days) / 
+			Detailed error message / 
+			Failed request tracing
+		- you can connect to the log stream and view the live logs (how show how to do that from VS Code)
+	
+	Publish Code from Git-based repository
+		- Go to deployment center - Select Github and authenticate - select repo and main branch 
+		- 
+		- 
