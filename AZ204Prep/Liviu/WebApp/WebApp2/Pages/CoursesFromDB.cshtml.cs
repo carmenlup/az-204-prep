@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.FeatureManagement;
 using System.Data.SqlClient;
 using WebApp2.PageModels;
+using WebApp2.Settings;
 
 namespace WebApp2.Pages
 {
@@ -11,13 +14,15 @@ namespace WebApp2.Pages
     public class CoursesFromDBModel : PageModel
     {
         public List<Course> Courses = new List<Course>();
+        public StyleSettings MySettings { get; set; }
         private readonly ILogger<IndexModel> _logger;
         private IConfiguration _configuration;
 
-        public CoursesFromDBModel(ILogger<IndexModel> logger, IConfiguration configuration)
+        public CoursesFromDBModel(ILogger<IndexModel> logger, IConfiguration configuration, IOptionsSnapshot<StyleSettings> options)
         {
             _logger = logger;
             _configuration = configuration;
+            MySettings = options.Value;
         }
         public void OnGet()
         {

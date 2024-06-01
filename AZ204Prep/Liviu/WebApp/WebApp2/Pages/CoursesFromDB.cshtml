@@ -1,8 +1,15 @@
 ﻿@page
 @using WebApp2.PageModels
 @model WebApp2.Pages.CoursesFromDBModel
-@{
-}
+<style>
+    .MyCustomStyle {
+        background-color: @Model.MySettings.BackgroundColor;
+        color: @Model.MySettings.FontColor;
+        font-size: @(Model.MySettings.FontSize)px;
+    }
+</style>
+
+
 
 <div class="container-sm">
 
@@ -25,7 +32,21 @@
                     <td>@course.CourseName</td>
                     <td>@course.Rating</td>
                 </tr>
-            }
+            }          
 
         </tbody>
+     </table>
+    @if (Model.MySettings.IsEnabled)
+    {
+        <div class="MyCustomStyle">
+            <span>@Model.MySettings.Message</span>
+        </div>
+    }
+    
+    <feature name = "BetaFeature">
+        <div class="MyCustomStyle">
+            <span>The Beta feature is activated from Feature flags.</span>
+        </div>
+    </feature>
+
 </div>

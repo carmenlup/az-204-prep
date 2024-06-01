@@ -71,5 +71,39 @@ Need to find what is the difference??
 	
 	Publish Code from Git-based repository
 		- Go to deployment center - Select Github and authenticate - select repo and main branch 
+		- there will be an workflow created on gitgub that will publish to azure when there are changes on the branch
+
+	Azure App Config
+		- store key-value pairs: Application settings & feature flags
+		- usefull for storing common configuration settings that are used by multiple apps
+		
+		Config settings: https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-aspnet-core-app
+			- create the resource
+			- use : char to create setting sections. e.g. WebApp:ConnectionStrings:MyDbConnection
+			- dotnet add package Microsoft.Azure.AppConfiguration.AspNetCore
+			- add the connection string to the App Config service ( You can find the connection string under Access Keys of your App Configuration store in the Azure portal.)
+			- From Program.cs:
+				string connectionString = builder.Configuration.GetConnectionString("AppConfig");
+				builder.Configuration.AddAzureAppConfiguration(connectionString);
+				!! This code will connect to your App Configuration store using a connection string and load all key-values that have no labels. 
+				WHY only the ones with no label?? 
+					=> You can define filters based on key name or label.Only the settings that meet the filters will be loaded in the app (de default filter ignores the ones with no label)
+			- In programm.cs you can bind a setting section to a strongly typed class created by you
+				// Bind configuration "TestApp:Settings" section to the Settings object
+				builder.Services.Configure<Settings>(builder.Configuration.GetSection("TestApp:Settings"));
+			- Then you can inject the config options whenever where you want to use them: IOptionsSnapshot<StyleSettings> options
+
+		Feature flags: https://learn.microsoft.com/en-us/azure/azure-app-configuration/quickstart-feature-flag-aspnet-core
+			- Feature management section
+			- dotnet add package Microsoft.FeatureManagement.AspNetCore
+			- need to add:
+				// Add feature management to the container of services.
+				builder.Services.AddFeatureManagement();
+			- Open Pages/_ViewImports.cshtml, and register the feature manager Tag Helper using an @addTagHelper directive.
+				@addTagHelper *, Microsoft.FeatureManagement.AspNetCore
+			- use the <feature name=""> directive. THis builds the html only if the feature is active. At the controller lavel you can use the attribute [FeatureGate()]
+
+	Azure Static web app
+		- nothing special learnt here. From the Create Web app screen - publish section - you choose Create Static Web app, which will direct you to a different create screen
 		- 
-		- 
+
