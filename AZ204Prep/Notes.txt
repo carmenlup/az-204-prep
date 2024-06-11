@@ -59,7 +59,52 @@ Need to find what is the difference??
 	Deployment Slots
 		- From Standard service plan or higher
 		- When creating configuration settings that should be available only for that specific deployment slot (not swapable), you need to check Deployment Slot Setting
+		Benefits of deploying to non-production slots:
+			- feature validation
+			- The instances are warmed up during the swap operations - resulting in no downtime for the prod env. 
+				You can even configure auto-swap when pre-swap validation is not required
+				how to enable auto-swap: go to the slot you want (stage) -> Settings -Configuration -> enable Auto-Swap
+				!!! Auto swap isn't currently supported in web apps on Linux and Web App for Containers.
+			- "roll-back" fast, by swapping again with staging
+		Swap operation. The steps that are executed in order to ensure no downtime:
+			1. apply the target slot settings to the source slot:
+				- Slot-specific app settings and connection strings, if applicable.
+				- Continuous deployment settings, if enabled.
+				- App Service authentication settings, if enabled.
+			This trigger a restart for the source slot instances
+			2. Wait for the source slot instances to restart. If any instance fails, the swap operation reverts all changes to the source slot and stops the operation
+			3. If local cache is enabled, then trigger cache initialization, which also trigger instances restart
+			4. If auto-swap is enabled, trigger Application initialization by making http request to the root of the source slot, for each instance
+				- if the instance returns http response, it's considered warmed up
+			5. If all the instances of the source slot are warmed up, swap the slots by switching the routing rules. After this step, the target slot has the app that was previously warmed up.
+			6. Now that the source slot has the pre-swap app previously in the target slot, perform the same operation by applying all settings and restarting the instances.
+
+			!!! All the warm-up operations happen on the source slot. So make sure the Production slot is alway set as target.
+		To make all settings swappable, add this app setting: WEBSITE_OVERRIDE_PRESERVE_DEFAULT_STICKY_SLOT_SETTINGS: false
 	
+		Swap with preview:
+			- it's the same swap operation, but it will pause after the settings are applied and the warm up finishes on the source slot. In this way you can validate the source slot
+		
+		Specify custom warm-up actions:
+			Some apps might require custom warm-up actions before the swap. The applicationInitialization configuration element in web.config lets you specify custom initialization actions. 
+			<system.webServer>
+			    <applicationInitialization>
+			        <add initializationPage="/" hostName="[app hostname]" />
+			        <add initializationPage="/Home/About" hostName="[app hostname]" />
+			    </applicationInitialization>
+			</system.webServer>
+
+		You can also customize the warm-up behavior with one or both of the following app settings:
+			- WEBSITE_SWAP_WARMUP_PING_PATH: /statuscheck
+			- WEBSITE_SWAP_WARMUP_PING_STATUSES: 200, 201, etc.
+			- WEBSITE_WARMUP_PATH: /statuscheck (A relative path on the site that should be pinged whenever the site restarts )
+
+		Route traffic:
+			- You can route a portion of the traffic that comes to production to another slot. (usefull when releasing a new update and want some feedback from a couple of users)
+			- A client is routed to the same slot during the lifetime of the current session (the x-ms-routing-name cookie is added to the request)
+			- Manually routing by using the query parameters: <webappname>.azurewebsites.net/?x-ms-routing-name=staging. After accessing the link, the cookie header is set and the user will be pinned to that slot
+
+
 	Azure app service Logging 
 		- From Web app level - Application Service Logs
 		- Enable/Disable: 
