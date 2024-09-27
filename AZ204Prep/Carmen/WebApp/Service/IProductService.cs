@@ -5,5 +5,6 @@ namespace WebApp.Service
     public interface IProductService
     {
         List<Product> GetProduct();
+        List<Course> GetCourses();
     }
 }

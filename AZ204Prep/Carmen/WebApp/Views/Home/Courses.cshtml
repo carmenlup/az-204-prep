@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Course>
+<div>
+    <h1>Production Version</h1>
+</div>
+<div class="text-center">
+    <h3 class="display-4">This is a list of Courses</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Course ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <th scope="row">@course.Id</th>
+                    <td>@course.Name</td>
+                    <td>@course.Rating</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    
+</div>
