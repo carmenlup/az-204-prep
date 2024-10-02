@@ -6,8 +6,6 @@ namespace WebApp.Data
     {
         public static void Initialize(ApplicationContext context)
         {
-            context.Database.EnsureCreated();
-
             // Look for any students.
             if (context.Products.Any())
             {
