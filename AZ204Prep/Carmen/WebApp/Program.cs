@@ -30,7 +30,7 @@ if (!builder.Environment.IsDevelopment())
         options
             .Connect(new Uri(azureAppConfigurationString!), new DefaultAzureCredential())
             .ConfigureRefresh(refreshOptions =>
-                refreshOptions.Register("TestApp:Sentinel", refreshAll: true))
+                refreshOptions.Register("AppConfig:Sentinel", refreshAll: true))
             .UseFeatureFlags());
 }
 
@@ -39,14 +39,16 @@ if(builder.Environment.IsDevelopment())
 
     builder.Configuration.AddAzureAppConfiguration(options =>
     {
-        options.Connect(builder.Configuration["ApiConfig:ConnectionStrings"])
+        //default refresh 30 seconds
+        options.Connect(builder.Configuration["ApiConfig:ConnectionString"])
             .ConfigureRefresh(refreshOptions =>
-                refreshOptions.Register("TestApp:Sentinel", refreshAll: true));
+                refreshOptions.Register("AppConfig:Sentinel", refreshAll: true));
         options.UseFeatureFlags();
     });
 
 }
 
+builder.Services.AddAzureAppConfiguration();
 // Add feature management to the container of services.
 builder.Services.AddFeatureManagement();
 
@@ -97,7 +99,7 @@ app.UseStaticFiles();
 app.UseRouting();
 //app.UseAuthentication();
 app.UseAuthorization();
-//app.UseAzureAppConfiguration();
+app.UseAzureAppConfiguration();
 
 app.MapControllerRoute(
     name: "default",

@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>d5752f7b-f339-4169-aad0-1a4a0d55526a</UserSecretsId>
-    <BaseOutputPath>bin\test</BaseOutputPath>
+    <BaseOutputPath>bin</BaseOutputPath>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
