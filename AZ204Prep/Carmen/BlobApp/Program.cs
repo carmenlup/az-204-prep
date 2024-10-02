@@ -15,7 +15,7 @@ var host = builder.Build();
 
 Console.WriteLine("Host created and User Secret config added to the builder");
 
-var storageConnectionString = builder.Configuration.GetConnectionString("StorageAccountConnectionString");
+var storageConnectionString = builder.Configuration["StorageAccount:ConnectionString"];
 
 // Application code should start here.
 Console.WriteLine("**********************");

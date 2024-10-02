@@ -1,28 +1,81 @@
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.FeatureManagement;
 using WebApp.Data;
 using WebApp.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+var envUri = Environment.GetEnvironmentVariable("VaultUri");
+
+// ef migration is not working with Environment.GetEnvironmentVariable("VaultUri")
+if (string.IsNullOrEmpty(envUri))
+    envUri = builder.Configuration["KeyVault:Uri"];
+
+var keyVaultEndpoint = new Uri(envUri);
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 builder.Services.AddTransient<IProductService, ProductService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
+
+// Configuration
+if (!builder.Environment.IsDevelopment())
+{
+    var azureAppConfigurationString = builder.Configuration["AzureAppConfiguration"];
+    builder.Configuration.AddAzureAppConfiguration(options =>
+        options
+            .Connect(new Uri(azureAppConfigurationString!), new DefaultAzureCredential())
+            .ConfigureRefresh(refreshOptions =>
+                refreshOptions.Register("AppConfig:Sentinel", refreshAll: true))
+            .UseFeatureFlags());
+}
+
+if(builder.Environment.IsDevelopment())
+{
+
+    builder.Configuration.AddAzureAppConfiguration(options =>
+    {
+        //default refresh 30 seconds
+        options.Connect(builder.Configuration["ApiConfig:ConnectionString"])
+            .ConfigureRefresh(refreshOptions =>
+                refreshOptions.Register("AppConfig:Sentinel", refreshAll: true));
+        options.UseFeatureFlags();
+    });
+
+}
+
+builder.Services.AddAzureAppConfiguration();
+// Add feature management to the container of services.
+builder.Services.AddFeatureManagement();
+
+//var connectionStringIdentity = builder.Configuration.GetConnectionString("AuthenticationContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationContextConnection' not found.");
+
+//builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDefaultIdentity<AuthenticationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationContext>();
+
+//builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration, "AzureAd");
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();//.AddMicrosoftIdentityUI();
 
 var app = builder.Build();
-    
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
         var context = services.GetRequiredService<ApplicationContext>();
-        
+        // Ensure the database is created
+        // Should not be used in production because bypass the migrations
+        //context.Database.EnsureCreated();
+
+        // Apply any pending migrations
+        context.Database.Migrate();
+
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
@@ -44,8 +97,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+//app.UseAuthentication();
 app.UseAuthorization();
+app.UseAzureAppConfiguration();
 
 app.MapControllerRoute(
     name: "default",

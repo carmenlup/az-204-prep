@@ -14,7 +14,7 @@ builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 var host = builder.Build();
 
 /*
- * throught visual studion key vault management can use DefaultAzureCredential for conectivity
+ * through visual studio key vault management can use DefaultAzureCredential for connectivity
  * For more info see documentation (Readme.md) provided under Azure.Security.KeyVault.Keys package
  * 
  * Code example to get the key from key vault service:
