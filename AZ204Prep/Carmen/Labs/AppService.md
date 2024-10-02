@@ -44,7 +44,7 @@ This lab will explain how App Service should be configured in this case.
 4. Verify the app url in a new tab - default page of the web server should be available
 ![Default web page Windows](./Images/AppService/SuccessfulDeploymentAppService.PNG "Default Web Server page Windows")
 
-#### Change your app for run on different folder
+#### Change your app for run on different folder (Optional)
 
 1. Right click on your web app ->> Properties
 2. Expand Build section 
